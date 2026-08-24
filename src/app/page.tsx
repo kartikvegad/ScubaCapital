@@ -1,23 +1,21 @@
-import { PartnersStrip } from "@/components/layout/PartnersStrip";
-import { AboutSection } from "@/components/sections/AboutSection";
+import { CollectSection } from "@/components/sections/CollectSection";
 import { ContactSection } from "@/components/sections/ContactSection";
-import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { HeroSection } from "@/components/sections/HeroSection";
-import { ServicesSection } from "@/components/sections/ServicesSection";
-import { StatsSection } from "@/components/sections/StatsSection";
-import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
+import { PlanningCardSection } from "@/components/sections/PlanningCardSection";
+import { SecureFlowSection } from "@/components/sections/SecureFlowSection";
+import { TabFeatureSection } from "@/components/sections/TabFeatureSection";
+import { TrustSection } from "@/components/sections/TrustSection";
 
 export default function Home() {
   return (
-    <>
+    <div className="page-shell">
       <HeroSection />
-      <PartnersStrip />
-      <FeaturesSection />
-      <StatsSection />
-      <ServicesSection />
-      <TestimonialsSection />
-      <AboutSection />
+      <TrustSection />
+      <TabFeatureSection />
+      <PlanningCardSection />
+      <SecureFlowSection />
+      <CollectSection />
       <ContactSection />
-    </>
+    </div>
   );
 }

@@ -16,22 +16,28 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Scuba Capital | Financial Planning & Investment Advisory",
+  title: "SCUBA CAPITAL PVT LTD | Financial Planning & Wealth Solutions",
   description:
-    "Scuba Capital helps professionals and families build, protect, and grow wealth through goal-based financial planning, mutual fund advisory, and insurance solutions.",
+    "SCUBA CAPITAL PVT LTD helps individuals, families, professionals and business owners approach financial planning, mutual fund solutions, protection and wealth management with greater clarity and discipline.",
   keywords: [
+    "SCUBA CAPITAL",
+    "SCUBA CAPITAL PVT LTD",
     "financial planning",
-    "mutual funds",
-    "SIP",
-    "investment advisory",
-    "AMFI registered",
-    "Mumbai",
-    "Scuba Capital",
+    "wealth planning",
+    "mutual fund distributor",
+    "mutual fund solutions",
+    "portfolio review",
+    "SIP planning",
+    "financial consultant",
+    "investment planning",
+    "retirement planning",
+    "wealth solutions",
+    "financial planning Mumbai",
   ],
   openGraph: {
-    title: "Scuba Capital | Financial Planning & Investment Advisory",
+    title: "SCUBA CAPITAL PVT LTD | Financial Planning & Wealth Solutions",
     description:
-      "Financial clarity at every depth. Goal-based planning for professionals at every stage of life.",
+      "Dive Deep. Invest Smart. Achieve More. Plan with Clarity. Grow with Confidence.",
     type: "website",
   },
 };
