@@ -25,7 +25,7 @@ export function ContactSection() {
           <ScrollReveal direction="left" delay={0.1}>
             <div className="offering-card h-full rounded-2xl bg-white p-6 ring-1 ring-border">
               <p className="text-xs font-semibold tracking-[0.14em] text-navy/50 uppercase">
-                Financial Guide
+                Mutual Fund Distributor
               </p>
               <h3 className="font-display mt-2 text-xl font-bold text-navy">
                 {founder.name}

@@ -229,7 +229,7 @@ export function Navbar() {
       </motion.header>
 
       {open ? (
-        <div className="navbar-mobile-sheet fixed inset-0 z-[105] flex flex-col lg:hidden">
+        <div className="navbar-mobile-sheet fixed inset-0 z-[109] flex flex-col lg:hidden">
           <div className="navbar-glass-backdrop" aria-hidden />
           <div className="navbar-glass-gradient" aria-hidden />
           <div className="relative z-10 h-[4.5rem] shrink-0" aria-hidden />

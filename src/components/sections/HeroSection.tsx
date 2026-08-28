@@ -158,7 +158,7 @@ export function HeroSection() {
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
           <span className="rounded-full border border-white/20 bg-black/35 px-4 py-1.5 text-[11px] font-medium text-white/90 shadow-sm backdrop-blur-sm">
-            AMFI Registered · {siteConfig.amfiArn}
+            AMFI Reg. MF & SIF Distributor · {siteConfig.amfiArn}
           </span>
         </motion.div>
       </div>

@@ -58,10 +58,10 @@ export function ServicesPageContent() {
         </div>
       </section>
 
-      <section id="segments" className="section-cream -mt-8 pb-24 pt-0 sm:-mt-10 sm:pb-16 sm:pt-2 lg:py-20">
+      <section id="segments" className="section-cream -mt-6 pb-24 pt-2 sm:-mt-8 sm:pb-16 sm:pt-4 lg:py-20">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <div className="sticky top-[4.5rem] z-20 mb-2 sm:static sm:mb-0">
-            <div className="grid grid-cols-2 gap-1.5 rounded-2xl bg-[#e6e2ea] p-1.5 shadow-[0_4px_20px_rgba(73,48,82,0.1),inset_0_1px_3px_rgba(73,48,82,0.12)] md:flex md:rounded-full md:gap-0 md:p-1 md:shadow-[inset_0_1px_3px_rgba(73,48,82,0.12)]">
+          <div className="sticky top-[4.75rem] z-20 -mx-1 mb-4 px-1 pb-1 sm:static sm:mx-0 sm:mb-0 sm:px-0 sm:pb-0">
+            <div className="flex gap-1 rounded-full bg-[#e6e2ea] p-1 shadow-[inset_0_1px_3px_rgba(73,48,82,0.12)]">
             {serviceSegments.map((segment, index) => {
               const isActive = index === activeIndex;
               return (
@@ -69,18 +69,18 @@ export function ServicesPageContent() {
                   key={segment.id}
                   type="button"
                   onClick={() => selectSegment(index)}
-                  className={`relative z-10 flex min-h-11 touch-manipulation items-center justify-center rounded-xl px-2 py-3 text-xs font-semibold transition-colors sm:min-h-12 sm:px-4 sm:text-sm md:flex-1 md:rounded-full md:py-3 ${
+                  className={`relative z-10 flex min-h-10 min-w-0 flex-1 touch-manipulation items-center justify-center rounded-full px-1.5 py-2.5 text-[11px] font-semibold whitespace-nowrap transition-colors sm:min-h-11 sm:px-3 sm:text-sm ${
                     isActive ? "text-navy" : "text-muted active:text-foreground/70"
                   }`}
                 >
                   {isActive ? (
                     <motion.span
                       layoutId="service-segment-pill"
-                      className="absolute inset-0 rounded-xl bg-white shadow-[0_2px_8px_rgba(37,41,71,0.12),0_1px_2px_rgba(37,41,71,0.08)] md:rounded-full"
+                      className="absolute inset-0 rounded-full bg-white shadow-[0_2px_8px_rgba(37,41,71,0.12),0_1px_2px_rgba(37,41,71,0.08)]"
                       transition={{ type: "spring", stiffness: 380, damping: 32 }}
                     />
                   ) : null}
-                  <span className="relative text-center leading-tight">
+                  <span className="relative text-center leading-none">
                     {segment.shortLabel}
                   </span>
                 </button>

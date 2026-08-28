@@ -56,7 +56,7 @@ export const heroContent = {
   headline: "Your Wealth. Your Goals. Your Future.",
   supporting: "Dive Deep. Invest Smart. Achieve More.",
   line1: "India's",
-  line2: "Financial Advisors for",
+  line2: "Mutual Fund Distributor for",
   body: [
     "Financial decisions become more important as your ambitions grow.",
     "At SCUBA CAPITAL, we look beyond individual financial products to understand the bigger picture — your goals, your existing finances, your protection needs, your future priorities and the path required to bring them together.",
@@ -135,7 +135,7 @@ export const heroServices = [
 export const trustFactors = [
   {
     title: "AMFI Registered",
-    description: "Mutual Fund Distributor",
+    description: "AMFI Reg. MF & SIF Distributor",
   },
   {
     title: "ARN-288339",
@@ -166,11 +166,11 @@ export const heroAudiences = [
 ] as const;
 
 export const guidesSection = {
-  eyebrow: "YOUR FINANCIAL GUIDES",
+  eyebrow: "YOUR MUTUAL FUND DISTRIBUTORS",
   headline: "We help you move forward with confidence.",
   paragraphs: [
     "It's not just about building a strong portfolio or retirement plan — it's about clear guidance, honest conversations, and making sure you understand every decision along the way.",
-    "We're advisors focused on your objectives first — and we take this journey seriously because your financial future matters.",
+    "We're mutual fund distributors focused on your objectives first — and we take this journey seriously because your financial future matters.",
   ],
   cta: "Explore Our Approach",
 } as const;
@@ -919,7 +919,7 @@ export const founder = {
   label: "OUR FOUNDER",
   name: "Mr. Satishkumar Kagre",
   displayName: "Satishkumar Kagre",
-  role: "Founder & Financial Planning Professional",
+  role: "Founder · Mutual Fund Distributor · AMFI Reg. MF & SIF Distributor",
   credentialHighlight: "AMFI ARN-288339 · NISM Certified",
   initials: "SK",
   location: "Dombivli East, Mumbai Metropolitan Region",

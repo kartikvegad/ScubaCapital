@@ -339,9 +339,14 @@ footer ::-moz-selection {
   isolation: isolate;
 }
 
-.navbar-glass-bar,
-.navbar-mobile-sheet {
+.navbar-glass-bar {
   position: relative;
+  isolation: isolate;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 8px 32px rgba(30, 26, 82, 0.18);
+}
+
+.navbar-mobile-sheet {
   isolation: isolate;
   border: 1px solid rgba(255, 255, 255, 0.22);
   box-shadow: 0 8px 32px rgba(30, 26, 82, 0.18);
