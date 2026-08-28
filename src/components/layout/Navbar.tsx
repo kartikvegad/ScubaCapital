@@ -27,18 +27,18 @@ export function Navbar() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-[100] transition-[padding] duration-300 ${
-          scrolled ? "pointer-events-none px-4 pt-4 sm:px-6 sm:pt-5" : ""
+        className={`fixed inset-x-0 top-0 z-[110] transition-[padding] duration-300 ${
+          scrolled && !open ? "pointer-events-none px-4 pt-4 sm:px-6 sm:pt-5" : ""
         }`}
       >
         <div
           className={`mx-auto transition-[max-width,padding] duration-300 ${
-            scrolled ? "max-w-6xl" : "max-w-7xl px-6 pt-5 lg:px-10"
+            scrolled && !open ? "max-w-6xl" : "max-w-7xl px-6 pt-5 lg:px-10"
           }`}
         >
           <nav
             className={`relative flex items-center justify-between ${
-              scrolled
+              scrolled && !open
                 ? "pointer-events-auto px-5 py-3.5 lg:px-7"
                 : "py-5"
             }`}
@@ -46,7 +46,7 @@ export function Navbar() {
             <div
               aria-hidden
               className={`navbar-glass pointer-events-none absolute inset-0 rounded-2xl border shadow-[0_8px_32px_rgba(37,24,56,0.35)] backdrop-blur-xl transition-[opacity,border-color] duration-300 ${
-                scrolled
+                scrolled && !open
                   ? "border-white/25 opacity-100"
                   : "border-transparent opacity-0"
               }`}
@@ -55,6 +55,7 @@ export function Navbar() {
             <a
               href="/"
               className="relative z-10 font-display text-xl font-bold tracking-tight text-white"
+              onClick={() => setOpen(false)}
             >
               SCUBA
             </a>
@@ -83,7 +84,7 @@ export function Navbar() {
 
             <button
               type="button"
-              aria-label="Toggle menu"
+              aria-label={open ? "Close menu" : "Open menu"}
               onClick={() => setOpen(!open)}
               className="relative z-10 text-white xl:hidden"
             >
@@ -93,22 +94,10 @@ export function Navbar() {
         </div>
       </header>
 
-      {open && (
-        <div className="navbar-glass fixed inset-0 z-[60] backdrop-blur-xl xl:hidden">
-          <div className="flex items-center justify-between px-6 py-5 pt-20">
-            <span className="font-display text-lg font-bold text-white">
-              SCUBA CAPITAL
-            </span>
-            <button
-              type="button"
-              aria-label="Close menu"
-              onClick={() => setOpen(false)}
-              className="text-white"
-            >
-              <X className="size-6" />
-            </button>
-          </div>
-          <ul className="flex flex-col gap-5 px-6 pt-4">
+      {open ? (
+        <div className="navbar-glass fixed inset-0 z-[100] flex flex-col backdrop-blur-xl xl:hidden">
+          <div className="h-[4.75rem] shrink-0 sm:h-20" aria-hidden />
+          <ul className="flex flex-1 flex-col gap-5 overflow-y-auto px-6 pt-2 pb-8">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <a
@@ -120,7 +109,7 @@ export function Navbar() {
                 </a>
               </li>
             ))}
-            <li className="pt-4">
+            <li className="pt-2">
               <a
                 href="/contact"
                 onClick={() => setOpen(false)}
@@ -129,12 +118,12 @@ export function Navbar() {
                 Book a Consultation
               </a>
             </li>
-            <li>
+            <li className="mt-auto pt-4">
               <p className="text-sm text-white/50">{siteConfig.tagline}</p>
             </li>
           </ul>
         </div>
-      )}
+      ) : null}
     </>
   );
 }

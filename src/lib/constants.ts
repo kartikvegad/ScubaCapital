@@ -321,12 +321,203 @@ export const products = [
   "Health Insurance",
   "Term Insurance",
   "Alternate Investment Funds",
-  "Corporate Fixed Deposits",
+  "Corporate FDs",
   "NPS",
   "Loan Against Mutual Funds",
   "Will Planning",
   "Private Family Trust",
   "Portfolio Management Services",
+] as const;
+
+export const servicesPageIntro = {
+  eyebrow: "Our Services",
+  heading: "Four Pillars of Financial Planning",
+  intro:
+    "SCUBA CAPITAL organises its advisory approach across four core segments — personal finance, risk management, retirement, and succession — so every recommendation fits within a structured, goal-oriented financial plan.",
+} as const;
+
+export const serviceSegments = [
+  {
+    id: "personal-finance",
+    shortLabel: "Invest",
+    title: "Personal Finance & Investment Planning",
+    intro:
+      "Build a financial foundation around the goals that matter to you. From investment planning and mutual fund solutions to children's education and long-term wealth creation, we help bring structure to your financial priorities.",
+    services: [
+      {
+        title: "Financial goal planning",
+        description:
+          "We help you identify, prioritise and timeline your financial objectives — whether buying a home, funding education, building wealth or preparing for major life events — so every decision connects back to what matters most.",
+      },
+      {
+        title: "Investment planning & asset allocation",
+        description:
+          "A structured approach to how your money is invested across asset classes, aligned to your goals, time horizon and risk comfort — rather than chasing products in isolation.",
+      },
+      {
+        title: "Mutual fund & SIP planning",
+        description:
+          "We facilitate mutual fund solutions and systematic investment plans aligned to your financial goals, portfolio structure and long-term strategy. AMFI Registration Number: ARN-288339. Mutual fund investments are subject to market risks.",
+      },
+      {
+        title: "Portfolio review & optimisation",
+        description:
+          "A structured review of your existing investments to understand what you own, whether holdings remain aligned to your goals, and where concentration, duplication or gaps may need attention.",
+      },
+      {
+        title: "Children's education planning",
+        description:
+          "Planning and investing toward education goals with appropriate time horizons, inflation considerations and liquidity needs — so you can prepare with greater clarity and discipline.",
+      },
+      {
+        title: "Tax-efficient financial planning",
+        description:
+          "Evaluating how tax considerations fit within your broader financial structure, so investment and planning decisions are made with a more complete picture in mind.",
+      },
+      {
+        title: "Wealth creation & financial independence",
+        description:
+          "Long-term strategies focused on disciplined wealth building and moving toward greater financial independence — structured around your priorities, not short-term market noise.",
+      },
+    ],
+  },
+  {
+    id: "risk-management",
+    shortLabel: "Protect",
+    title: "Risk Management",
+    intro:
+      "Wealth creation is only one part of financial planning. Protecting what you have built is equally important. We help evaluate protection needs, financial risks and potential gaps so your broader strategy is not built on an incomplete foundation.",
+    services: [
+      {
+        title: "Life insurance & protection planning",
+        description:
+          "Evaluating life insurance requirements based on your financial responsibilities, dependents and long-term obligations — so protection levels reflect your actual needs.",
+      },
+      {
+        title: "Health insurance planning",
+        description:
+          "Understanding health cover requirements and reviewing whether existing arrangements adequately address medical and hospitalisation risks for you and your family.",
+      },
+      {
+        title: "Insurance portfolio review",
+        description:
+          "A consolidated look at your existing insurance policies — coverage, overlaps, gaps and relevance — so you know what protection you actually have in place.",
+      },
+      {
+        title: "Emergency fund planning",
+        description:
+          "Building and maintaining an appropriate liquidity buffer for unforeseen expenses, income disruptions or short-term financial needs without disrupting long-term investments.",
+      },
+      {
+        title: "Liability & financial risk assessment",
+        description:
+          "Reviewing loans, obligations and financial exposures to understand how liabilities interact with your overall financial position and protection strategy.",
+      },
+      {
+        title: "Protection-gap analysis",
+        description:
+          "Identifying areas where current protection arrangements may fall short of your financial responsibilities — helping you address gaps before they become problems.",
+      },
+      {
+        title: "Family financial security planning",
+        description:
+          "A holistic view of how investments, protection and liquidity work together to safeguard your family's financial wellbeing across different life stages.",
+      },
+    ],
+  },
+  {
+    id: "retirement",
+    shortLabel: "Retire",
+    title: "Retirement Planning",
+    intro:
+      "Retirement planning is about more than reaching a number. It is about preparing for the lifestyle you want, creating an appropriate corpus, considering inflation and longevity, and planning how your wealth can support you through the years ahead.",
+    services: [
+      {
+        title: "Retirement goal planning",
+        description:
+          "Defining what retirement looks like for you — lifestyle, expenses, timelines and priorities — and translating that vision into a structured financial objective.",
+      },
+      {
+        title: "Retirement corpus calculation",
+        description:
+          "Estimating the corpus required to sustain your desired lifestyle, factoring in inflation, expected expenses and the years you plan to rely on your retirement savings.",
+      },
+      {
+        title: "Early retirement planning",
+        description:
+          "For those aiming to retire before conventional age, structuring a plan that accounts for a longer retirement horizon, healthcare needs and sustained income requirements.",
+      },
+      {
+        title: "Financial independence planning",
+        description:
+          "Building a path toward financial independence where your assets and income streams can increasingly support your lifestyle without active employment income.",
+      },
+      {
+        title: "Post-retirement income planning",
+        description:
+          "Planning how to generate steady income from your retirement corpus — through systematic withdrawals, interest, dividends or other suitable structures.",
+      },
+      {
+        title: "Inflation & longevity planning",
+        description:
+          "Accounting for rising costs over decades of retirement and the possibility of living longer than expected, so your plan remains resilient over time.",
+      },
+      {
+        title: "Retirement portfolio review",
+        description:
+          "Periodic assessment of your retirement investments to ensure asset allocation, risk levels and holdings remain appropriate as you approach and enter retirement.",
+      },
+      {
+        title: "SWP / income planning",
+        description:
+          "Exploring systematic withdrawal strategies from mutual fund and investment portfolios to create regular post-retirement income while managing longevity risk.",
+      },
+    ],
+  },
+  {
+    id: "succession",
+    shortLabel: "Preserve",
+    title: "Estate / Succession Planning",
+    intro:
+      "Building wealth is one journey. Preserving and transferring it is another. We help families and business owners think ahead about wealth transfer, succession, estate liquidity and the continuity of their financial legacy.",
+    services: [
+      {
+        title: "Will & estate planning coordination",
+        description:
+          "Coordinating with appropriate legal professionals to ensure your estate planning documents align with your financial arrangements and wealth transfer intentions.",
+      },
+      {
+        title: "Wealth transfer planning",
+        description:
+          "Structuring how assets will be passed to the next generation — considering timing, tax implications and the financial readiness of beneficiaries.",
+      },
+      {
+        title: "Nomination review",
+        description:
+          "Reviewing nominations across financial accounts, investments and insurance policies to ensure they reflect your current intentions and family structure.",
+      },
+      {
+        title: "Business succession planning",
+        description:
+          "Helping business owners evaluate how ownership, control and value will transition — whether to family, partners or external parties — with financial continuity in mind.",
+      },
+      {
+        title: "Inter-generational wealth transfer",
+        description:
+          "Planning the orderly transfer of wealth across generations while preserving family harmony, financial literacy and the long-term stewardship of assets.",
+      },
+      {
+        title: "Legacy planning",
+        description:
+          "Going beyond numbers to define the values, intentions and structures through which you want your wealth to benefit your family and causes you care about.",
+      },
+      {
+        title: "Estate liquidity planning",
+        description:
+          "Ensuring sufficient liquid assets are available to meet estate obligations, taxes and family needs without forcing a distress sale of investments or property.",
+      },
+    ],
+  },
 ] as const;
 
 export const productsIntro = {
@@ -567,7 +758,7 @@ export const resourceCategories = [
 export const navLinks = [
   { label: "About", href: "/#about" },
   { label: "Philosophy", href: "/#philosophy" },
-  { label: "Services", href: "/#services" },
+  { label: "Services", href: "/services" },
   { label: "Our Approach", href: "/#approach" },
   { label: "Resources", href: "/#resources" },
   { label: "FAQs", href: "/#faqs" },

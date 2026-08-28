@@ -14,6 +14,13 @@ export function ServicesSection() {
             {servicesIntro.heading}
           </h2>
           <p className="mt-5 text-muted">{servicesIntro.intro}</p>
+          <a
+            href="/services"
+            className="btn-outline-navy mt-8 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold"
+          >
+            View all services
+            <ArrowRight className="size-4" />
+          </a>
         </div>
 
         <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">

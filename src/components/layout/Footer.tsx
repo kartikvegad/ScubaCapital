@@ -1,4 +1,5 @@
 import { navLinks, siteConfig } from "@/lib/constants";
+import { DotLogo } from "@/components/ui/DotLogo";
 
 export function Footer() {
   return (
@@ -72,6 +73,10 @@ export function Footer() {
             © {new Date().getFullYear()} {siteConfig.legalName}. All Rights
             Reserved. {siteConfig.philosophyLine}
           </p>
+          <div className="flex flex-wrap items-center justify-center gap-2.5 pt-2">
+            <span className="text-xs text-white/35">Designed by</span>
+            <DotLogo className="h-5 w-auto text-white/80" />
+          </div>
         </div>
       </div>
     </footer>
