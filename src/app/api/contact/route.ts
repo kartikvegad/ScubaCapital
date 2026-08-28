@@ -1,8 +1,16 @@
 import { NextResponse } from "next/server";
 import { sendContactEmail, type ContactFormPayload } from "@/lib/email";
 
+const FORM_TYPES = ["consultation", "portfolio-review"] as const;
+
+type FormType = (typeof FORM_TYPES)[number];
+
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function isFormType(value: unknown): value is FormType {
+  return typeof value === "string" && FORM_TYPES.includes(value as FormType);
 }
 
 function parsePayload(body: unknown): ContactFormPayload | null {
@@ -10,7 +18,7 @@ function parsePayload(body: unknown): ContactFormPayload | null {
     return null;
   }
 
-  const { name, email, phone, message } = body as Record<string, unknown>;
+  const { name, email, phone, message, formType } = body as Record<string, unknown>;
 
   if (typeof name !== "string" || typeof email !== "string" || typeof phone !== "string") {
     return null;
@@ -20,6 +28,7 @@ function parsePayload(body: unknown): ContactFormPayload | null {
   const trimmedEmail = email.trim();
   const trimmedPhone = phone.trim();
   const trimmedMessage = typeof message === "string" ? message.trim() : "";
+  const resolvedFormType: FormType = isFormType(formType) ? formType : "consultation";
 
   if (!trimmedName || !trimmedEmail || !trimmedPhone || !isValidEmail(trimmedEmail)) {
     return null;
@@ -34,6 +43,7 @@ function parsePayload(body: unknown): ContactFormPayload | null {
   }
 
   return {
+    formType: resolvedFormType,
     name: trimmedName,
     email: trimmedEmail,
     phone: trimmedPhone,

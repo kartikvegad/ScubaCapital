@@ -21,7 +21,7 @@ export function SectionImage({
         src={src}
         alt={alt}
         fill
-        className="object-cover"
+        className="pointer-events-none object-cover select-none"
         sizes={sizes}
         priority={priority}
       />

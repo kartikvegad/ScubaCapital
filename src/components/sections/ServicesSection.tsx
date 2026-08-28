@@ -1,122 +1,82 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionImage } from "@/components/ui/SectionImage";
-import { products, productsIntro, serviceSegments, services, servicesIntro } from "@/lib/constants";
+import { SegmentCard } from "@/components/ui/SegmentCard";
+import { PartnerEcosystemSection } from "@/components/sections/PartnerEcosystemSection";
+import { ctaConfig, serviceSegments, wealthSection } from "@/lib/constants";
 
 export function ServicesSection() {
   return (
-    <section id="services" className="section-cream py-20 lg:py-28">
+    <section id="services" className="section-cream section-py">
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="eyebrow">Services</p>
-          <h2 className="font-display mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
-            {servicesIntro.heading}
-          </h2>
-          <p className="mt-5 text-muted">{servicesIntro.intro}</p>
-          <a
-            href="/services"
-            className="btn-outline-navy mt-8 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold"
-          >
-            View all services
-            <ArrowRight className="size-4" />
-          </a>
-        </div>
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
+          <ScrollReveal direction="left">
+            <SectionImage
+              src={wealthSection.image}
+              alt="Mutual fund investment planning"
+              className="aspect-[5/4] rounded-2xl shadow-[0_16px_40px_rgba(38,34,98,0.08)]"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+          </ScrollReveal>
 
-        <div className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-4">
-          {serviceSegments.map((segment) => (
-            <a
-              key={segment.id}
-              href="/services"
-              className="group relative overflow-hidden rounded-2xl"
-            >
-              <SectionImage
-                src={segment.image}
-                alt={segment.title}
-                className="aspect-[4/3] transition-transform duration-500 group-hover:scale-105"
-                sizes="(max-width: 768px) 50vw, 25vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#252947]/80 via-[#252947]/20 to-transparent" />
-              <p className="absolute inset-x-0 bottom-0 p-3 font-display text-sm font-bold text-white">
-                {segment.shortLabel}
-              </p>
-            </a>
-          ))}
-        </div>
+          <ScrollReveal direction="right" delay={0.1}>
+            <p className="eyebrow">{wealthSection.eyebrow}</p>
+            <h2 className="font-display mt-3 text-2xl font-bold tracking-tight sm:text-3xl">
+              {wealthSection.heading}
+            </h2>
+            <p className="mt-4 text-sm text-muted">{wealthSection.intro}</p>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, i) => (
-            <motion.article
-              key={service.id}
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ delay: i * 0.05 }}
-              className="panel flex flex-col rounded-[1.75rem] p-6 lg:p-7"
-            >
-              <p className="eyebrow">{service.label}</p>
-              <h3 className="font-display mt-3 text-xl font-bold">{service.title}</h3>
-              <p className="mt-1 text-sm font-medium text-gold">{service.subtitle}</p>
-              <p className="mt-4 flex-1 text-sm leading-relaxed text-muted">
-                {service.description}
-              </p>
-              <ul className="mt-5 space-y-1.5">
-                {service.items.slice(0, 4).map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-start gap-2 text-sm text-foreground/80"
-                  >
-                    <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-gold" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              {"cta" in service && service.cta ? (
-                <a
-                  href="#contact"
-                  className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-navy"
+            <ul className="mt-6 space-y-3">
+              {wealthSection.features.map((feature) => (
+                <li
+                  key={feature.title}
+                  className="feature-card rounded-xl bg-white p-4 ring-1 ring-border"
                 >
-                  {service.cta}
-                  <ArrowRight className="size-4" />
-                </a>
-              ) : (
-                <a
-                  href="#contact"
-                  className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-navy"
-                >
-                  Explore
-                  <ArrowRight className="size-4" />
-                </a>
-              )}
-              {"note" in service && service.note ? (
-                <p className="mt-4 text-[10px] leading-relaxed text-muted/80">
-                  {service.note}
-                </p>
-              ) : null}
-            </motion.article>
-          ))}
-        </div>
+                  <h3 className="font-display text-sm font-bold text-navy">
+                    {feature.title}
+                  </h3>
+                  <p className="mt-1 text-xs leading-relaxed text-muted">
+                    {feature.description}
+                  </p>
+                </li>
+              ))}
+            </ul>
 
-        <div className="bg-gradient-brand mt-16 rounded-[2rem] px-6 py-10 text-center text-white sm:px-10">
-          <p className="eyebrow text-gold-light">Products & Solutions</p>
-          <h3 className="font-display mt-3 text-2xl font-bold sm:text-3xl">
-            {productsIntro.heading}
-          </h3>
-          <p className="mx-auto mt-4 max-w-2xl text-sm text-white/65">
-            {productsIntro.intro}
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
-            {products.map((product) => (
-              <span
-                key={product}
-                className="rounded-full bg-white/10 px-4 py-2 text-xs font-medium text-white/80 ring-1 ring-white/15"
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a
+                href={ctaConfig.consultation.href}
+                className="btn-primary inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold"
               >
-                {product}
-              </span>
-            ))}
-          </div>
+                {ctaConfig.consultation.label}
+                <ArrowRight className="size-4" />
+              </a>
+              <a
+                href="/services"
+                className="btn-outline-navy inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold"
+              >
+                All services
+                <ArrowRight className="size-4" />
+              </a>
+            </div>
+          </ScrollReveal>
         </div>
+
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {serviceSegments.map((segment) => (
+            <SegmentCard
+              key={segment.id}
+              title={segment.title}
+              shortLabel={segment.shortLabel}
+              description={segment.intro}
+              image={segment.image}
+              href={`/services#${segment.id}`}
+            />
+          ))}
+        </div>
+
+        <PartnerEcosystemSection variant="compact" />
       </div>
     </section>
   );

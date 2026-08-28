@@ -48,40 +48,49 @@ export function createMailTransport() {
 }
 
 export type ContactFormPayload = {
+  formType: "consultation" | "portfolio-review";
   name: string;
   email: string;
   phone: string;
   message?: string;
 };
 
+const formTypeLabels = {
+  consultation: "Consultation request",
+  "portfolio-review": "Portfolio review request",
+} as const;
+
 export async function sendContactEmail(payload: ContactFormPayload) {
   const { user, recipients } = getMailConfig();
   const transport = createMailTransport();
 
-  const { name, email, phone, message } = payload;
+  const { formType, name, email, phone, message } = payload;
+  const requestLabel = formTypeLabels[formType];
 
   await transport.sendMail({
     from: `"Scuba Capital Website" <${user}>`,
     to: recipients.join(", "),
     replyTo: email,
-    subject: `New inquiry from ${name}`,
+    subject: `${requestLabel} from ${name}`,
     text: [
-      "New contact form submission",
+      `New ${requestLabel.toLowerCase()}`,
       "",
+      `Request type: ${requestLabel}`,
       `Name: ${name}`,
       `Email: ${email}`,
       `Phone: ${phone}`,
       "",
-      "Message:",
-      message?.trim() || "(No message provided)",
+      "Details:",
+      message?.trim() || "(No additional details provided)",
     ].join("\n"),
     html: `
-      <h2>New contact form submission</h2>
+      <h2>New ${escapeHtml(requestLabel.toLowerCase())}</h2>
+      <p><strong>Request type:</strong> ${escapeHtml(requestLabel)}</p>
       <p><strong>Name:</strong> ${escapeHtml(name)}</p>
       <p><strong>Email:</strong> ${escapeHtml(email)}</p>
       <p><strong>Phone:</strong> ${escapeHtml(phone)}</p>
-      <p><strong>Message:</strong></p>
-      <p>${escapeHtml(message?.trim() || "(No message provided)").replace(/\n/g, "<br>")}</p>
+      <p><strong>Details:</strong></p>
+      <p>${escapeHtml(message?.trim() || "(No additional details provided)").replace(/\n/g, "<br>")}</p>
     `,
   });
 }

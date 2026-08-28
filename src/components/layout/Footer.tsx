@@ -1,13 +1,23 @@
 import { navLinks, siteConfig } from "@/lib/constants";
 import { DotLogo } from "@/components/ui/DotLogo";
-
+import { SocialLinks } from "@/components/ui/SocialLinks";
 export function Footer() {
   return (
-    <footer className="bg-gradient-brand text-white">
-      <div className="mx-auto max-w-6xl px-6 py-16 lg:px-8">
-        <div className="grid gap-12 md:grid-cols-3">
+    <footer className="bg-gradient-brand relative overflow-hidden text-white">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute bottom-0 left-1/2 h-[min(75vw,720px)] w-[min(100vw,960px)] -translate-x-1/2 translate-y-[18%] bg-[url('/scuba-capital-logo-white.svg')] bg-contain bg-center bg-no-repeat opacity-[0.09]"
+      />
+      <div className="relative z-10 mx-auto max-w-6xl px-6 py-16 lg:px-8">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="md:col-span-1">
-            <p className="font-display text-xl font-bold">SCUBA CAPITAL</p>
+            <a
+              href="/"
+              aria-label="SCUBA CAPITAL home"
+              className="font-display inline-block text-lg font-bold transition-opacity hover:opacity-90"
+            >
+              SCUBA CAPITAL
+            </a>
             <p className="mt-3 text-sm text-gold-light">{siteConfig.tagline}</p>
             <p className="mt-4 text-sm leading-relaxed text-white/55">
               {siteConfig.footerDescriptor}
@@ -15,6 +25,12 @@ export function Footer() {
             <p className="mt-4 text-sm text-white/45">
               AMFI ARN: {siteConfig.amfiArn}
             </p>
+            <div className="mt-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/40">
+                Follow Us
+              </p>
+              <SocialLinks className="mt-3" />
+            </div>
           </div>
 
           <div>
@@ -32,6 +48,32 @@ export function Footer() {
                   </a>
                 </li>
               ))}
+            </ul>
+          </div>
+
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/40">
+              Blog
+            </p>
+            <ul className="mt-4 space-y-2">
+              <li>
+                <a
+                  href="/blog"
+                  className="text-sm text-white/65 transition-colors hover:text-gold-light"
+                >
+                  All Articles
+                </a>
+              </li>
+              <li>
+                <a
+                  href={siteConfig.social.medium}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-white/65 transition-colors hover:text-gold-light"
+                >
+                  Medium
+                </a>
+              </li>
             </ul>
           </div>
 

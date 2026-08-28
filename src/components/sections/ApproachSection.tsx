@@ -1,43 +1,35 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { SectionImage } from "@/components/ui/SectionImage";
-import { approachIntro, processSteps, siteImages } from "@/lib/constants";
+import { approachIntro, processSteps } from "@/lib/constants";
 
 export function ApproachSection() {
   return (
-    <section id="approach" className="section-white py-20 lg:py-28">
+    <section id="approach" className="section-white section-py">
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto max-w-2xl text-center">
           <p className="eyebrow">Our Approach</p>
-          <h2 className="font-display mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+          <h2 className="font-display mt-3 text-2xl font-bold tracking-tight sm:text-3xl">
             {approachIntro.heading}
           </h2>
-          <p className="mt-5 text-muted">{approachIntro.intro}</p>
+          <p className="mt-4 text-sm text-muted">{approachIntro.intro}</p>
         </div>
 
-        <SectionImage
-          src={siteImages.approach}
-          alt="Collaborative financial planning approach"
-          className="mt-12 aspect-[21/9] rounded-[2rem] shadow-[0_20px_50px_rgba(73,48,82,0.1)]"
-          sizes="(max-width: 1024px) 100vw, 1152px"
-        />
-
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {processSteps.map((step, i) => (
             <motion.div
               key={step.step}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.06 }}
-              className="rounded-[1.5rem] bg-cream p-5"
+              transition={{ delay: i * 0.04 }}
+              className="rounded-xl bg-cream p-4"
             >
-              <span className="font-display text-2xl font-bold text-gold">
+              <span className="font-display text-xl font-bold text-gold">
                 {step.step}
               </span>
-              <h3 className="font-display mt-3 font-bold">{step.title}</h3>
-              <p className="mt-2 text-xs leading-relaxed text-muted">
+              <h3 className="font-display mt-2 text-sm font-bold">{step.title}</h3>
+              <p className="mt-1.5 text-xs leading-relaxed text-muted">
                 {step.description}
               </p>
             </motion.div>

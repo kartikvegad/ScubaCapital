@@ -68,7 +68,7 @@ export function GuideCard({ guide, onClick }: GuideCardProps) {
           src={guide.image}
           alt={guide.displayName}
           fill
-          className="object-cover object-top"
+          className="pointer-events-none object-cover object-top select-none"
           sizes="(max-width: 640px) 280px, 300px"
         />
 
@@ -76,11 +76,14 @@ export function GuideCard({ guide, onClick }: GuideCardProps) {
 
         <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5">
           <div className="min-w-0 pr-2">
-            <p className="font-display text-lg font-bold leading-tight text-white drop-shadow-sm sm:text-xl">
+            <p className="font-display text-xl font-bold leading-tight text-white drop-shadow-sm sm:text-2xl">
               {guide.displayName}
             </p>
-            <p className="mt-1 text-xs leading-snug text-white/80 sm:text-sm">
+            <p className="mt-1 text-xs font-semibold leading-snug text-gold-light sm:text-sm">
               {guide.role}
+            </p>
+            <p className="mt-1 text-[10px] leading-snug text-white/75 sm:text-xs">
+              {guide.credentialHighlight}
             </p>
           </div>
           <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-white/95 text-navy shadow-md transition-transform group-hover:scale-110">

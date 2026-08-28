@@ -1,4 +1,5 @@
 export const siteConfig = {
+  logo: "/scuba-capital-logo.svg",
   legalName: "SCUBA CAPITAL PVT LTD",
   name: "SCUBA CAPITAL",
   tagline: "Dive Deep. Invest Smart. Achieve More.",
@@ -24,6 +25,10 @@ export const siteConfig = {
   social: {
     instagram: "https://www.instagram.com/scubacapital",
     facebook: "https://www.facebook.com/scubacapital",
+    linkedin: "https://www.linkedin.com/company/scubacapital",
+    youtube: "https://www.youtube.com/@scubacapital",
+    medium: "https://medium.com/@scubacapital",
+    whatsapp: "https://wa.me/918527633669",
   },
   founderQuote:
     "Financial planning is not about predicting the future. It is about preparing for it.",
@@ -36,11 +41,12 @@ export const siteImages = {
   philosophy: "/images/ocean-depth.jpg",
   approach: "/images/team-approach.jpg",
   whyUs: "/images/family-protect.jpg",
+  brandLogoFull: "/images/scuba-capital-full-logo.png",
   founder: "/founder-satish.jpg",
   segments: {
     "personal-finance": "/images/invest-grow.jpg",
     "risk-management": "/images/family-protect.jpg",
-    retirement: "/images/retirement.jpg",
+    retirement: "/images/retirement-beach.jpg",
     succession: "/images/legacy-home.jpg",
   },
 } as const;
@@ -57,9 +63,97 @@ export const heroContent = {
     "We help individuals, families, professionals, entrepreneurs and business owners approach their financial journey with greater clarity, structure and discipline.",
   ],
   primaryCta: "Book a Consultation",
-  secondaryCta: "Talk to Our Wealth Team",
+  secondaryCta: "Request a Portfolio Review",
+  primaryCtaHref: "/contact",
+  secondaryCtaHref: "/contact/portfolio-review",
   supportingLine: "Plan with Clarity. Grow with Confidence.",
 } as const;
+
+export const ctaConfig = {
+  consultation: {
+    label: "Book a Consultation",
+    href: "/contact",
+  },
+  portfolioReview: {
+    label: "Request a Portfolio Review",
+    shortLabel: "Review My Portfolio",
+    href: "/contact/portfolio-review",
+  },
+} as const;
+
+export const contactPages = {
+  consultation: {
+    title: "Book a consultation",
+    description:
+      "Share your details and our team will reach out to discuss your financial goals, protection needs, and investment planning.",
+  },
+  portfolioReview: {
+    title: "Request a portfolio review",
+    description:
+      "Tell us about your current holdings and goals. We will review your portfolio structure, alignment, and areas that may need attention.",
+  },
+} as const;
+
+export const portfolioReviewFormOptions = {
+  portfolioValueRanges: [
+    "Below ₹10 lakh",
+    "₹10 lakh – ₹25 lakh",
+    "₹25 lakh – ₹50 lakh",
+    "₹50 lakh – ₹1 crore",
+    "Above ₹1 crore",
+  ],
+  holdingTypes: [
+    "Mutual Funds",
+    "Fixed Deposits / RDs",
+    "PPF / EPF / NPS",
+    "Insurance / ULIPs",
+    "Stocks / Direct Equity",
+    "Other Investments",
+  ],
+  reviewFocusAreas: [
+    "Existing investments",
+    "Portfolio concentration",
+    "Goal alignment",
+    "Risk considerations",
+    "Liquidity requirements",
+    "Duplication of investments",
+    "Gaps in financial planning",
+  ],
+} as const;
+
+/** Key service areas shown in the hero */
+export const heroServices = [
+  "Investment Planning",
+  "Retirement Planning",
+  "Goal Planning",
+  "Portfolio Review",
+  "SIP Planning",
+  "Protection Planning",
+] as const;
+
+/** Factual trust credentials for advisory credibility */
+export const trustFactors = [
+  {
+    title: "AMFI Registered",
+    description: "Mutual Fund Distributor",
+  },
+  {
+    title: "ARN-288339",
+    description: "Official AMFI registration number",
+  },
+  {
+    title: "NISM V-A Certified",
+    description: "Mutual fund distribution",
+  },
+  {
+    title: "Banking & Insurance",
+    description: "Sydenham College, Mumbai University",
+  },
+  {
+    title: "NISM XIII Certified",
+    description: "Common derivatives certification",
+  },
+] as const;
 
 /** Rotating audience labels for Path-style hero */
 export const heroAudiences = [
@@ -78,11 +172,14 @@ export const guidesSection = {
     "It's not just about building a strong portfolio or retirement plan — it's about clear guidance, honest conversations, and making sure you understand every decision along the way.",
     "We're advisors focused on your objectives first — and we take this journey seriously because your financial future matters.",
   ],
-  cta: "See why SCUBA",
+  cta: "Explore Our Approach",
 } as const;
 
 export const pillarsIntro = {
-  heading: "A Deeper Approach to Your Financial Journey",
+  eyebrow: "Comprehensive Solutions",
+  heading: "Our Core Offerings",
+  subtitle:
+    "Tailored financial strategies designed to secure your future and help you grow with structure and discipline.",
   intro: [
     "Your financial life is connected.",
     "Investments influence liquidity. Protection supports your family's security. Retirement requires long-term preparation. Wealth built today may eventually need to be transferred to the next generation.",
@@ -108,7 +205,7 @@ export const pillars = [
       "Wealth creation & financial independence",
     ],
     cta: "Explore Investment Planning",
-    href: "/services",
+    href: "/services#personal-finance",
     image: siteImages.segments["personal-finance"],
   },
   {
@@ -128,7 +225,7 @@ export const pillars = [
       "Family financial security planning",
     ],
     cta: "Explore Protection Planning",
-    href: "/services",
+    href: "/services#risk-management",
     image: siteImages.segments["risk-management"],
   },
   {
@@ -149,7 +246,7 @@ export const pillars = [
       "SWP / income planning",
     ],
     cta: "Explore Retirement Planning",
-    href: "/services",
+    href: "/services#retirement",
     image: siteImages.segments.retirement,
   },
   {
@@ -169,7 +266,7 @@ export const pillars = [
       "Estate liquidity planning",
     ],
     cta: "Explore Succession Planning",
-    href: "/services",
+    href: "/services#succession",
     image: siteImages.segments.succession,
   },
 ] as const;
@@ -191,6 +288,8 @@ export const philosophyIntro = {
   intro:
     "Our name represents the way we approach financial planning. We believe better financial decisions begin by going deeper — understanding the person, the objective and the context before discussing solutions.",
   closing: "SCUBA = Strategy • Clarity • Understanding • Balance • Achievement",
+  acronymSummary:
+    "Each letter in SCUBA reflects a principle we apply to every financial plan.",
 } as const;
 
 export const philosophy = [
@@ -231,6 +330,97 @@ export const servicesIntro = {
   intro:
     "Different stages of life require different financial decisions. SCUBA CAPITAL provides access to a range of financial solutions designed to support investment, protection, liquidity, retirement and long-term wealth objectives.",
 } as const;
+
+export const wealthSection = {
+  eyebrow: "Mutual Fund Distribution",
+  heading: "Structured Mutual Fund Strategies",
+  intro:
+    "AMFI-registered mutual fund distribution aligned to your goals, risk profile, and investment horizon.",
+  features: [
+    {
+      title: "Systematic Investment Plans (SIPs)",
+      description:
+        "Build long-term wealth through disciplined, regular investments that benefit from rupee-cost averaging over time.",
+    },
+    {
+      title: "Goal-Based Portfolio Mapping",
+      description:
+        "Strategies mapped to life events — retirement, children's education, or moving toward financial independence.",
+    },
+    {
+      title: "Portfolio Review & Optimisation",
+      description:
+        "Structured reviews to understand holdings, alignment with goals, and where gaps or overlaps may need attention.",
+    },
+  ],
+  cta: "Book a Consultation",
+  image: siteImages.segments["personal-finance"],
+} as const;
+
+export const goalPlanningIntro = {
+  eyebrow: "Goal Planning",
+  heading: "Let's Start Creating Your Goals",
+  intro:
+    "Whether it is retirement, education, protection, or legacy planning, we help you define clear financial goals and build a structured path toward them — with discipline, clarity, and a plan that fits your life.",
+  cta: "Explore All Services",
+} as const;
+
+export const investorResourceCards = [
+  {
+    title: "Portfolio Review",
+    description:
+      "Understand what you own and whether holdings remain aligned to your goals.",
+    href: "/contact/portfolio-review",
+    label: "Request review",
+  },
+  {
+    title: "SIP Discipline",
+    description:
+      "How systematic investing supports long-term wealth building.",
+    href: "/blog/sip-discipline-for-long-term-investors",
+    label: "Read insight",
+  },
+  {
+    title: "Goal Planning",
+    description:
+      "Why defining goals should come before product selection.",
+    href: "/blog/financial-goal-planning-before-you-invest",
+    label: "Read insight",
+  },
+  {
+    title: "Annual Review",
+    description:
+      "What to check when reviewing your portfolio each year.",
+    href: "/blog/annual-portfolio-review-checklist",
+    label: "Read insight",
+  },
+  {
+    title: "MF Categories",
+    description:
+      "How to match mutual fund categories to different financial goals.",
+    href: "/blog/mutual-fund-categories-for-different-goals",
+    label: "Read insight",
+  },
+  {
+    title: "Understanding Returns",
+    description:
+      "What 3, 5 and 7 year mutual fund returns actually tell you.",
+    href: "/blog/understanding-mutual-fund-performance-returns",
+    label: "Read insight",
+  },
+  {
+    title: "AMC Partners",
+    description: "Access mutual funds across 45+ leading AMCs.",
+    href: "/services#partners",
+    label: "View partners",
+  },
+  {
+    title: "Investor FAQs",
+    description: "Answers to common questions about working with us.",
+    href: "/#faqs",
+    label: "View FAQs",
+  },
+] as const;
 
 export const services = [
   {
@@ -335,16 +525,110 @@ export const services = [
 
 export const products = [
   "Mutual Funds",
-  "Specialised Investment Funds",
+  "SIP & STP Solutions",
   "Health Insurance",
   "Term Insurance",
-  "Alternate Investment Funds",
   "Corporate FDs",
   "NPS",
   "Loan Against Mutual Funds",
   "Will Planning",
   "Private Family Trust",
-  "Portfolio Management Services",
+] as const;
+
+export const partnerEcosystemIntro = {
+  eyebrow: "Our Partner Ecosystem",
+  heading: "Access Across Leading AMCs & Insurers",
+  compactHeading: "45+ AMCs & Leading Insurance Partners",
+  description:
+    "As an AMFI-registered Mutual Fund Distributor, we facilitate mutual fund solutions across a wide range of Asset Management Companies. We also help clients evaluate health and life insurance options through established insurance partners.",
+  compactDescription:
+    "Mutual fund distribution across leading AMCs, plus health and life insurance solutions through established insurance partners.",
+  disclaimer:
+    "Partner listings represent categories of providers we may facilitate access to. Product availability, suitability and terms depend on the respective AMC or insurer. Mutual fund investments are subject to market risks.",
+} as const;
+
+/** Major AMCs — representative list; availability subject to AMFI registration and distributor tie-ups */
+export const partnerAmcs = [
+  "SBI Mutual Fund",
+  "HDFC Mutual Fund",
+  "ICICI Prudential Mutual Fund",
+  "Nippon India Mutual Fund",
+  "Kotak Mahindra Mutual Fund",
+  "Aditya Birla Sun Life MF",
+  "Axis Mutual Fund",
+  "UTI Mutual Fund",
+  "DSP Mutual Fund",
+  "Tata Mutual Fund",
+  "Mirae Asset Mutual Fund",
+  "Franklin Templeton MF",
+  "Bandhan Mutual Fund",
+  "HSBC Mutual Fund",
+  "Invesco Mutual Fund",
+  "PGIM India Mutual Fund",
+  "Edelweiss Mutual Fund",
+  "Mahindra Manulife MF",
+  "Bajaj Finserv Mutual Fund",
+  "Baroda BNP Paribas MF",
+  "Canara Robeco Mutual Fund",
+  "LIC Mutual Fund",
+  "Motilal Oswal Mutual Fund",
+  "NJ Mutual Fund",
+  "Parag Parikh Mutual Fund",
+  "Quant Mutual Fund",
+  "Quantum Mutual Fund",
+  "Samco Mutual Fund",
+  "Shriram Mutual Fund",
+  "Sundaram Mutual Fund",
+  "Union Mutual Fund",
+  "WhiteOak Capital MF",
+  "JM Financial Mutual Fund",
+  "ITI Mutual Fund",
+  "Groww Mutual Fund",
+  "Helios Mutual Fund",
+  "Trust Mutual Fund",
+  "Old Bridge Mutual Fund",
+  "Bank of India MF",
+  "Taurus Mutual Fund",
+  "360 ONE Mutual Fund",
+  "Angel One Mutual Fund",
+  "Unifi Mutual Fund",
+  "Capitalmind Mutual Fund",
+  "Jio BlackRock Mutual Fund",
+] as const;
+
+export const partnerLifeInsurers = [
+  "LIC of India",
+  "HDFC Life",
+  "ICICI Prudential Life",
+  "SBI Life",
+  "Max Life Insurance",
+  "Bajaj Allianz Life",
+  "Tata AIA Life",
+  "PNB MetLife",
+  "Kotak Mahindra Life",
+  "Aditya Birla Sun Life Insurance",
+  "Canara HSBC Life",
+  "Bandhan Life",
+  "Shriram Life Insurance",
+  "IndiaFirst Life",
+  "Star Union Dai-ichi Life",
+] as const;
+
+export const partnerHealthInsurers = [
+  "Star Health",
+  "HDFC ERGO",
+  "ICICI Lombard",
+  "Niva Bupa Health",
+  "Care Health Insurance",
+  "Aditya Birla Health",
+  "Bajaj Allianz General",
+  "Tata AIG",
+  "Royal Sundaram",
+  "SBI General Insurance",
+  "New India Assurance",
+  "Oriental Insurance",
+  "National Insurance",
+  "United India Insurance",
 ] as const;
 
 export const servicesPageIntro = {
@@ -369,9 +653,9 @@ export const serviceSegments = [
           "We help you identify, prioritise and timeline your financial objectives — whether buying a home, funding education, building wealth or preparing for major life events — so every decision connects back to what matters most.",
       },
       {
-        title: "Investment planning & asset allocation",
+        title: "Investment planning & mutual fund allocation",
         description:
-          "A structured approach to how your money is invested across asset classes, aligned to your goals, time horizon and risk comfort — rather than chasing products in isolation.",
+          "A structured approach to how your mutual fund portfolio is spread across suitable categories — aligned to your goals, time horizon and risk comfort — rather than chasing products in isolation.",
       },
       {
         title: "Mutual fund & SIP planning",
@@ -543,9 +827,9 @@ export const serviceSegments = [
 ] as const;
 
 export const productsIntro = {
-  heading: "Solutions Across Your Financial Journey",
+  heading: "Mutual Funds, Protection & Planning Solutions",
   intro:
-    "From building wealth to protecting it and planning its eventual transfer, SCUBA CAPITAL can facilitate access to a range of financial products and solutions, subject to suitability, eligibility, availability and applicable regulations.",
+    "We focus on mutual fund distribution, protection planning and structured financial solutions — not direct equity broking. Access is facilitated across leading AMCs and insurance partners, subject to suitability, eligibility and applicable regulations.",
 } as const;
 
 export const processSteps = [
@@ -636,6 +920,7 @@ export const founder = {
   name: "Mr. Satishkumar Kagre",
   displayName: "Satishkumar Kagre",
   role: "Founder & Financial Planning Professional",
+  credentialHighlight: "AMFI ARN-288339 · NISM Certified",
   initials: "SK",
   location: "Dombivli East, Mumbai Metropolitan Region",
   experience: "Banking & Financial Services",
@@ -708,8 +993,8 @@ export const finalCta = {
   heading: "Your Financial Journey Starts With a Conversation.",
   body: "You don't need to have all the answers before speaking to us. Whether you want to review your existing portfolio, start investing, plan for a major financial goal or simply understand your current financial position, SCUBA CAPITAL can help you begin with greater clarity.",
   closing: "Let's Understand Your Goals. Let's Plan Your Future.",
-  primaryCta: "Book a Financial Consultation",
-  secondaryCta: "Contact SCUBA CAPITAL Today",
+  primaryCta: "Book a Consultation",
+  secondaryCta: "Request a Portfolio Review",
 } as const;
 
 export const faqs = [
@@ -727,6 +1012,16 @@ export const faqs = [
     question: "Do you help with mutual fund investments?",
     answer:
       "Yes. SCUBA CAPITAL facilitates mutual fund solutions and provides services including SIP planning, portfolio review, portfolio consolidation, goal-based investment planning and ongoing investment reviews. AMFI Registration Number: ARN-288339.",
+  },
+  {
+    question: "Do you offer direct equity or stock broking?",
+    answer:
+      "No. SCUBA CAPITAL focuses on mutual fund distribution, financial planning, protection solutions and related advisory services. We do not offer direct equity or stock broking.",
+  },
+  {
+    question: "Which mutual fund AMCs can I access through SCUBA CAPITAL?",
+    answer:
+      "As an AMFI-registered Mutual Fund Distributor (ARN-288339), we facilitate mutual fund solutions across a wide network of Asset Management Companies — 45+ AMC partners. Specific scheme availability depends on the respective AMC and applicable regulations.",
   },
   {
     question: "Can you review my existing investments?",
@@ -777,11 +1072,140 @@ export const resourceCategories = [
   "Investor FAQs",
 ] as const;
 
+export type BlogPost = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  body: readonly string[];
+  publishedAt: string;
+  readTime: string;
+  category: string;
+  image: string;
+  mediumUrl: string;
+  author: string;
+};
+
+export const blogSection = {
+  eyebrow: "Insights & Education",
+  headline: "From Our Blog",
+  description:
+    "Practical insights on mutual fund strategies, goal-based planning and disciplined investing — on Medium.",
+  mediumCta: "Follow on Medium",
+} as const;
+
+export const blogPosts: readonly BlogPost[] = [
+  {
+    slug: "financial-goal-planning-before-you-invest",
+    title: "Why Financial Goal Planning Should Come Before Product Selection",
+    excerpt:
+      "Most investors start with a product. A clearer approach begins with defining what the money is meant to achieve — and when.",
+    body: [
+      "When someone asks which mutual fund to buy, the more useful starting question is often different: what is this money meant to do, and when will you need it?",
+      "Goal planning helps separate short-term liquidity needs from long-term wealth building. It also makes it easier to choose an appropriate asset mix, rather than chasing recent performance.",
+      "A simple framework can help: list your goals, assign a time horizon to each, estimate the amount required, and only then evaluate suitable product categories. This does not guarantee outcomes, but it brings structure to decision-making.",
+      "For Indian families and professionals, common goals include emergency reserves, children's education, home purchase, retirement, and legacy planning. Each goal may need a different contribution rhythm and review schedule.",
+      "At SCUBA CAPITAL, we encourage clients to think in terms of plans first and products second — so every investment decision supports a defined objective.",
+    ],
+    publishedAt: "2026-01-18",
+    readTime: "5 min read",
+    category: "Financial Planning",
+    image: "/images/about-planning.jpg",
+    mediumUrl:
+      "https://medium.com/@scubacapital/why-financial-goal-planning-should-come-before-product-selection-8f2a1c9d4e7b",
+    author: "Mr. Satishkumar Kagre",
+  },
+  {
+    slug: "sip-discipline-for-long-term-investors",
+    title: "SIP Discipline: What Long-Term Investors Should Understand",
+    excerpt:
+      "Systematic investing is less about timing the market and more about staying consistent through different market phases.",
+    body: [
+      "A Systematic Investment Plan (SIP) allows investors to contribute at regular intervals rather than committing a large amount at once. For many households, this aligns naturally with monthly income.",
+      "The practical benefit of SIPs is behavioural: they encourage regular saving and reduce the pressure to predict short-term market movements. However, SIPs do not remove market risk. Returns will vary with market conditions.",
+      "Investors should also review whether the SIP amount, fund category, and time horizon still match their goals. Increasing income, new liabilities, or a change in risk tolerance may require adjustments.",
+      "Before starting or changing an SIP, read the scheme related documents carefully and understand the category, expense ratio, and suitability for your profile.",
+      "Consistency matters, but so does periodic review. A disciplined SIP combined with an annual portfolio check can support long-term financial planning without unnecessary complexity.",
+    ],
+    publishedAt: "2026-02-05",
+    readTime: "6 min read",
+    category: "Mutual Funds",
+    image: "/images/invest-grow.jpg",
+    mediumUrl:
+      "https://medium.com/@scubacapital/sip-discipline-what-long-term-investors-should-understand-3b7e5a2f1c90",
+    author: "Mr. Satishkumar Kagre",
+  },
+  {
+    slug: "annual-portfolio-review-checklist",
+    title: "Annual Portfolio Review: What to Check and Why It Matters",
+    excerpt:
+      "A yearly review helps ensure your investments still reflect your goals, risk profile, and changing life circumstances.",
+    body: [
+      "Markets move. Goals evolve. An annual portfolio review is a practical way to check whether your current holdings still align with your financial priorities.",
+      "A useful review does not begin with performance charts alone. Start with your goals: have any timelines, amounts, or priorities changed? Has your income, family situation, or protection needs shifted?",
+      "Next, examine your mutual fund category mix. Are equity-oriented, debt, hybrid and liquid fund allocations still appropriate for each goal's time horizon? Over time, market movements can drift a portfolio away from its intended mix.",
+      "Also review fund selection within each category. Check whether the schemes remain suitable, whether overlaps have increased, and whether costs and portfolio characteristics still meet your expectations.",
+      "Finally, document what you reviewed and what action, if any, you decided to take. A review is most valuable when it leads to informed decisions — not reactive changes based on short-term noise.",
+    ],
+    publishedAt: "2026-03-12",
+    readTime: "5 min read",
+    category: "Portfolio Review",
+    image: "/images/team-approach.jpg",
+    mediumUrl:
+      "https://medium.com/@scubacapital/annual-portfolio-review-what-to-check-and-why-it-matters-9d4c8b1e6f23",
+    author: "Mr. Satishkumar Kagre",
+  },
+  {
+    slug: "mutual-fund-categories-for-different-goals",
+    title: "Choosing Mutual Fund Categories for Different Financial Goals",
+    excerpt:
+      "Not every goal needs the same type of mutual fund. Understanding categories — liquid, debt, hybrid and equity-oriented — helps match investments to timelines.",
+    body: [
+      "One of the most common questions investors ask is which mutual fund to choose. A more useful starting point is which category fits the goal — because category selection matters as much as individual scheme selection.",
+      "For short-term needs within one to three years, liquid, ultra-short and short-duration debt funds are often considered. For medium-term goals, hybrid or balanced advantage categories may be evaluated depending on risk comfort and time horizon.",
+      "For long-term goals such as retirement or children's education, equity-oriented mutual fund categories may be considered — but only where the investor's risk profile and time horizon support it. These are mutual fund categories, not direct stock investing.",
+      "Rather than comparing recent returns alone, review whether the category matches when you need the money, how much volatility you can tolerate, and whether the fund's role in your plan is clear.",
+      "At SCUBA CAPITAL, we help clients think in terms of goal timelines and suitable mutual fund categories first — then evaluate specific schemes within our AMC partner ecosystem.",
+    ],
+    publishedAt: "2026-04-02",
+    readTime: "6 min read",
+    category: "Mutual Funds",
+    image: "/images/invest-grow.jpg",
+    mediumUrl:
+      "https://medium.com/@scubacapital/choosing-mutual-fund-categories-for-different-financial-goals",
+    author: "Mr. Satishkumar Kagre",
+  },
+  {
+    slug: "understanding-mutual-fund-performance-returns",
+    title: "Understanding 3, 5 and 7 Year Mutual Fund Returns",
+    excerpt:
+      "Trailing returns over different periods can be useful — but only when you know what they measure, what they do not, and how to use them in context.",
+    body: [
+      "When reviewing mutual funds, investors often look at 3-year, 5-year and 7-year returns. These figures show how a scheme has performed over those specific past periods — but they are not a promise of future results.",
+      "A 3-year return may reflect a recent market phase. A 5-year return can smooth some short-term volatility. A 7-year return may better reflect a full market cycle — but only if the fund's strategy and management have remained consistent.",
+      "Comparing returns without comparing categories can be misleading. A debt fund and an equity-oriented fund should not be ranked against each other using the same return benchmark.",
+      "Also consider rolling returns, consistency across periods, expense ratio, portfolio characteristics and whether the fund still fits your goal. Past performance is one input — not the only input.",
+      "We encourage clients to use performance data as part of a broader review: goal alignment, category suitability, portfolio overlap and discipline matter more than chasing last year's top performer.",
+    ],
+    publishedAt: "2026-04-18",
+    readTime: "5 min read",
+    category: "Mutual Funds",
+    image: "/images/about-planning.jpg",
+    mediumUrl:
+      "https://medium.com/@scubacapital/understanding-3-5-and-7-year-mutual-fund-returns",
+    author: "Mr. Satishkumar Kagre",
+  },
+] as const;
+
+export function getBlogPost(slug: string): BlogPost | undefined {
+  return blogPosts.find((post) => post.slug === slug);
+}
+
 export const navLinks = [
   { label: "About", href: "/#about" },
   { label: "Philosophy", href: "/#philosophy" },
   { label: "Services", href: "/services" },
   { label: "Our Approach", href: "/#approach" },
+  { label: "Blog", href: "/blog" },
   { label: "Resources", href: "/#resources" },
   { label: "FAQs", href: "/#faqs" },
   { label: "Contact", href: "/contact" },

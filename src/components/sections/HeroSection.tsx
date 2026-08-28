@@ -3,10 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Pause, Play } from "lucide-react";
-import { heroAudiences, heroContent, siteConfig } from "@/lib/constants";
+import { heroAudiences, heroContent, heroServices, siteConfig } from "@/lib/constants";
+import { heroMedia } from "@/lib/media";
 
-const HERO_VIDEO = "/videos/hero-ocean.mp4";
-const HERO_POSTER = "/videos/hero-ocean-poster.jpg";
+const HERO_VIDEO = heroMedia.video;
+const HERO_POSTER = heroMedia.poster;
 
 export function HeroSection() {
   const [index, setIndex] = useState(0);
@@ -47,7 +48,7 @@ export function HeroSection() {
   }
 
   return (
-    <section className="theme-dark relative min-h-[100svh] overflow-hidden bg-[#252947]">
+    <section className="relative min-h-[100svh] overflow-hidden bg-sky-100">
       <div className="absolute inset-0 overflow-hidden">
         <video
           ref={videoRef}
@@ -60,18 +61,18 @@ export function HeroSection() {
           disablePictureInPicture
           controls={false}
           aria-hidden
-          className="pointer-events-none absolute inset-0 h-full w-full scale-110 object-cover object-center blur-[5px]"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
         >
           <source src={HERO_VIDEO} type="video/mp4" />
         </video>
-        <div className="hero-vignette absolute inset-0" />
+        <div className="hero-daylight absolute inset-0" />
       </div>
 
       <button
         type="button"
         onClick={togglePlayback}
         aria-label={playing ? "Pause background video" : "Play background video"}
-        className="absolute right-6 bottom-24 z-20 flex size-9 items-center justify-center rounded-full border border-white/30 bg-black/40 text-white backdrop-blur-sm transition-colors hover:bg-black/55 sm:bottom-8"
+        className="absolute right-6 bottom-24 z-20 flex size-9 items-center justify-center rounded-full border border-navy/15 bg-white/80 text-navy shadow-sm backdrop-blur-sm transition-colors hover:bg-white sm:bottom-8"
       >
         {playing ? <Pause className="size-4" /> : <Play className="ml-0.5 size-4" />}
       </button>
@@ -83,12 +84,12 @@ export function HeroSection() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="w-full max-w-5xl"
         >
-          <h1 className="font-display text-4xl font-bold tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.45)] sm:text-5xl lg:text-6xl">
+          <h1 className="font-display mt-2 text-3xl font-bold tracking-tight text-navy [text-shadow:0_2px_30px_rgba(255,255,255,0.95)] sm:text-4xl lg:text-5xl">
             <span className="block">{heroContent.line1}</span>
             <span className="mt-1 block">{heroContent.line2}</span>
           </h1>
 
-          <div className="relative mx-auto mt-2 flex h-14 items-center justify-center overflow-hidden sm:mt-3 sm:h-16 lg:h-[4.5rem]">
+          <div className="relative mx-auto mt-1 flex h-12 items-center justify-center overflow-hidden sm:mt-2 sm:h-14 lg:h-16">
             <AnimatePresence mode="wait">
               <motion.p
                 key={heroAudiences[index]}
@@ -96,7 +97,7 @@ export function HeroSection() {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -48, opacity: 0 }}
                 transition={{ duration: 0.4, ease: "easeInOut" }}
-                className="absolute inset-x-0 font-display text-4xl font-bold tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.45)] sm:text-5xl lg:text-6xl"
+                className="absolute inset-x-0 font-display text-3xl font-bold tracking-tight text-navy [text-shadow:0_2px_30px_rgba(255,255,255,0.95)] sm:text-4xl lg:text-5xl"
               >
                 {heroAudiences[index]}
               </motion.p>
@@ -107,31 +108,45 @@ export function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.35 }}
-            className="mx-auto mt-8 max-w-md text-sm leading-relaxed text-white/70 sm:text-base"
+            className="mx-auto mt-6 max-w-lg text-sm text-white [text-shadow:0_1px_12px_rgba(0,0,0,0.45)]"
           >
-            {siteConfig.tagline}
-            <br />
-            {heroContent.supportingLine}
+            {siteConfig.tagline} · {heroContent.supportingLine}
           </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="mx-auto mt-5 flex max-w-3xl flex-wrap items-center justify-center gap-2"
+          >
+            {heroServices.map((service) => (
+              <span
+                key={service}
+                className="rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[11px] font-medium text-white/90 backdrop-blur-sm"
+              >
+                {service}
+              </span>
+            ))}
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="mt-10 flex flex-wrap items-center justify-center gap-4"
+            transition={{ delay: 0.45 }}
+            className="mt-8 flex flex-wrap items-center justify-center gap-3"
           >
             <a
-              href="/contact"
-              className="path-btn-outline inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-medium"
+              href={heroContent.primaryCtaHref}
+              className="btn-primary inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold"
             >
               {heroContent.primaryCta}
               <ArrowRight className="size-4" />
             </a>
             <a
-              href="#guides"
-              className="inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-medium text-white/80 transition-colors hover:text-white"
+              href={heroContent.secondaryCtaHref}
+              className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-7 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20"
             >
-              Meet Your Guide
+              {heroContent.secondaryCta}
             </a>
           </motion.div>
         </motion.div>
@@ -142,7 +157,7 @@ export function HeroSection() {
           transition={{ delay: 0.7 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
-          <span className="rounded-full border border-white/20 bg-black/30 px-4 py-1.5 text-[11px] font-medium text-white/75 backdrop-blur-sm">
+          <span className="rounded-full border border-white/20 bg-black/35 px-4 py-1.5 text-[11px] font-medium text-white/90 shadow-sm backdrop-blur-sm">
             AMFI Registered · {siteConfig.amfiArn}
           </span>
         </motion.div>

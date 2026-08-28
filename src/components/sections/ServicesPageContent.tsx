@@ -1,19 +1,45 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionImage } from "@/components/ui/SectionImage";
-import {
-  products,
-  productsIntro,
-  serviceSegments,
-  servicesPageIntro,
-} from "@/lib/constants";
+import { ctaConfig, products, productsIntro, serviceSegments, servicesPageIntro } from "@/lib/constants";
+import { PartnerEcosystemSection } from "@/components/sections/PartnerEcosystemSection";
+
+function getSegmentIndexFromHash(hash: string): number {
+  const segmentId = hash.replace(/^#/, "");
+  if (!segmentId) return 0;
+
+  const index = serviceSegments.findIndex((segment) => segment.id === segmentId);
+  return index >= 0 ? index : 0;
+}
 
 export function ServicesPageContent() {
   const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    function syncFromHash() {
+      const index = getSegmentIndexFromHash(window.location.hash);
+      setActiveIndex(index);
+
+      if (window.location.hash) {
+        document.getElementById("segments")?.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
+    syncFromHash();
+    window.addEventListener("hashchange", syncFromHash);
+    return () => window.removeEventListener("hashchange", syncFromHash);
+  }, []);
+
+  function selectSegment(index: number) {
+    setActiveIndex(index);
+    const segmentId = serviceSegments[index].id;
+    window.history.replaceState(null, "", `/services#${segmentId}`);
+  }
+
   const activeSegment = serviceSegments[activeIndex];
 
   return (
@@ -32,7 +58,7 @@ export function ServicesPageContent() {
         </div>
       </section>
 
-      <section className="section-cream -mt-8 pb-24 pt-0 sm:-mt-10 sm:pb-16 sm:pt-2 lg:py-20">
+      <section id="segments" className="section-cream -mt-8 pb-24 pt-0 sm:-mt-10 sm:pb-16 sm:pt-2 lg:py-20">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <div className="sticky top-[4.5rem] z-20 mb-2 sm:static sm:mb-0">
             <div className="grid grid-cols-2 gap-1.5 rounded-2xl bg-[#e6e2ea] p-1.5 shadow-[0_4px_20px_rgba(73,48,82,0.1),inset_0_1px_3px_rgba(73,48,82,0.12)] md:flex md:rounded-full md:gap-0 md:p-1 md:shadow-[inset_0_1px_3px_rgba(73,48,82,0.12)]">
@@ -42,7 +68,7 @@ export function ServicesPageContent() {
                 <button
                   key={segment.id}
                   type="button"
-                  onClick={() => setActiveIndex(index)}
+                  onClick={() => selectSegment(index)}
                   className={`relative z-10 flex min-h-11 touch-manipulation items-center justify-center rounded-xl px-2 py-3 text-xs font-semibold transition-colors sm:min-h-12 sm:px-4 sm:text-sm md:flex-1 md:rounded-full md:py-3 ${
                     isActive ? "text-navy" : "text-muted active:text-foreground/70"
                   }`}
@@ -121,14 +147,16 @@ export function ServicesPageContent() {
         </div>
       </section>
 
-      <section className="section-navy pb-24 pt-12 sm:pb-16 sm:pt-16 lg:py-24">
+      <PartnerEcosystemSection />
+
+      <section className="section-cream pb-24 pt-0 sm:pb-16 lg:py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center">
-            <p className="eyebrow text-gold-light">Products</p>
-            <h2 className="font-display mt-3 text-2xl font-bold text-white sm:mt-4 sm:text-3xl lg:text-4xl">
+            <p className="eyebrow">Solutions</p>
+            <h2 className="font-display mt-3 text-2xl font-bold sm:text-3xl">
               {productsIntro.heading}
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/65 sm:mt-5 sm:text-base">
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
               {productsIntro.intro}
             </p>
           </ScrollReveal>
@@ -138,7 +166,7 @@ export function ServicesPageContent() {
               {products.map((product) => (
                 <span
                   key={product}
-                  className="rounded-xl border border-white/15 bg-white/10 px-3 py-2.5 text-center text-[10px] font-semibold tracking-wide text-white/85 uppercase backdrop-blur-sm sm:rounded-full sm:px-4 sm:text-xs"
+                  className="rounded-xl border border-border bg-white px-3 py-2.5 text-center text-[10px] font-semibold tracking-wide text-navy/80 uppercase sm:rounded-full sm:px-4 sm:text-xs"
                 >
                   {product}
                 </span>
@@ -147,15 +175,11 @@ export function ServicesPageContent() {
           </ScrollReveal>
 
           <ScrollReveal delay={0.15} className="mt-10 text-center sm:mt-12">
-            <p className="text-xs leading-relaxed text-white/55 sm:text-sm">
-              All products are subject to suitability, eligibility, availability and applicable
-              regulations.
-            </p>
             <a
-              href="/contact"
-              className="btn-primary mt-6 flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold sm:mt-8 sm:inline-flex sm:w-auto sm:px-8"
+              href={ctaConfig.consultation.href}
+              className="btn-primary inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold sm:px-8"
             >
-              Book a Consultation
+              {ctaConfig.consultation.label}
               <ArrowRight className="size-4" />
             </a>
           </ScrollReveal>

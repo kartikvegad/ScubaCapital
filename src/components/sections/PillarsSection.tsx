@@ -1,70 +1,48 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { SectionImage } from "@/components/ui/SectionImage";
+import { OfferingCard } from "@/components/ui/OfferingCard";
 import { pillars, pillarsIntro } from "@/lib/constants";
+
+function formatOfferingNumber(index: number) {
+  return String(index + 1).padStart(2, "0");
+}
 
 export function PillarsSection() {
   return (
-    <section className="section-cream py-20 lg:py-28">
+    <section className="section-cream section-py">
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
-        <ScrollReveal className="mx-auto max-w-3xl text-center">
-          <p className="eyebrow">Four Core Pillars</p>
-          <h2 className="font-display mt-4 text-3xl font-bold tracking-tight sm:text-4xl lg:text-[2.75rem]">
+        <ScrollReveal className="mx-auto max-w-2xl text-center">
+          <p className="eyebrow">{pillarsIntro.eyebrow}</p>
+          <h2 className="font-display mt-3 text-2xl font-bold tracking-tight sm:text-3xl">
             {pillarsIntro.heading}
           </h2>
-          <div className="mt-6 space-y-3 text-muted">
-            {pillarsIntro.intro.map((p) => (
-              <p key={p.slice(0, 36)}>{p}</p>
-            ))}
-          </div>
+          <p className="mt-4 text-sm text-muted">{pillarsIntro.subtitle}</p>
         </ScrollReveal>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-2">
+        <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
           {pillars.map((pillar, i) => (
-            <motion.article
+            <motion.div
               key={pillar.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ delay: i * 0.06 }}
-              className="panel group overflow-hidden rounded-[1.75rem] transition-shadow hover:shadow-[0_24px_50px_rgba(216,61,120,0.12)]"
+              transition={{ delay: i * 0.05 }}
+              className="h-full"
             >
-              <SectionImage
-                src={pillar.image}
-                alt={pillar.subtitle}
-                className="aspect-[16/9]"
-                sizes="(max-width: 768px) 100vw, 50vw"
+              <OfferingCard
+                number={formatOfferingNumber(i)}
+                label={pillar.label}
+                title={pillar.title}
+                subtitle={pillar.subtitle}
+                description={pillar.description}
+                href={pillar.href}
+                cta={pillar.cta}
+                image={pillar.image}
+                imageAlt={pillar.subtitle}
               />
-              <div className="p-7 lg:p-8">
-                <p className="eyebrow">{pillar.label}</p>
-                <h3 className="font-display mt-3 text-2xl font-bold">{pillar.title}</h3>
-                <p className="mt-1 text-sm font-medium text-gold">{pillar.subtitle}</p>
-                <p className="mt-4 text-sm leading-relaxed text-muted">
-                  {pillar.description}
-                </p>
-                <ul className="mt-5 space-y-2">
-                  {pillar.items.slice(0, 5).map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-start gap-2 text-sm text-foreground/80"
-                    >
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-gold" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <a
-                  href={pillar.href}
-                  className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-navy transition-colors group-hover:text-gold"
-                >
-                  {pillar.cta}
-                  <ArrowRight className="size-4" />
-                </a>
-              </div>
-            </motion.article>
+            </motion.div>
           ))}
         </div>
       </div>

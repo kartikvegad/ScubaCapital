@@ -1,21 +1,68 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { navLinks, siteConfig } from "@/lib/constants";
+import { ctaConfig, navLinks } from "@/lib/constants";
+import { ScubaLogo } from "@/components/ui/ScubaLogo";
+
+const HOME_SECTION_TO_HREF: Record<string, string> = {
+  about: "/#about",
+  philosophy: "/#philosophy",
+  services: "/services",
+  approach: "/#approach",
+  blog: "/blog",
+  resources: "/#resources",
+  faqs: "/#faqs",
+};
+
+const HOME_SECTION_ORDER = [
+  "about",
+  "philosophy",
+  "services",
+  "approach",
+  "blog",
+  "resources",
+  "faqs",
+] as const;
+
+const SPRING = { type: "spring" as const, stiffness: 260, damping: 30, mass: 0.8 };
+
+function resolveRouteActive(pathname: string, hash: string): string | null {
+  if (pathname === "/contact" || pathname === "/contact/portfolio-review") {
+    return "/contact";
+  }
+  if (pathname === "/services") return "/services";
+  if (pathname === "/blog" || pathname.startsWith("/blog/")) return "/blog";
+
+  if (pathname === "/" && hash) {
+    const href = `/#${hash.replace(/^#/, "")}`;
+    if (navLinks.some((link) => link.href === href)) return href;
+  }
+
+  return null;
+}
 
 export function Navbar() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeHref, setActiveHref] = useState<string>("");
+
+  const isFormed = !isHome || scrolled || open;
+  const heroOpen = isHome && !isFormed;
 
   useEffect(() => {
     function onScroll() {
-      setScrolled(window.scrollY > 40);
+      setScrolled(window.scrollY > 48);
     }
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -24,102 +71,203 @@ export function Navbar() {
     };
   }, [open]);
 
+  useEffect(() => {
+    function syncFromHash() {
+      const routed = resolveRouteActive(pathname, window.location.hash);
+      if (routed) setActiveHref(routed);
+    }
+
+    syncFromHash();
+    window.addEventListener("hashchange", syncFromHash);
+    return () => window.removeEventListener("hashchange", syncFromHash);
+  }, [pathname]);
+
+  useEffect(() => {
+    const routed = resolveRouteActive(
+      pathname,
+      typeof window !== "undefined" ? window.location.hash : "",
+    );
+    if (routed) {
+      setActiveHref(routed);
+      return;
+    }
+
+    if (pathname !== "/") return;
+
+    function updateScrollActive() {
+      const marker = window.scrollY + window.innerHeight * 0.32;
+      let current = "";
+
+      for (const sectionId of HOME_SECTION_ORDER) {
+        const element = document.getElementById(sectionId);
+        if (element && element.offsetTop <= marker) {
+          current = HOME_SECTION_TO_HREF[sectionId];
+        }
+      }
+
+      if (current) setActiveHref(current);
+    }
+
+    updateScrollActive();
+    window.addEventListener("scroll", updateScrollActive, { passive: true });
+    return () => window.removeEventListener("scroll", updateScrollActive);
+  }, [pathname]);
+
   return (
     <>
-      <header
-        className={`fixed inset-x-0 top-0 z-[110] transition-[padding] duration-300 ${
-          scrolled && !open ? "pointer-events-none px-4 pt-4 sm:px-6 sm:pt-5" : ""
-        }`}
+      <motion.header
+        className="pointer-events-none fixed inset-x-0 top-0 z-[110]"
+        animate={{
+          paddingLeft: isFormed ? 16 : 24,
+          paddingRight: isFormed ? 16 : 24,
+          paddingTop: isFormed ? 14 : 22,
+        }}
+        transition={SPRING}
       >
-        <div
-          className={`mx-auto transition-[max-width,padding] duration-300 ${
-            scrolled && !open ? "max-w-6xl" : "max-w-7xl px-6 pt-5 lg:px-10"
-          }`}
+        <motion.div
+          className="pointer-events-auto mx-auto w-full"
+          animate={{ maxWidth: isFormed ? 1152 : 1280 }}
+          transition={SPRING}
         >
-          <nav
-            className={`relative flex items-center justify-between ${
-              scrolled && !open
-                ? "pointer-events-auto px-5 py-3.5 lg:px-7"
-                : "py-5"
+          <motion.nav
+            className={`relative flex w-full items-center overflow-hidden px-2 py-2 sm:px-3 sm:py-2.5 ${
+              isFormed ? "navbar-glass-bar" : ""
             }`}
+            animate={{ borderRadius: isFormed ? 9999 : 0 }}
+            transition={SPRING}
           >
-            <div
-              aria-hidden
-              className={`navbar-glass pointer-events-none absolute inset-0 rounded-2xl border shadow-[0_8px_32px_rgba(37,24,56,0.35)] backdrop-blur-xl transition-[opacity,border-color] duration-300 ${
-                scrolled && !open
-                  ? "border-white/25 opacity-100"
-                  : "border-transparent opacity-0"
-              }`}
-            />
+            {isFormed ? (
+              <>
+                <div className="navbar-glass-backdrop" aria-hidden />
+                <div className="navbar-glass-gradient" aria-hidden />
+              </>
+            ) : null}
 
-            <a
-              href="/"
-              className="relative z-10 font-display text-xl font-bold tracking-tight text-white"
-              onClick={() => setOpen(false)}
-            >
-              SCUBA
-            </a>
+            <div className="relative z-10 flex w-full min-w-0 items-center gap-3">
+              <a
+                href="/"
+                aria-label="SCUBA CAPITAL home"
+                className="inline-flex shrink-0 items-center pl-1"
+                onClick={() => setOpen(false)}
+              >
+                <ScubaLogo variant="white" className="h-8 w-auto sm:h-9" priority />
+              </a>
 
-            <ul className="relative z-10 hidden items-center gap-7 xl:flex">
-              {navLinks.map((link) => (
+              <ul
+                className={`relative hidden min-w-0 flex-1 items-center justify-center lg:flex ${
+                  isFormed ? "gap-0.5" : "gap-2"
+                }`}
+              >
+                {navLinks.map((link) => {
+                  const isActive = activeHref === link.href;
+
+                  return (
+                    <li key={link.href} className="relative">
+                      {isActive && isFormed ? (
+                        <motion.span
+                          layoutId="navbar-active-pill"
+                          className="absolute inset-0 rounded-full bg-white/15 ring-1 ring-white/25"
+                          transition={SPRING}
+                        />
+                      ) : null}
+                      <a
+                        href={link.href}
+                        className={`relative z-10 block rounded-full px-3 py-2 text-sm font-medium transition-colors ${
+                          isActive && isFormed
+                            ? "text-white"
+                            : heroOpen
+                              ? "text-white/85 hover:text-white"
+                              : isFormed
+                                ? "text-white/75 hover:text-white"
+                                : "text-white/85 hover:text-white"
+                        }`}
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+
+              <div className="ml-auto hidden items-center gap-2 lg:flex">
+                <a
+                  href={ctaConfig.portfolioReview.href}
+                  className={
+                    isFormed
+                      ? "navbar-cta-outline whitespace-nowrap"
+                      : "navbar-cta-outline navbar-cta-outline--open whitespace-nowrap"
+                  }
+                >
+                  {ctaConfig.portfolioReview.shortLabel}
+                </a>
+                <a
+                  href={ctaConfig.consultation.href}
+                  className={
+                    isFormed
+                      ? "navbar-cta-outline whitespace-nowrap"
+                      : "navbar-cta-outline navbar-cta-outline--open whitespace-nowrap"
+                  }
+                >
+                  {ctaConfig.consultation.label}
+                </a>
+              </div>
+
+              <button
+                type="button"
+                aria-label={open ? "Close menu" : "Open menu"}
+                aria-expanded={open}
+                onClick={() => setOpen(!open)}
+                className={`ml-auto inline-flex size-10 shrink-0 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10 lg:ml-0 lg:hidden ${
+                  isFormed ? "ring-1 ring-white/20" : ""
+                }`}
+              >
+                {open ? <X className="size-5" /> : <Menu className="size-5" />}
+              </button>
+            </div>
+          </motion.nav>
+        </motion.div>
+      </motion.header>
+
+      {open ? (
+        <div className="navbar-mobile-sheet fixed inset-0 z-[105] flex flex-col lg:hidden">
+          <div className="navbar-glass-backdrop" aria-hidden />
+          <div className="navbar-glass-gradient" aria-hidden />
+          <div className="relative z-10 h-[4.5rem] shrink-0" aria-hidden />
+          <ul className="relative z-10 flex flex-1 flex-col gap-1 overflow-y-auto px-5 pt-2 pb-8">
+            {navLinks.map((link) => {
+              const isActive = activeHref === link.href;
+
+              return (
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-sm font-medium text-white/75 transition-colors hover:text-white"
+                    className={`block rounded-full px-4 py-3 text-sm font-medium transition-colors ${
+                      isActive
+                        ? "bg-white/15 text-white ring-1 ring-white/25"
+                        : "text-white/75 hover:bg-white/10 hover:text-white"
+                    }`}
+                    onClick={() => setOpen(false)}
                   >
                     {link.label}
                   </a>
                 </li>
-              ))}
-            </ul>
-
-            <div className="relative z-10 hidden items-center gap-4 lg:flex">
+              );
+            })}
+            <li className="flex flex-col gap-2 pt-4">
               <a
-                href="/contact"
-                className="path-btn-outline inline-flex rounded-full px-5 py-2.5 text-sm font-medium"
-              >
-                Book a Consultation
-              </a>
-            </div>
-
-            <button
-              type="button"
-              aria-label={open ? "Close menu" : "Open menu"}
-              onClick={() => setOpen(!open)}
-              className="relative z-10 text-white xl:hidden"
-            >
-              {open ? <X className="size-6" /> : <Menu className="size-6" />}
-            </button>
-          </nav>
-        </div>
-      </header>
-
-      {open ? (
-        <div className="navbar-glass fixed inset-0 z-[100] flex flex-col backdrop-blur-xl xl:hidden">
-          <div className="h-[4.75rem] shrink-0 sm:h-20" aria-hidden />
-          <ul className="flex flex-1 flex-col gap-5 overflow-y-auto px-6 pt-2 pb-8">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  className="text-xl font-semibold text-white"
-                  onClick={() => setOpen(false)}
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-            <li className="pt-2">
-              <a
-                href="/contact"
+                href={ctaConfig.portfolioReview.href}
                 onClick={() => setOpen(false)}
-                className="btn-primary inline-flex rounded-full px-6 py-3 text-sm font-semibold"
+                className="navbar-cta-outline w-full justify-center px-6 py-3 text-sm"
               >
-                Book a Consultation
+                {ctaConfig.portfolioReview.shortLabel}
               </a>
-            </li>
-            <li className="mt-auto pt-4">
-              <p className="text-sm text-white/50">{siteConfig.tagline}</p>
+              <a
+                href={ctaConfig.consultation.href}
+                onClick={() => setOpen(false)}
+                className="navbar-cta-outline w-full justify-center px-6 py-3 text-sm"
+              >
+                {ctaConfig.consultation.label}
+              </a>
             </li>
           </ul>
         </div>

@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, X } from "lucide-react";
 import { GuideCard } from "@/components/sections/GuideCard";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { financialGuides, guidesSection } from "@/lib/constants";
+import { ctaConfig, financialGuides, guidesSection } from "@/lib/constants";
 
 type Guide = (typeof financialGuides)[number];
 
@@ -26,45 +26,51 @@ export function GuidesSection() {
 
   return (
     <>
-      <section
-        id="guides"
-        className="bg-gradient-brand px-4 py-6 sm:px-6 lg:px-8 lg:py-8"
-      >
-        <div className="path-cream-panel mx-auto max-w-7xl overflow-visible px-6 py-14 sm:px-10 sm:py-16 lg:px-14 lg:py-20">
-          <div className="grid items-start gap-12 overflow-visible lg:grid-cols-[1fr_1.15fr] lg:gap-16">
-            <ScrollReveal direction="left" className="max-w-md">
-              <p className="eyebrow text-gold-light">
-                {guidesSection.eyebrow}
-              </p>
-              <h2 className="font-display mt-5 text-3xl font-bold leading-tight tracking-tight text-navy sm:text-4xl lg:text-[2.75rem]">
-                {guidesSection.headline}
-              </h2>
-              <div className="mt-6 space-y-4 text-sm leading-relaxed text-muted sm:text-base">
-                {guidesSection.paragraphs.map((paragraph) => (
-                  <p key={paragraph.slice(0, 32)}>{paragraph}</p>
-                ))}
-              </div>
+      <section id="guides" className="section-cream section-py overflow-visible">
+        <div className="mx-auto max-w-6xl overflow-visible px-6 lg:px-8">
+          <ScrollReveal className="mx-auto max-w-2xl text-center">
+            <p className="eyebrow">{guidesSection.eyebrow}</p>
+            <h2 className="font-display mt-4 text-3xl font-bold leading-tight tracking-tight text-navy sm:text-4xl">
+              {guidesSection.headline}
+            </h2>
+            <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-muted sm:text-base">
+              {guidesSection.paragraphs[0]}
+            </p>
+          </ScrollReveal>
+
+          <ScrollReveal delay={0.12} className="mt-10 overflow-visible sm:mt-12">
+            <div className="flex justify-center gap-6 overflow-visible px-2 py-4 sm:gap-8">
+              {financialGuides.map((guide) => (
+                <GuideCard
+                  key={guide.id}
+                  guide={guide}
+                  onClick={() => setActiveGuide(guide)}
+                />
+              ))}
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal delay={0.2} className="mt-8 text-center sm:mt-10">
+            <p className="mx-auto max-w-lg text-sm leading-relaxed text-muted">
+              {guidesSection.paragraphs[1]}
+            </p>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <a
-                href="#about"
-                className="btn-navy mt-8 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold"
+                href={ctaConfig.consultation.href}
+                className="btn-primary inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold"
               >
-                {guidesSection.cta}
+                {ctaConfig.consultation.label}
                 <ArrowRight className="size-4" />
               </a>
-            </ScrollReveal>
-
-            <ScrollReveal direction="right" delay={0.1} className="overflow-visible px-2 py-6">
-              <div className="flex min-w-max gap-5">
-                {financialGuides.map((guide) => (
-                  <GuideCard
-                    key={guide.id}
-                    guide={guide}
-                    onClick={() => setActiveGuide(guide)}
-                  />
-                ))}
-              </div>
-            </ScrollReveal>
-          </div>
+              <a
+                href={ctaConfig.portfolioReview.href}
+                className="btn-outline-navy inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold"
+              >
+                {ctaConfig.portfolioReview.shortLabel}
+                <ArrowRight className="size-4" />
+              </a>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -108,10 +114,15 @@ export function GuidesSection() {
 
                   <div className="mt-4 space-y-3">
                     <div>
-                      <h3 className="font-display text-base font-bold leading-tight">
+                      <h3 className="font-display text-xl font-bold leading-tight sm:text-2xl">
                         {activeGuide.displayName}
                       </h3>
-                      <p className="mt-0.5 text-xs text-white/65">{activeGuide.role}</p>
+                      <p className="mt-1 text-sm font-semibold text-gold-light">
+                        {activeGuide.role}
+                      </p>
+                      <p className="mt-1 text-xs text-white/70">
+                        {activeGuide.credentialHighlight}
+                      </p>
                     </div>
 
                     <div>
@@ -178,18 +189,19 @@ export function GuidesSection() {
 
                   <div className="flex flex-wrap items-center gap-2 pt-0.5">
                     <a
-                      href="#contact"
+                      href={ctaConfig.consultation.href}
+                      onClick={() => setActiveGuide(null)}
+                      className="btn-primary rounded-full px-4 py-2 text-xs font-semibold"
+                    >
+                      {ctaConfig.consultation.label}
+                    </a>
+                    <a
+                      href="#about"
                       onClick={() => setActiveGuide(null)}
                       className="path-btn-outline rounded-full px-4 py-2 text-xs font-medium"
                     >
-                      Work with me
+                      About SCUBA
                     </a>
-                    <button
-                      type="button"
-                      className="rounded-full bg-white/15 px-4 py-2 text-xs font-medium backdrop-blur-sm transition-colors hover:bg-white/20"
-                    >
-                      View Profile
-                    </button>
                   </div>
                 </div>
               </div>
