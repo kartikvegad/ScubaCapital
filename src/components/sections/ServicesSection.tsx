@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { products, productsIntro, services, servicesIntro } from "@/lib/constants";
+import { SectionImage } from "@/components/ui/SectionImage";
+import { products, productsIntro, serviceSegments, services, servicesIntro } from "@/lib/constants";
 
 export function ServicesSection() {
   return (
@@ -21,6 +22,27 @@ export function ServicesSection() {
             View all services
             <ArrowRight className="size-4" />
           </a>
+        </div>
+
+        <div className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-4">
+          {serviceSegments.map((segment) => (
+            <a
+              key={segment.id}
+              href="/services"
+              className="group relative overflow-hidden rounded-2xl"
+            >
+              <SectionImage
+                src={segment.image}
+                alt={segment.title}
+                className="aspect-[4/3] transition-transform duration-500 group-hover:scale-105"
+                sizes="(max-width: 768px) 50vw, 25vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#252947]/80 via-[#252947]/20 to-transparent" />
+              <p className="absolute inset-x-0 bottom-0 p-3 font-display text-sm font-bold text-white">
+                {segment.shortLabel}
+              </p>
+            </a>
+          ))}
         </div>
 
         <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">

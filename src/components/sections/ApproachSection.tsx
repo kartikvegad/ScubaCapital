@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { approachIntro, processSteps } from "@/lib/constants";
+import { SectionImage } from "@/components/ui/SectionImage";
+import { approachIntro, processSteps, siteImages } from "@/lib/constants";
 
 export function ApproachSection() {
   return (
@@ -14,6 +15,13 @@ export function ApproachSection() {
           </h2>
           <p className="mt-5 text-muted">{approachIntro.intro}</p>
         </div>
+
+        <SectionImage
+          src={siteImages.approach}
+          alt="Collaborative financial planning approach"
+          className="mt-12 aspect-[21/9] rounded-[2rem] shadow-[0_20px_50px_rgba(73,48,82,0.1)]"
+          sizes="(max-width: 1024px) 100vw, 1152px"
+        />
 
         <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {processSteps.map((step, i) => (

@@ -3,13 +3,22 @@
 import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { finalCta, founder, siteConfig } from "@/lib/constants";
+import { SectionImage } from "@/components/ui/SectionImage";
+import { finalCta, founder, siteConfig, siteImages } from "@/lib/constants";
 
 export function ContactSection() {
   return (
     <>
-      <section className="section-navy py-24 lg:py-32">
-        <div className="mx-auto max-w-3xl px-6 text-center lg:px-8">
+      <section className="relative overflow-hidden py-24 lg:py-32">
+        <SectionImage
+          src={siteImages.philosophy}
+          alt=""
+          aria-hidden
+          className="absolute inset-0"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-[#252947]/75" />
+        <div className="relative z-10 mx-auto max-w-3xl px-6 text-center lg:px-8">
           <ScrollReveal>
             <h2 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
               {finalCta.heading}
@@ -43,8 +52,14 @@ export function ContactSection() {
 
       <section id="contact" className="section-cream py-20 lg:py-24">
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-2">
+          <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
             <ScrollReveal direction="left">
+              <SectionImage
+                src={siteImages.approach}
+                alt="Connect with SCUBA CAPITAL"
+                className="mb-8 aspect-[16/10] rounded-2xl"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
               <p className="eyebrow">Contact</p>
               <h3 className="font-display mt-3 text-2xl font-bold">
                 Let&apos;s Connect

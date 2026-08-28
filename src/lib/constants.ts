@@ -31,6 +31,20 @@ export const siteConfig = {
     "Mutual fund investments are subject to market risks. Read all scheme related documents carefully. The information provided on this website is for general informational and educational purposes and should not be construed as investment advice, a guarantee of returns or a solicitation to buy or sell any financial product. Investment decisions should be made after considering individual financial circumstances, objectives, risk profile and applicable product documentation. Past performance is not indicative of future results. Product availability and suitability are subject to applicable laws, regulations, eligibility criteria and the terms and conditions of the respective product provider.",
 } as const;
 
+export const siteImages = {
+  about: "/images/about-planning.jpg",
+  philosophy: "/images/ocean-depth.jpg",
+  approach: "/images/team-approach.jpg",
+  whyUs: "/images/family-protect.jpg",
+  founder: "/founder-satish.jpg",
+  segments: {
+    "personal-finance": "/images/invest-grow.jpg",
+    "risk-management": "/images/family-protect.jpg",
+    retirement: "/images/retirement.jpg",
+    succession: "/images/legacy-home.jpg",
+  },
+} as const;
+
 export const heroContent = {
   eyebrow: "FINANCIAL PLANNING • INVESTMENT SOLUTIONS • WEALTH STRATEGY",
   headline: "Your Wealth. Your Goals. Your Future.",
@@ -94,7 +108,8 @@ export const pillars = [
       "Wealth creation & financial independence",
     ],
     cta: "Explore Investment Planning",
-    href: "#services",
+    href: "/services",
+    image: siteImages.segments["personal-finance"],
   },
   {
     id: "protect",
@@ -113,7 +128,8 @@ export const pillars = [
       "Family financial security planning",
     ],
     cta: "Explore Protection Planning",
-    href: "#services",
+    href: "/services",
+    image: siteImages.segments["risk-management"],
   },
   {
     id: "retire",
@@ -133,7 +149,8 @@ export const pillars = [
       "SWP / income planning",
     ],
     cta: "Explore Retirement Planning",
-    href: "#services",
+    href: "/services",
+    image: siteImages.segments.retirement,
   },
   {
     id: "preserve",
@@ -152,7 +169,8 @@ export const pillars = [
       "Estate liquidity planning",
     ],
     cta: "Explore Succession Planning",
-    href: "#services",
+    href: "/services",
+    image: siteImages.segments.succession,
   },
 ] as const;
 
@@ -341,6 +359,7 @@ export const serviceSegments = [
     id: "personal-finance",
     shortLabel: "Invest",
     title: "Personal Finance & Investment Planning",
+    image: siteImages.segments["personal-finance"],
     intro:
       "Build a financial foundation around the goals that matter to you. From investment planning and mutual fund solutions to children's education and long-term wealth creation, we help bring structure to your financial priorities.",
     services: [
@@ -385,6 +404,7 @@ export const serviceSegments = [
     id: "risk-management",
     shortLabel: "Protect",
     title: "Risk Management",
+    image: siteImages.segments["risk-management"],
     intro:
       "Wealth creation is only one part of financial planning. Protecting what you have built is equally important. We help evaluate protection needs, financial risks and potential gaps so your broader strategy is not built on an incomplete foundation.",
     services: [
@@ -429,6 +449,7 @@ export const serviceSegments = [
     id: "retirement",
     shortLabel: "Retire",
     title: "Retirement Planning",
+    image: siteImages.segments.retirement,
     intro:
       "Retirement planning is about more than reaching a number. It is about preparing for the lifestyle you want, creating an appropriate corpus, considering inflation and longevity, and planning how your wealth can support you through the years ahead.",
     services: [
@@ -478,6 +499,7 @@ export const serviceSegments = [
     id: "succession",
     shortLabel: "Preserve",
     title: "Estate / Succession Planning",
+    image: siteImages.segments.succession,
     intro:
       "Building wealth is one journey. Preserving and transferring it is another. We help families and business owners think ahead about wealth transfer, succession, estate liquidity and the continuity of their financial legacy.",
     services: [

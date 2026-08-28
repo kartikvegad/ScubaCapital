@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { SectionImage } from "@/components/ui/SectionImage";
 import { pillars, pillarsIntro } from "@/lib/constants";
 
 export function PillarsSection() {
@@ -21,7 +22,7 @@ export function PillarsSection() {
           </div>
         </ScrollReveal>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-2">
+        <div className="mt-14 grid gap-6 md:grid-cols-2">
           {pillars.map((pillar, i) => (
             <motion.article
               key={pillar.id}
@@ -29,32 +30,40 @@ export function PillarsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ delay: i * 0.06 }}
-              className="panel group rounded-[1.75rem] p-7 transition-shadow hover:shadow-[0_24px_50px_rgba(216,61,120,0.12)] lg:p-8"
+              className="panel group overflow-hidden rounded-[1.75rem] transition-shadow hover:shadow-[0_24px_50px_rgba(216,61,120,0.12)]"
             >
-              <p className="eyebrow">{pillar.label}</p>
-              <h3 className="font-display mt-3 text-2xl font-bold">{pillar.title}</h3>
-              <p className="mt-1 text-sm font-medium text-gold">{pillar.subtitle}</p>
-              <p className="mt-4 text-sm leading-relaxed text-muted">
-                {pillar.description}
-              </p>
-              <ul className="mt-5 space-y-2">
-                {pillar.items.slice(0, 5).map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-start gap-2 text-sm text-foreground/80"
-                  >
-                    <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-gold" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <a
-                href={pillar.href}
-                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-navy transition-colors group-hover:text-gold"
-              >
-                {pillar.cta}
-                <ArrowRight className="size-4" />
-              </a>
+              <SectionImage
+                src={pillar.image}
+                alt={pillar.subtitle}
+                className="aspect-[16/9]"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <div className="p-7 lg:p-8">
+                <p className="eyebrow">{pillar.label}</p>
+                <h3 className="font-display mt-3 text-2xl font-bold">{pillar.title}</h3>
+                <p className="mt-1 text-sm font-medium text-gold">{pillar.subtitle}</p>
+                <p className="mt-4 text-sm leading-relaxed text-muted">
+                  {pillar.description}
+                </p>
+                <ul className="mt-5 space-y-2">
+                  {pillar.items.slice(0, 5).map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-2 text-sm text-foreground/80"
+                    >
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-gold" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href={pillar.href}
+                  className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-navy transition-colors group-hover:text-gold"
+                >
+                  {pillar.cta}
+                  <ArrowRight className="size-4" />
+                </a>
+              </div>
             </motion.article>
           ))}
         </div>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { SectionImage } from "@/components/ui/SectionImage";
 import {
   products,
   productsIntro,
@@ -72,6 +73,23 @@ export function ServicesPageContent() {
               className="mt-6 sm:mt-10"
             >
               <div className="text-left sm:text-center">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={`${activeSegment.id}-image`}
+                    initial={{ opacity: 0, scale: 0.98 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.98 }}
+                    transition={{ duration: 0.3 }}
+                    className="mb-6 sm:mb-8"
+                  >
+                    <SectionImage
+                      src={activeSegment.image}
+                      alt={activeSegment.title}
+                      className="aspect-[16/10] rounded-2xl sm:aspect-[21/9]"
+                      sizes="(max-width: 1024px) 100vw, 896px"
+                    />
+                  </motion.div>
+                </AnimatePresence>
                 <h2 className="font-display text-xl font-bold leading-snug text-navy sm:text-2xl lg:text-3xl">
                   {activeSegment.title}
                 </h2>

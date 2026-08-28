@@ -75,7 +75,15 @@ export function Footer() {
           </p>
           <div className="flex flex-wrap items-center justify-center gap-2.5 pt-2">
             <span className="text-xs text-white/35">Designed by</span>
-            <DotLogo className="h-5 w-auto text-white/80" />
+            <a
+              href="https://dot-site.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="DOT — visit website"
+              className="transition-opacity hover:opacity-80"
+            >
+              <DotLogo className="h-5 w-auto text-white/80" />
+            </a>
           </div>
         </div>
       </div>
