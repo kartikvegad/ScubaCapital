@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   BarChart3,
-  BookOpen,
+  Calculator,
   ChevronDown,
   LineChart,
   PieChart,
@@ -15,8 +15,7 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { faqs, investorResourceCards } from "@/lib/constants";
 
 const HOMEPAGE_FAQ_COUNT = 5;
-
-const resourceIcons = [PieChart, LineChart, Target, BookOpen] as const;
+const resourceIcons = [Calculator, PieChart, LineChart, Target] as const;
 
 export function FaqSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);

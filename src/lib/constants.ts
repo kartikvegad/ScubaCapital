@@ -365,7 +365,30 @@ export const goalPlanningIntro = {
   cta: "Explore All Services",
 } as const;
 
+export const sipCalculatorPage = {
+  eyebrow: "Tools",
+  title: "Inflation Adjusted SIP Return Calculator",
+  intro:
+    "Project how your monthly SIP may grow over time — and what that corpus could be worth in today's purchasing power after inflation. Useful for goal planning before you choose products or tenure.",
+  formulaNotes: [
+    "Future value assumes monthly instalments at the start of each month, compounded at your expected annual return.",
+    "Inflation-adjusted value discounts the nominal corpus back to today's rupees using your expected inflation rate.",
+    "Returns are illustrative only. Actual mutual fund performance varies with market conditions.",
+  ],
+  example:
+    "A ₹5,000 monthly SIP for 10 years at 12% p.a. could grow to about ₹11.6 lakh nominally, with an inflation-adjusted value of roughly ₹6.5 lakh at 6% inflation — on a total investment of ₹6 lakh.",
+  disclaimer:
+    "Mutual fund investments are subject to market risks. Read all scheme-related documents carefully. Past performance does not guarantee future returns. This calculator is for education only and not investment advice.",
+} as const;
+
 export const investorResourceCards = [
+  {
+    title: "SIP Calculator",
+    description:
+      "Estimate SIP returns and inflation-adjusted corpus in today's purchasing power.",
+    href: "/tools/sip-calculator",
+    label: "Use calculator",
+  },
   {
     title: "Portfolio Review",
     description:
