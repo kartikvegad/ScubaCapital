@@ -8,7 +8,7 @@ import type { financialGuides } from "@/lib/constants";
 
 type Guide = (typeof financialGuides)[number];
 
-const TILT = 5;
+const TILT = 9;
 
 function useCardTilt() {
   const ref = useRef<HTMLButtonElement>(null);
@@ -16,12 +16,12 @@ function useCardTilt() {
   const pointerY = useMotionValue(0);
 
   const rotateX = useSpring(useTransform(pointerY, [-0.5, 0.5], [TILT, -TILT]), {
-    stiffness: 180,
-    damping: 26,
+    stiffness: 220,
+    damping: 20,
   });
   const rotateY = useSpring(useTransform(pointerX, [-0.5, 0.5], [-TILT, TILT]), {
-    stiffness: 180,
-    damping: 26,
+    stiffness: 220,
+    damping: 20,
   });
 
   function onMouseMove(event: React.MouseEvent<HTMLButtonElement>) {
@@ -56,19 +56,21 @@ export function GuideCard({ guide, onClick }: GuideCardProps) {
       onClick={onClick}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
+      whileHover={{ y: -8, scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 320, damping: 22 }}
       style={{
         rotateX,
         rotateY,
-        transformPerspective: 1000,
+        transformPerspective: 900,
       }}
-      className="group w-[280px] shrink-0 rounded-[1.75rem] text-left shadow-[0_16px_40px_rgba(37,41,71,0.16)] sm:w-[300px]"
+      className="group w-[280px] shrink-0 rounded-[1.75rem] text-left shadow-[0_16px_40px_rgba(37,41,71,0.16)] transition-shadow duration-300 hover:shadow-[0_24px_50px_rgba(37,41,71,0.22)] sm:w-[300px]"
     >
-      <div className="guide-card relative aspect-[3/4]">
+      <div className="guide-card relative aspect-[3/4] overflow-hidden">
         <Image
           src={guide.image}
           alt={guide.displayName}
           fill
-          className="pointer-events-none object-cover object-top select-none"
+          className="pointer-events-none object-cover object-top select-none transition-transform duration-700 ease-out group-hover:scale-[1.06]"
           sizes="(max-width: 640px) 280px, 300px"
         />
 
@@ -86,7 +88,7 @@ export function GuideCard({ guide, onClick }: GuideCardProps) {
               {guide.credentialHighlight}
             </p>
           </div>
-          <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-white/95 text-navy shadow-md transition-transform group-hover:scale-110">
+          <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-white/95 text-navy shadow-md transition-transform duration-300 group-hover:scale-[1.15] group-hover:rotate-90">
             <Plus className="size-5" />
           </span>
         </div>

@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { HeroVideoBackground } from "@/components/ui/HeroVideoBackground";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { siteConfig } from "@/lib/constants";
 
@@ -35,8 +36,10 @@ export function ContactPageShell({
 }: ContactPageShellProps) {
   return (
     <section className="relative min-h-[100svh] overflow-hidden bg-[#1a1848]">
+      <HeroVideoBackground overlayClassName="hero-contact-video" showControls={false} />
+
       <div
-        className="pointer-events-none absolute inset-0 opacity-40"
+        className="pointer-events-none absolute inset-0 z-[1] opacity-40"
         style={{
           background:
             "radial-gradient(ellipse 80% 60% at 20% 0%, rgba(141, 198, 63, 0.18) 0%, transparent 55%), radial-gradient(ellipse 70% 50% at 100% 100%, rgba(0, 104, 56, 0.22) 0%, transparent 50%)",

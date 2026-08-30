@@ -1,4 +1,4 @@
 export const heroMedia = {
-  video: "/videos/hero-ocean.mp4",
-  poster: "/videos/hero-day-poster.jpg",
+  video: "/videos/DEEP%20SEA%20WATER%20EFFECT.mp4",
+  poster: "/videos/hero-ocean-poster.jpg",
 } as const;

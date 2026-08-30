@@ -1,18 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Pause, Play } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { HeroVideoBackground } from "@/components/ui/HeroVideoBackground";
 import { heroAudiences, heroContent, heroServices, siteConfig } from "@/lib/constants";
-import { heroMedia } from "@/lib/media";
-
-const HERO_VIDEO = heroMedia.video;
-const HERO_POSTER = heroMedia.poster;
 
 export function HeroSection() {
   const [index, setIndex] = useState(0);
-  const [playing, setPlaying] = useState(true);
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -21,61 +16,9 @@ export function HeroSection() {
     return () => clearInterval(timer);
   }, []);
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (reducedMotion.matches) {
-      video.pause();
-      setPlaying(false);
-      return;
-    }
-
-    video.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
-  }, []);
-
-  function togglePlayback() {
-    const video = videoRef.current;
-    if (!video) return;
-
-    if (video.paused) {
-      video.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
-    } else {
-      video.pause();
-      setPlaying(false);
-    }
-  }
-
   return (
     <section className="relative min-h-[100svh] overflow-hidden bg-sky-100">
-      <div className="absolute inset-0 overflow-hidden">
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          poster={HERO_POSTER}
-          disablePictureInPicture
-          controls={false}
-          aria-hidden
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
-        >
-          <source src={HERO_VIDEO} type="video/mp4" />
-        </video>
-        <div className="hero-daylight absolute inset-0" />
-      </div>
-
-      <button
-        type="button"
-        onClick={togglePlayback}
-        aria-label={playing ? "Pause background video" : "Play background video"}
-        className="absolute right-6 bottom-24 z-20 flex size-9 items-center justify-center rounded-full border border-navy/15 bg-white/80 text-navy shadow-sm backdrop-blur-sm transition-colors hover:bg-white sm:bottom-8"
-      >
-        {playing ? <Pause className="size-4" /> : <Play className="ml-0.5 size-4" />}
-      </button>
+      <HeroVideoBackground />
 
       <div className="relative z-10 flex min-h-[100svh] flex-col items-center justify-center px-6 pt-24 pb-28 text-center">
         <motion.div
@@ -84,7 +27,7 @@ export function HeroSection() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="w-full max-w-5xl"
         >
-          <h1 className="font-display mt-2 text-3xl font-bold tracking-tight text-navy [text-shadow:0_2px_30px_rgba(255,255,255,0.95)] sm:text-4xl lg:text-5xl">
+          <h1 className="font-display mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
             <span className="block">{heroContent.line1}</span>
             <span className="mt-1 block">{heroContent.line2}</span>
           </h1>
@@ -97,7 +40,7 @@ export function HeroSection() {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -48, opacity: 0 }}
                 transition={{ duration: 0.4, ease: "easeInOut" }}
-                className="absolute inset-x-0 font-display text-3xl font-bold tracking-tight text-navy [text-shadow:0_2px_30px_rgba(255,255,255,0.95)] sm:text-4xl lg:text-5xl"
+                className="absolute inset-x-0 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl"
               >
                 {heroAudiences[index]}
               </motion.p>

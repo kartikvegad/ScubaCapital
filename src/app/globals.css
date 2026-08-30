@@ -163,6 +163,16 @@ footer ::-moz-selection {
     );
 }
 
+.hero-contact-video {
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(26, 24, 72, 0.45) 0%,
+      rgba(26, 24, 72, 0.62) 45%,
+      rgba(15, 14, 42, 0.82) 100%
+    );
+}
+
 .path-vignette {
   background:
     radial-gradient(ellipse 70% 60% at 50% 45%, transparent 0%, rgba(0, 0, 0, 0.45) 100%),
@@ -342,36 +352,28 @@ footer ::-moz-selection {
 .navbar-glass-bar {
   position: relative;
   isolation: isolate;
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: 0 8px 32px rgba(30, 26, 82, 0.18);
 }
 
 .navbar-mobile-sheet {
   isolation: isolate;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  box-shadow: 0 8px 32px rgba(30, 26, 82, 0.18);
 }
 
-.navbar-glass-backdrop {
+.navbar-solid-bg {
   position: absolute;
   inset: 0;
-  backdrop-filter: blur(20px) saturate(1.5);
-  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  background: #262262;
   pointer-events: none;
   z-index: 0;
 }
 
+.navbar-glass-backdrop {
+  display: none;
+}
+
 .navbar-glass-gradient {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    120deg,
-    rgba(30, 26, 82, 0.82) 0%,
-    rgba(38, 34, 98, 0.78) 42%,
-    rgba(0, 104, 56, 0.72) 100%
-  );
-  pointer-events: none;
-  z-index: 1;
+  display: none;
 }
 
 .navbar-cta-outline {
@@ -402,14 +404,21 @@ footer ::-moz-selection {
   border-color: rgba(255, 255, 255, 0.65);
 }
 
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .navbar-glass-gradient {
-    background: linear-gradient(120deg, #1e1a52 0%, #262262 45%, #006838 100%);
-    opacity: 0.96;
-  }
+.navbar-cta-compact {
+  padding: 0.45rem 0.75rem;
+  font-size: 0.75rem;
+}
 
-  .navbar-glass-backdrop {
-    display: none;
+@media (min-width: 1280px) {
+  .navbar-cta-compact {
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .navbar-solid-bg {
+    background: #262262;
   }
 }
 

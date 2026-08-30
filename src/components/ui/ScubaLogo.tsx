@@ -1,15 +1,16 @@
 import Image from "next/image";
 
-type ScubaLogoProps = {
-  className?: string;
-  priority?: boolean;
-  variant?: "default" | "white";
-};
-
 const LOGO_SOURCES = {
   default: "/scuba-capital-logo.svg",
   white: "/scuba-capital-logo-white.svg",
+  navbar: "/images/Scuba.anil2-04.png",
 } as const;
+
+type ScubaLogoProps = {
+  className?: string;
+  priority?: boolean;
+  variant?: keyof typeof LOGO_SOURCES;
+};
 
 export function ScubaLogo({
   className,
@@ -21,8 +22,8 @@ export function ScubaLogo({
       src={LOGO_SOURCES[variant]}
       alt=""
       aria-hidden
-      width={271}
-      height={193}
+      width={variant === "navbar" ? 320 : 271}
+      height={variant === "navbar" ? 96 : 193}
       priority={priority}
       className={className}
       draggable={false}
