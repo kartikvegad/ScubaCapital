@@ -112,7 +112,8 @@ export function Footer() {
             {siteConfig.disclaimer}
           </p>
           <p className="text-xs text-white/30">
-            © {new Date().getFullYear()} {siteConfig.legalName}. All Rights
+            © <span suppressHydrationWarning>{new Date().getFullYear()}</span>{" "}
+            {siteConfig.legalName}. All Rights
             Reserved. {siteConfig.philosophyLine}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-2.5 pt-2">

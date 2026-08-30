@@ -35,16 +35,8 @@ export function ContactPageShell({
   children,
 }: ContactPageShellProps) {
   return (
-    <section className="relative min-h-[100svh] overflow-hidden bg-[#1a1848]">
-      <HeroVideoBackground overlayClassName="hero-contact-video" showControls={false} />
-
-      <div
-        className="pointer-events-none absolute inset-0 z-[1] opacity-40"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 60% at 20% 0%, rgba(141, 198, 63, 0.18) 0%, transparent 55%), radial-gradient(ellipse 70% 50% at 100% 100%, rgba(0, 104, 56, 0.22) 0%, transparent 50%)",
-        }}
-      />
+    <section className="relative min-h-[100svh] overflow-hidden bg-black">
+      <HeroVideoBackground showControls={false} />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 pt-32 pb-20 lg:px-8 lg:pt-36 lg:pb-24">
         <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">

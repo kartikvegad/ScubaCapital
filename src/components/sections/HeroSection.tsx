@@ -17,7 +17,7 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-[100svh] overflow-hidden bg-sky-100">
+    <section className="relative min-h-[100svh] overflow-hidden bg-black">
       <HeroVideoBackground />
 
       <div className="relative z-10 flex min-h-[100svh] flex-col items-center justify-center px-6 pt-24 pb-28 text-center">

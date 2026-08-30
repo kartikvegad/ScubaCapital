@@ -5,18 +5,21 @@ import { Pause, Play } from "lucide-react";
 import { heroMedia } from "@/lib/media";
 
 type HeroVideoBackgroundProps = {
-  overlayClassName?: string;
   showControls?: boolean;
 };
 
-export function HeroVideoBackground({
-  overlayClassName = "hero-daylight",
-  showControls = true,
-}: HeroVideoBackgroundProps) {
-  const [playing, setPlaying] = useState(true);
+export function HeroVideoBackground({ showControls = true }: HeroVideoBackgroundProps) {
+  const [mounted, setMounted] = useState(false);
+  const [playing, setPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
     const video = videoRef.current;
     if (!video) return;
 
@@ -28,7 +31,7 @@ export function HeroVideoBackground({
     }
 
     video.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
-  }, []);
+  }, [mounted]);
 
   function togglePlayback() {
     const video = videoRef.current;
@@ -44,26 +47,26 @@ export function HeroVideoBackground({
 
   return (
     <>
-      <div className="absolute inset-0 overflow-hidden">
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          poster={heroMedia.poster}
-          disablePictureInPicture
-          controls={false}
-          aria-hidden
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
-        >
-          <source src={heroMedia.video} type="video/mp4" />
-        </video>
-        <div className={`absolute inset-0 ${overlayClassName}`} />
+      <div className="absolute inset-0 overflow-hidden bg-black">
+        {mounted ? (
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            disablePictureInPicture
+            controls={false}
+            aria-hidden
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
+          >
+            <source src={heroMedia.video} type="video/mp4" />
+          </video>
+        ) : null}
       </div>
 
-      {showControls ? (
+      {showControls && mounted ? (
         <button
           type="button"
           onClick={togglePlayback}
