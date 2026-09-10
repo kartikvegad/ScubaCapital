@@ -77,7 +77,7 @@ export function SocialLinks({ className = "", variant = "light" }: SocialLinksPr
   const ringClass =
     variant === "light"
       ? "ring-white/15 bg-white/10 hover:bg-white/15"
-      : "ring-border bg-white hover:bg-[#f4f8ec]";
+      : "ring-border bg-surface hover:bg-accent-light";
 
   return (
     <ul className={`flex flex-nowrap items-center gap-1.5 ${className}`}>

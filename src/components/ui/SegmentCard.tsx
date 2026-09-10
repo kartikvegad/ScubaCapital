@@ -19,7 +19,7 @@ export function SegmentCard({
   return (
     <a
       href={href}
-      className="group flex h-full flex-col overflow-hidden rounded-2xl bg-cream ring-1 ring-border/80 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-[0_16px_40px_rgba(38,34,98,0.1)]"
+      className="group flex h-full flex-col overflow-hidden rounded-2xl bg-cream ring-1 ring-border/80 transition-all duration-300 hover:-translate-y-1 hover:bg-surface hover:shadow-[0_16px_40px_rgba(38,34,98,0.1)]"
     >
       <div className="relative overflow-hidden">
         <SectionImage
@@ -29,7 +29,7 @@ export function SegmentCard({
           sizes="(max-width: 768px) 50vw, 25vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#262262]/80 via-[#262262]/20 to-transparent" />
-        <span className="absolute top-3 left-3 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-semibold tracking-[0.12em] text-navy uppercase">
+        <span className="absolute top-3 left-3 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-semibold tracking-[0.12em] text-brand-ink uppercase">
           {shortLabel}
         </span>
       </div>

@@ -51,7 +51,7 @@ function SliderField({
             step={step}
             value={value}
             onChange={(event) => onChange(Number(event.target.value))}
-            className="w-24 rounded-lg border border-border bg-white px-2.5 py-1.5 text-right text-sm font-semibold text-navy outline-none ring-green/30 focus:ring-2"
+            className="w-24 rounded-lg border border-border bg-surface px-2.5 py-1.5 text-right text-sm font-semibold text-navy outline-none ring-green/30 focus:ring-2"
           />
           {suffix ? (
             <span className="text-xs font-medium text-muted">{suffix}</span>
@@ -201,7 +201,7 @@ export function InflationAdjustedSipCalculator() {
               Projected corpus before adjusting for inflation.
             </p>
           </div>
-          <div className="rounded-2xl bg-navy p-5 text-white sm:col-span-2">
+          <div className="rounded-2xl bg-brand-ink p-5 text-white sm:col-span-2">
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/60">
               Inflation-adjusted value
             </p>
@@ -217,10 +217,10 @@ export function InflationAdjustedSipCalculator() {
 
         <div className="panel rounded-2xl p-5">
           <p className="text-sm font-semibold text-navy">Corpus composition</p>
-          <div className="mt-4 h-3 overflow-hidden rounded-full bg-[#eef2ea]">
+          <div className="mt-4 h-3 overflow-hidden rounded-full bg-background-soft">
             <div className="flex h-full">
               <div
-                className="bg-navy/80 transition-all duration-500"
+                className="bg-brand-ink/80 transition-all duration-500"
                 style={{ width: `${nominalShare}%` }}
               />
               <div
@@ -231,7 +231,7 @@ export function InflationAdjustedSipCalculator() {
           </div>
           <div className="mt-3 flex flex-wrap gap-4 text-xs text-muted">
             <span className="inline-flex items-center gap-2">
-              <span className="size-2.5 rounded-full bg-navy/80" />
+              <span className="size-2.5 rounded-full bg-brand-ink/80" />
               Amount invested
             </span>
             <span className="inline-flex items-center gap-2">
@@ -253,7 +253,7 @@ export function InflationAdjustedSipCalculator() {
         </div>
         <div className="overflow-x-auto">
           <table className="min-w-full text-left text-sm">
-            <thead className="bg-[#f8faf5] text-xs uppercase tracking-[0.12em] text-muted">
+            <thead className="bg-cream text-xs uppercase tracking-[0.12em] text-muted">
               <tr>
                 <th className="px-6 py-3 font-semibold">Year</th>
                 <th className="px-6 py-3 font-semibold">Invested</th>

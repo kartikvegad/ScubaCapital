@@ -18,9 +18,9 @@ export function InsightCard({
   return (
     <a
       href={href}
-      className="insight-card group flex h-full flex-col rounded-2xl border border-border bg-white p-5 shadow-[0_6px_24px_rgba(38,34,98,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-green/30 hover:shadow-[0_16px_40px_rgba(38,34,98,0.1)]"
+      className="insight-card group flex h-full flex-col rounded-2xl border border-border bg-surface p-5 shadow-[0_6px_24px_rgba(38,34,98,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-green/30 hover:shadow-[0_16px_40px_rgba(38,34,98,0.1)]"
     >
-      <span className="flex size-11 items-center justify-center rounded-xl bg-[#f4f8ec] text-green transition-colors group-hover:bg-green group-hover:text-white">
+      <span className="flex size-11 items-center justify-center rounded-xl bg-accent-light text-green transition-colors group-hover:bg-green group-hover:text-white">
         <Icon className="size-5" aria-hidden />
       </span>
       <h3 className="font-display mt-4 text-base font-bold text-navy">{title}</h3>

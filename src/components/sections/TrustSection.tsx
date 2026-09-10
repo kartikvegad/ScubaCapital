@@ -5,7 +5,7 @@ import { trustFactors } from "@/lib/constants";
 
 export function TrustSection() {
   return (
-    <section id="trust" className="border-y border-border bg-white py-8">
+    <section id="trust" className="border-y border-border bg-surface py-8">
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <ScrollReveal className="text-center">
           <p className="eyebrow">Why Trust SCUBA CAPITAL</p>

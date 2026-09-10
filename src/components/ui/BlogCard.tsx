@@ -18,7 +18,7 @@ function formatDate(date: string) {
 
 export function BlogCard({ post, variant = "preview" }: BlogCardProps) {
   return (
-    <article className="offering-card group flex h-full flex-col overflow-hidden rounded-2xl bg-white ring-1 ring-border shadow-[0_8px_30px_rgba(38,34,98,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(38,34,98,0.1)]">
+    <article className="offering-card group flex h-full flex-col overflow-hidden rounded-2xl bg-surface ring-1 ring-border shadow-[0_8px_30px_rgba(38,34,98,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(38,34,98,0.1)]">
       <a href={`/blog/${post.slug}`} className="relative block aspect-[16/10] overflow-hidden">
         <Image
           src={post.image}
@@ -28,7 +28,7 @@ export function BlogCard({ post, variant = "preview" }: BlogCardProps) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#262262]/70 via-transparent to-transparent" />
-        <span className="absolute top-4 left-4 rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold tracking-wide text-navy uppercase">
+        <span className="absolute top-4 left-4 rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold tracking-wide text-brand-ink uppercase">
           {post.category}
         </span>
       </a>

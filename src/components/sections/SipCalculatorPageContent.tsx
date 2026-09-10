@@ -36,7 +36,7 @@ export function SipCalculatorPageContent() {
                   <p key={note}>{note}</p>
                 ))}
               </div>
-              <div className="mt-5 space-y-2 rounded-xl bg-[#f8faf5] p-4 font-mono text-xs text-navy/80">
+              <div className="mt-5 space-y-2 rounded-xl bg-background-soft p-4 font-mono text-xs text-navy/80">
                 <p>FV = P × [((1 + r)ⁿ − 1) / r] × (1 + r)</p>
                 <p>Real value = FV ÷ (1 + inflation)ʸᵉᵃʳˢ</p>
                 <p>Real return = (1 + nominal) ÷ (1 + inflation) − 1</p>

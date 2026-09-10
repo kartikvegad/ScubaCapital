@@ -1,6 +1,7 @@
 "use client";
 
 import { siteConfig } from "@/lib/constants";
+import { ChatBot } from "@/components/layout/ChatBot";
 
 function WhatsAppIcon() {
   return (
@@ -10,16 +11,19 @@ function WhatsAppIcon() {
   );
 }
 
-export function WhatsAppButton() {
+export function FloatingActions() {
   return (
-    <a
-      href={`https://wa.me/${siteConfig.whatsapp}`}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Chat with us on WhatsApp"
-      className="fixed bottom-6 left-6 z-50 flex size-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_8px_24px_rgba(37,211,102,0.45)] transition-transform hover:scale-105 active:scale-95"
-    >
-      <WhatsAppIcon />
-    </a>
+    <div className="fixed right-4 bottom-6 z-40 flex flex-col items-end gap-3 sm:right-6">
+      <ChatBot />
+      <a
+        href={`https://wa.me/${siteConfig.whatsapp}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat with us on WhatsApp"
+        className="flex size-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_8px_24px_rgba(37,211,102,0.45)] transition-transform hover:scale-105 active:scale-95"
+      >
+        <WhatsAppIcon />
+      </a>
+    </div>
   );
 }

@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { ctaConfig, navLinks } from "@/lib/constants";
 import { ScubaLogo } from "@/components/ui/ScubaLogo";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 const HOME_SECTION_TO_HREF: Record<string, string> = {
   about: "/#about",
@@ -187,7 +188,7 @@ export function Navbar() {
           transition={SPRING}
         >
           <motion.nav
-            className={`relative flex w-full items-center overflow-hidden px-2 py-1 sm:px-3 sm:py-1.5 ${
+            className={`relative flex w-full items-center overflow-hidden px-3 py-2.5 sm:px-4 sm:py-3 ${
               isFormed ? "navbar-glass-bar" : ""
             }`}
             animate={{ borderRadius: isFormed ? 9999 : 0 }}
@@ -195,7 +196,7 @@ export function Navbar() {
           >
             {isFormed ? <div className="navbar-solid-bg" aria-hidden /> : null}
 
-            <div className="relative z-10 flex w-full min-w-0 items-center gap-2 sm:gap-2.5">
+            <div className="relative z-10 flex w-full min-w-0 items-center gap-2.5 sm:gap-3">
               <a
                 href="/"
                 aria-label="SCUBA CAPITAL home"
@@ -204,14 +205,14 @@ export function Navbar() {
               >
                 <ScubaLogo
                   variant="navbar"
-                  className="h-7 w-auto sm:h-8 md:h-9"
+                  className="h-9 w-auto sm:h-10 md:h-11"
                   priority
                 />
               </a>
 
               <ul
                 className={`relative hidden min-w-0 flex-1 flex-nowrap items-center justify-center xl:flex ${
-                  isFormed ? "gap-0" : "gap-1.5"
+                  isFormed ? "gap-0.5" : "gap-1.5"
                 }`}
               >
                 {navLinks.map((link) => {
@@ -228,8 +229,8 @@ export function Navbar() {
                       ) : null}
                       <a
                         href={link.href}
-                        className={`relative z-10 block rounded-full whitespace-nowrap py-1.5 font-medium transition-colors ${
-                          isFormed ? "px-2 text-xs" : "px-2.5 text-[13px]"
+                        className={`relative z-10 block rounded-full whitespace-nowrap py-2 font-medium transition-colors ${
+                          isFormed ? "px-2.5 text-[13px]" : "px-3 text-sm"
                         } ${
                           isActive && isFormed
                             ? "text-white"
@@ -248,6 +249,9 @@ export function Navbar() {
               </ul>
 
               <div className="ml-auto hidden shrink-0 items-center gap-1.5 xl:flex xl:gap-2">
+                <ThemeToggle
+                  className={isFormed ? "ring-1 ring-white/20" : ""}
+                />
                 <a
                   href={ctaConfig.portfolioReview.href}
                   className={
@@ -271,6 +275,9 @@ export function Navbar() {
               </div>
 
               <div className="ml-auto flex shrink-0 items-center gap-1.5 xl:ml-0 xl:hidden">
+                <ThemeToggle
+                  className={isFormed ? "ring-1 ring-white/20" : ""}
+                />
                 <a
                   href={ctaConfig.consultation.href}
                   className={`navbar-cta-outline navbar-cta-primary hidden whitespace-nowrap sm:inline-flex ${
@@ -285,7 +292,7 @@ export function Navbar() {
                   aria-label={open ? "Close menu" : "Open menu"}
                   aria-expanded={open}
                   onClick={() => setOpen(!open)}
-                  className={`inline-flex size-9 shrink-0 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10 ${
+                  className={`inline-flex size-10 shrink-0 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10 ${
                     isFormed ? "ring-1 ring-white/20" : ""
                   }`}
                 >
@@ -339,7 +346,7 @@ export function Navbar() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.22 }}
             />
-            <div className="relative z-10 h-14 shrink-0 sm:h-16" aria-hidden />
+            <div className="relative z-10 h-16 shrink-0 sm:h-[4.5rem]" aria-hidden />
             <motion.div
               className="relative z-10 flex flex-1 flex-col overflow-y-auto px-4 pt-2 pb-8 sm:px-6"
               variants={mobileMenuPanelVariants}
@@ -374,7 +381,14 @@ export function Navbar() {
                   );
                 })}
                 <motion.li
-                  className="flex flex-col gap-2.5 pt-5 sm:flex-row sm:gap-3"
+                  className="flex items-center justify-between gap-3 pt-6"
+                  variants={mobileMenuItemVariants}
+                >
+                  <span className="px-4 text-sm text-white/55">Appearance</span>
+                  <ThemeToggle className="ring-1 ring-white/20" />
+                </motion.li>
+                <motion.li
+                  className="flex flex-col gap-2.5 pt-3 sm:flex-row sm:gap-3"
                   variants={mobileMenuItemVariants}
                 >
                   <a

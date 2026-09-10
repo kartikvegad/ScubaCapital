@@ -23,7 +23,7 @@ export function ContactSection() {
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_1.1fr] lg:gap-10">
           <ScrollReveal direction="left" delay={0.1}>
-            <div className="offering-card h-full rounded-2xl bg-white p-6 ring-1 ring-border">
+            <div className="offering-card h-full rounded-2xl bg-surface p-6 ring-1 ring-border">
               <p className="text-xs font-semibold tracking-[0.14em] text-navy/50 uppercase">
                 Mutual Fund Distributor
               </p>
@@ -46,7 +46,7 @@ export function ContactSection() {
                   href={`tel:${siteConfig.phone}`}
                   className="flex items-start gap-3 text-muted transition-colors hover:text-navy"
                 >
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#f4f8ec]">
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-accent-light">
                     <Phone className="size-4 text-green" />
                   </span>
                   <span>
@@ -60,7 +60,7 @@ export function ContactSection() {
                   href={`mailto:${siteConfig.email}`}
                   className="flex items-start gap-3 text-muted transition-colors hover:text-navy"
                 >
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#f4f8ec]">
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-accent-light">
                     <Mail className="size-4 text-green" />
                   </span>
                   <span>
@@ -71,7 +71,7 @@ export function ContactSection() {
                   </span>
                 </a>
                 <div className="flex items-start gap-3 text-muted">
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#f4f8ec]">
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-accent-light">
                     <MapPin className="size-4 text-green" />
                   </span>
                   <span>
@@ -91,7 +91,7 @@ export function ContactSection() {
           </ScrollReveal>
 
           <ScrollReveal direction="right" delay={0.15}>
-            <div className="rounded-2xl bg-white p-6 ring-1 ring-border shadow-[0_8px_30px_rgba(38,34,98,0.07)] lg:p-8">
+            <div className="rounded-2xl bg-surface p-6 ring-1 ring-border shadow-[0_8px_30px_rgba(38,34,98,0.07)] lg:p-8">
               <h3 className="font-display text-lg font-bold text-navy">
                 Send a message
               </h3>

@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --navy: #262262;
   --navy-mid: #1e1a52;
@@ -24,6 +26,17 @@
   --border: rgba(38, 34, 98, 0.12);
   --success: #006838;
   --danger: #b42318;
+  --section-cream-start: #f8faf5;
+  --section-cream-mid: #f4f7fb;
+  --section-cream-end: #eef4e6;
+  --guide-card-start: #f4f8ec;
+  --guide-card-end: #eef4e6;
+  --panel-shadow: 0 18px 40px rgba(38, 34, 98, 0.06);
+  --outline-navy-border: rgba(38, 34, 98, 0.28);
+  --brand-ink: #262262;
+  --scrollbar-track: #f0f3f0;
+  --scrollbar-thumb: #9aa3b5;
+  --scrollbar-thumb-hover: #6f7a90;
 
   --gradient-brand: linear-gradient(
     145deg,
@@ -51,6 +64,34 @@
     linear-gradient(165deg, #262262 0%, #1e1a52 55%, #1a1848 100%);
 }
 
+.dark {
+  --navy: #e8eef4;
+  --navy-mid: #c5d0db;
+  --navy-soft: #9aabba;
+  --cream: #121c24;
+  --cream-dark: #0e171e;
+  --charcoal: #e8eef4;
+  --background: #0a1218;
+  --background-soft: #101a22;
+  --foreground: #e8eef4;
+  --muted: #9aabba;
+  --accent-light: rgba(141, 198, 63, 0.18);
+  --surface: #121c24;
+  --surface-dark: #0a1218;
+  --border: rgba(232, 238, 244, 0.12);
+  --section-cream-start: #0e171e;
+  --section-cream-mid: #121c24;
+  --section-cream-end: #152028;
+  --guide-card-start: #152028;
+  --guide-card-end: #101a22;
+  --panel-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  --outline-navy-border: rgba(232, 238, 244, 0.28);
+  --brand-ink: #262262;
+  --scrollbar-track: #0c161e;
+  --scrollbar-thumb: #3a4d5c;
+  --scrollbar-thumb-hover: #8dc63f;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-background-soft: var(--background-soft);
@@ -69,6 +110,7 @@
   --color-gold-light: var(--gold-light);
   --color-green: var(--green);
   --color-cream: var(--cream);
+  --color-brand-ink: var(--brand-ink);
   --color-success: var(--success);
   --color-danger: var(--danger);
   --font-sans: var(--font-inter);
@@ -77,12 +119,41 @@
 
 * {
   scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+/* Custom scrollbar — Chromium / Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 9999px;
+  border: 2px solid var(--scrollbar-track);
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+  border: 2px solid var(--scrollbar-track);
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-corner {
+  background: var(--scrollbar-track);
 }
 
 img,
@@ -250,7 +321,7 @@ footer ::-moz-selection {
 }
 
 .guide-card {
-  background: linear-gradient(145deg, #f4f8ec 0%, #eef4e6 100%);
+  background: linear-gradient(145deg, var(--guide-card-start) 0%, var(--guide-card-end) 100%);
   border-radius: 1.75rem;
   overflow: hidden;
 }
@@ -261,12 +332,17 @@ footer ::-moz-selection {
 }
 
 .section-cream {
-  background: linear-gradient(180deg, #f8faf5 0%, #f4f7fb 50%, #eef4e6 100%);
+  background: linear-gradient(
+    180deg,
+    var(--section-cream-start) 0%,
+    var(--section-cream-mid) 50%,
+    var(--section-cream-end) 100%
+  );
   color: var(--foreground);
 }
 
 .section-white {
-  background: #fff;
+  background: var(--background);
   color: var(--foreground);
 }
 
@@ -287,9 +363,9 @@ footer ::-moz-selection {
 }
 
 .panel {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--border);
-  box-shadow: 0 18px 40px rgba(38, 34, 98, 0.06);
+  box-shadow: var(--panel-shadow);
 }
 
 .btn-primary {
@@ -325,7 +401,7 @@ footer ::-moz-selection {
 }
 
 .btn-outline-navy {
-  border: 1px solid rgba(38, 34, 98, 0.28);
+  border: 1px solid var(--outline-navy-border);
   color: var(--navy);
   background: transparent;
   transition: background 0.2s ease, border-color 0.2s ease;
@@ -393,8 +469,8 @@ footer ::-moz-selection {
   border-radius: 9999px;
   border: 1px solid rgba(255, 255, 255, 0.45);
   background: rgba(255, 255, 255, 0.06);
-  padding: 0.35rem 0.85rem;
-  font-size: 0.75rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   color: #ffffff;
   transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
@@ -426,14 +502,14 @@ footer ::-moz-selection {
 }
 
 .navbar-cta-compact {
-  padding: 0.3rem 0.65rem;
-  font-size: 0.6875rem;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.75rem;
 }
 
 @media (min-width: 1280px) {
   .navbar-cta-compact {
-    padding: 0.35rem 0.85rem;
-    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
   }
 }
 

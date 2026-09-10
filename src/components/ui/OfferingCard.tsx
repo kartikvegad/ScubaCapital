@@ -37,7 +37,7 @@ export function OfferingCard({
         </div>
 
         <div className="relative flex flex-1 flex-col px-5 pt-8 pb-5 sm:px-6 sm:pb-6">
-          <span className="absolute top-0 right-4 inline-flex size-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-navy shadow-lg transition-transform duration-300 group-hover:scale-105">
+          <span className="absolute top-0 right-4 inline-flex size-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-brand-ink shadow-lg transition-transform duration-300 group-hover:scale-105">
             <ArrowUpRight className="size-4 text-green" strokeWidth={2.25} />
           </span>
           <h3 className="font-display text-lg font-bold text-white sm:text-xl">

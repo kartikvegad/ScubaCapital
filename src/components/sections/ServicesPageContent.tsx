@@ -70,13 +70,13 @@ export function ServicesPageContent() {
                   type="button"
                   onClick={() => selectSegment(index)}
                   className={`relative z-10 flex min-h-10 min-w-0 flex-1 touch-manipulation items-center justify-center rounded-full px-1.5 py-2.5 text-[11px] font-semibold whitespace-nowrap transition-colors sm:min-h-11 sm:px-3 sm:text-sm ${
-                    isActive ? "text-navy" : "text-muted active:text-foreground/70"
+                    isActive ? "text-brand-ink" : "text-muted active:text-foreground/70"
                   }`}
                 >
                   {isActive ? (
                     <motion.span
                       layoutId="service-segment-pill"
-                      className="absolute inset-0 rounded-full bg-white shadow-[0_2px_8px_rgba(37,41,71,0.12),0_1px_2px_rgba(37,41,71,0.08)]"
+                      className="absolute inset-0 rounded-full bg-surface shadow-[0_2px_8px_rgba(37,41,71,0.12),0_1px_2px_rgba(37,41,71,0.08)]"
                       transition={{ type: "spring", stiffness: 380, damping: 32 }}
                     />
                   ) : null}
@@ -166,7 +166,7 @@ export function ServicesPageContent() {
               {products.map((product) => (
                 <span
                   key={product}
-                  className="rounded-xl border border-border bg-white px-3 py-2.5 text-center text-[10px] font-semibold tracking-wide text-navy/80 uppercase sm:rounded-full sm:px-4 sm:text-xs"
+                  className="rounded-xl border border-border bg-surface px-3 py-2.5 text-center text-[10px] font-semibold tracking-wide text-navy/80 uppercase sm:rounded-full sm:px-4 sm:text-xs"
                 >
                   {product}
                 </span>

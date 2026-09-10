@@ -124,7 +124,7 @@ export function PartnerEcosystemSection({ variant = "full" }: PartnerEcosystemSe
                 onClick={() => setActiveTab(tab.id)}
                 className={`rounded-full px-4 py-2 text-xs font-semibold transition-colors sm:text-sm ${
                   activeTab === tab.id
-                    ? "bg-white text-navy"
+                    ? "bg-white text-brand-ink"
                     : "border border-white/20 bg-white/10 text-white/80 hover:bg-white/15"
                 }`}
               >

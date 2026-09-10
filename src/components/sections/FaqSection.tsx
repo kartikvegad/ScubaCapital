@@ -79,7 +79,7 @@ export function FaqSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.03 }}
-                  className="overflow-hidden rounded-xl bg-white ring-1 ring-border"
+                  className="overflow-hidden rounded-xl bg-surface ring-1 ring-border"
                 >
                   <button
                     type="button"

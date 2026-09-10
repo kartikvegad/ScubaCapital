@@ -1,23 +1,16 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
-import { siteImages, whyUs } from "@/lib/constants";
+import { BrandFullLogo } from "@/components/ui/BrandFullLogo";
+import { whyUs } from "@/lib/constants";
 
 export function WhyUsSection() {
   return (
     <section className="section-cream section-py">
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-12">
-          <div className="flex items-center justify-center rounded-xl bg-white p-8 shadow-sm sm:p-10">
-            <Image
-              src={siteImages.brandLogoFull}
-              alt="SCUBA CAPITAL"
-              width={480}
-              height={340}
-              className="h-auto w-full max-w-xs object-contain sm:max-w-sm"
-              sizes="(max-width: 1024px) 80vw, 400px"
-            />
+          <div className="flex items-center justify-center rounded-xl bg-surface p-8 shadow-sm sm:p-10">
+            <BrandFullLogo className="w-full max-w-xs sm:max-w-sm" />
           </div>
 
           <div>

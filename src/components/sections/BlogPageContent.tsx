@@ -25,7 +25,7 @@ export function BlogPageContent() {
                 rel="noopener noreferrer"
                 className="btn-primary inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold"
               >
-                <span className="inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-white">
+                <span className="inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-surface">
                   <MediumLogo className="size-3.5" />
                 </span>
                 {blogSection.mediumCta}

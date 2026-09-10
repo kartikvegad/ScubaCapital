@@ -36,7 +36,7 @@ export function ContactPageShell({
 }: ContactPageShellProps) {
   return (
     <section className="relative min-h-[100svh] overflow-hidden bg-black">
-      <HeroVideoBackground showControls={false} />
+      <HeroVideoBackground />
 
       {/* Match landing hero atmosphere */}
       <div

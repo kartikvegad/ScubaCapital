@@ -104,7 +104,7 @@ export function GuideCard({ guide, onClick, variant = "default" }: GuideCardProp
               {guide.credentialHighlight}
             </p>
           </div>
-          <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white/95 text-navy shadow-md transition-transform duration-300 group-hover:scale-[1.15] group-hover:rotate-90">
+          <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white/95 text-brand-ink shadow-md transition-transform duration-300 group-hover:scale-[1.15] group-hover:rotate-90">
             <Plus className="size-4" />
           </span>
         </div>

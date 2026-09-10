@@ -42,7 +42,7 @@ export function ApproachSection() {
   const nextStep = processSteps[Math.min(total - 1, activeIndex + 1)];
 
   return (
-    <section id="approach" className="relative bg-[#f7f8f4]">
+    <section id="approach" className="relative bg-background-soft">
       <div ref={trackRef} className="relative h-[280vh]">
         <div className="sticky top-0 flex min-h-[100svh] flex-col justify-between overflow-hidden pt-24 pb-8 sm:pt-28 lg:pb-10">
           <div className="pointer-events-none absolute inset-0" aria-hidden>
@@ -108,7 +108,7 @@ export function ApproachSection() {
 
               {/* Journey list — titles only, no repeating numbers */}
               <div className="relative">
-                <div className="overflow-hidden rounded-[1.75rem] border border-navy/8 bg-white/85 p-6 shadow-[0_24px_80px_rgba(38,34,98,0.08)] backdrop-blur-sm sm:p-7">
+                <div className="overflow-hidden rounded-[1.75rem] border border-navy/8 bg-surface/85 p-6 shadow-[0_24px_80px_rgba(38,34,98,0.08)] backdrop-blur-sm sm:p-7">
                   <p className="text-[11px] font-semibold tracking-[0.18em] text-navy/40 uppercase">
                     The journey
                   </p>

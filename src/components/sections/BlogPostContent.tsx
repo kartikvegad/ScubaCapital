@@ -34,7 +34,7 @@ export function BlogPostContent({ post }: BlogPostContentProps) {
             </a>
 
             <div className="mt-6 flex flex-wrap items-center gap-2 text-sm text-muted">
-              <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold tracking-wide text-navy uppercase ring-1 ring-border">
+              <span className="rounded-full bg-surface px-3 py-1 text-xs font-semibold tracking-wide text-brand-ink uppercase ring-1 ring-border">
                 {post.category}
               </span>
               <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
