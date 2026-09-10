@@ -8,8 +8,8 @@ export function Footer() {
         aria-hidden
         className="pointer-events-none absolute bottom-0 left-1/2 h-[min(75vw,720px)] w-[min(100vw,960px)] -translate-x-1/2 translate-y-[18%] bg-[url('/scuba-capital-logo-white.svg')] bg-contain bg-center bg-no-repeat opacity-[0.09]"
       />
-      <div className="relative z-10 mx-auto max-w-6xl px-6 py-16 lg:px-8">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+      <div className="relative z-10 mx-auto max-w-6xl px-6 py-8 lg:px-8 lg:py-10">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
           <div className="md:col-span-1">
             <a
               href="/"
@@ -18,18 +18,18 @@ export function Footer() {
             >
               SCUBA CAPITAL
             </a>
-            <p className="mt-3 text-sm text-gold-light">{siteConfig.tagline}</p>
-            <p className="mt-4 text-sm leading-relaxed text-white/55">
+            <p className="mt-2 text-sm text-gold-light">{siteConfig.tagline}</p>
+            <p className="mt-2.5 text-sm leading-relaxed text-white/55">
               {siteConfig.footerDescriptor}
             </p>
-            <p className="mt-4 text-sm text-white/45">
+            <p className="mt-2.5 text-sm text-white/45">
               AMFI ARN: {siteConfig.amfiArn}
             </p>
-            <div className="mt-6">
+            <div className="mt-4">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/40">
                 Follow Us
               </p>
-              <SocialLinks className="mt-3" />
+              <SocialLinks className="mt-2" />
             </div>
           </div>
 
@@ -37,7 +37,7 @@ export function Footer() {
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/40">
               Sitemap
             </p>
-            <ul className="mt-4 space-y-2">
+            <ul className="mt-3 space-y-1.5">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <a
@@ -55,7 +55,7 @@ export function Footer() {
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/40">
               Blog
             </p>
-            <ul className="mt-4 space-y-2">
+            <ul className="mt-3 space-y-1.5">
               <li>
                 <a
                   href="/blog"
@@ -81,7 +81,7 @@ export function Footer() {
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/40">
               Contact
             </p>
-            <ul className="mt-4 space-y-2 text-sm text-white/65">
+            <ul className="mt-3 space-y-1.5 text-sm text-white/65">
               <li>
                 <a
                   href={`tel:${siteConfig.phone}`}
@@ -103,7 +103,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 space-y-4 border-t border-white/10 pt-8">
+        <div className="mt-6 space-y-3 border-t border-white/10 pt-5">
           <p className="font-display text-sm font-semibold text-white/80">
             {siteConfig.brandStatement}
           </p>
@@ -116,7 +116,7 @@ export function Footer() {
             {siteConfig.legalName}. All Rights
             Reserved. {siteConfig.philosophyLine}
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-2.5 pt-2">
+          <div className="flex flex-wrap items-center justify-center gap-2.5 pt-1">
             <span className="text-xs text-white/35">Designed by</span>
             <a
               href="https://dot-site.vercel.app"
@@ -125,7 +125,7 @@ export function Footer() {
               aria-label="DOT — visit website"
               className="transition-opacity hover:opacity-80"
             >
-              <DotLogo className="h-5 w-auto text-white/80" />
+              <DotLogo className="h-5 w-auto" />
             </a>
           </div>
         </div>

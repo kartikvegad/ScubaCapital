@@ -1,5 +1,4 @@
 import { siteConfig } from "@/lib/constants";
-import { MediumLogo } from "@/components/ui/MediumLogo";
 
 type SocialLinksProps = {
   className?: string;
@@ -8,7 +7,6 @@ type SocialLinksProps = {
 
 type IconProps = {
   className?: string;
-  inverted?: boolean;
 };
 
 function InstagramIcon({ className }: IconProps) {
@@ -45,11 +43,11 @@ function YouTubeIcon({ className }: IconProps) {
   );
 }
 
-function MediumIcon({ className, inverted = false }: IconProps) {
+function MediumIcon({ className }: IconProps) {
   return (
-    <MediumLogo
-      className={`${className ?? ""}${inverted ? " brightness-0 invert" : ""}`}
-    />
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className={className}>
+      <path d="M13.54 12a6.82 6.82 0 01-6.77 6.82A6.82 6.82 0 010 12a6.82 6.82 0 016.77-6.82A6.82 6.82 0 0113.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42s-3.39-2.88-3.39-6.42 1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42zM24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75S24 8.83 24 12z" />
+    </svg>
   );
 }
 
@@ -82,21 +80,17 @@ export function SocialLinks({ className = "", variant = "light" }: SocialLinksPr
       : "ring-border bg-white hover:bg-[#f4f8ec]";
 
   return (
-    <ul className={`flex flex-wrap items-center gap-2 ${className}`}>
+    <ul className={`flex flex-nowrap items-center gap-1.5 ${className}`}>
       {socialItems.map(({ id, label, href, Icon }) => (
-        <li key={id}>
+        <li key={id} className="shrink-0">
           <a
             href={href}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`SCUBA CAPITAL on ${label}`}
-            className={`flex size-10 items-center justify-center rounded-full ring-1 ${ringClass} ${baseClass}`}
+            className={`flex size-9 items-center justify-center rounded-full ring-1 ${ringClass} ${baseClass}`}
           >
-            {id === "medium" ? (
-              <MediumIcon className="size-4.5" inverted={variant === "light"} />
-            ) : (
-              <Icon className="size-4.5" />
-            )}
+            <Icon className="size-4" />
           </a>
         </li>
       ))}

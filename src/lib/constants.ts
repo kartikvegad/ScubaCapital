@@ -876,31 +876,36 @@ export const processSteps = [
     step: "01",
     title: "Understand",
     description:
-      "We understand your financial position, objectives, priorities and requirements.",
+      "We begin by understanding your financial position, objectives, priorities and requirements — so every recommendation starts with the person behind the portfolio.",
+    image: "/images/approach/understand.png",
   },
   {
     step: "02",
     title: "Analyse",
     description:
-      "We review your existing financial arrangements and identify opportunities, gaps and areas requiring attention.",
+      "We review your existing financial arrangements in detail and identify opportunities, gaps and areas that need attention before any strategy is formed.",
+    image: "/images/approach/analyse.png",
   },
   {
     step: "03",
     title: "Strategise",
     description:
-      "We develop a structured approach based on your goals, time horizon and financial considerations.",
+      "We develop a structured approach based on your goals, time horizon and financial considerations — turning clarity into a practical plan.",
+    image: "/images/approach/strategise.png",
   },
   {
     step: "04",
     title: "Implement",
     description:
-      "We help facilitate implementation of suitable financial solutions through the appropriate channels.",
+      "We help facilitate implementation of suitable financial solutions through the appropriate channels, with care and clear communication at every stage.",
+    image: "/images/approach/implement.png",
   },
   {
     step: "05",
     title: "Review",
     description:
-      "We encourage periodic reviews so that your financial strategy can evolve as your circumstances and objectives change.",
+      "We encourage periodic reviews so your financial strategy can evolve as your circumstances, priorities and objectives change over time.",
+    image: "/images/approach/review.png",
   },
 ] as const;
 

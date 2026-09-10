@@ -110,16 +110,18 @@ export function WhoWeAreSection() {
         </div>
       </div>
 
-      <div id="philosophy" ref={trackRef} className="relative h-[450vh] bg-navy">
+      <div id="philosophy" ref={trackRef} className="relative h-[450vh] bg-[#061018]">
         <div className="sticky top-0 flex min-h-[100svh] items-center overflow-hidden py-20">
           <div className="pointer-events-none absolute inset-0" aria-hidden>
             <SectionImage
-              src={siteImages.philosophy}
+              src="/videos/hero-ocean-poster.jpg"
               alt=""
-              className="absolute inset-0 h-full w-full opacity-35"
+              className="absolute inset-0 h-full w-full scale-105 object-cover opacity-55"
               sizes="100vw"
             />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(30,26,82,0.94)_0%,rgba(26,24,72,0.9)_50%,rgba(30,26,82,0.96)_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(165deg,rgba(6,16,24,0.55)_0%,rgba(10,28,36,0.45)_45%,rgba(8,22,30,0.62)_100%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_75%_60%_at_75%_35%,rgba(141,198,63,0.12),transparent_55%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,16,24,0.5)_0%,transparent_42%,transparent_58%,rgba(6,16,24,0.35)_100%)]" />
           </div>
 
           <div className="relative z-10 mx-auto grid w-full max-w-6xl gap-10 px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-14 lg:px-8">
@@ -183,7 +185,7 @@ export function WhoWeAreSection() {
               initial={{ opacity: 0, y: 28, filter: "blur(4px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 0.4, ease: "easeOut" }}
-              className="rounded-2xl border border-white/12 bg-white/5 p-6 backdrop-blur-sm sm:p-8"
+              className="rounded-2xl border border-white/15 bg-[#0a1a22]/80 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.4)] backdrop-blur-md sm:p-8"
             >
               <p className="text-[11px] font-semibold tracking-[0.18em] text-green uppercase">
                 {current.letter} — {current.title}

@@ -38,6 +38,16 @@ export function ContactPageShell({
     <section className="relative min-h-[100svh] overflow-hidden bg-black">
       <HeroVideoBackground showControls={false} />
 
+      {/* Match landing hero atmosphere */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(0,0,0,0.72)_0%,rgba(0,0,0,0.45)_42%,rgba(0,0,0,0.12)_68%,transparent_100%)]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(180deg,rgba(0,0,0,0.35)_0%,transparent_22%,transparent_72%,rgba(0,0,0,0.5)_100%)]"
+      />
+
       <div className="relative z-10 mx-auto max-w-7xl px-6 pt-32 pb-20 lg:px-8 lg:pt-36 lg:pb-24">
         <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
           <ScrollReveal direction="left">

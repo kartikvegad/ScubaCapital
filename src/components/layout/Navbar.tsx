@@ -81,6 +81,12 @@ const mobileMenuItemVariants = {
   },
 };
 
+const VIDEO_HERO_PATHS = new Set([
+  "/",
+  "/contact",
+  "/contact/portfolio-review",
+]);
+
 function resolveRouteActive(pathname: string, hash: string): string | null {
   if (pathname === "/contact" || pathname === "/contact/portfolio-review") {
     return "/contact";
@@ -99,12 +105,13 @@ function resolveRouteActive(pathname: string, hash: string): string | null {
 export function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === "/";
+  const hasVideoHero = VIDEO_HERO_PATHS.has(pathname);
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeHref, setActiveHref] = useState<string>("");
 
-  const isFormed = !isHome || scrolled || open;
-  const heroOpen = isHome && !isFormed;
+  const isFormed = !hasVideoHero || scrolled || open;
+  const heroOpen = hasVideoHero && !isFormed;
 
   useEffect(() => {
     function onScroll() {
@@ -168,21 +175,19 @@ export function Navbar() {
   return (
     <>
       <motion.header
-        className="pointer-events-none fixed inset-x-0 top-0 z-[110]"
-        animate={{
-          paddingLeft: isFormed ? 16 : 24,
-          paddingRight: isFormed ? 16 : 24,
-          paddingTop: isFormed ? 14 : 22,
-        }}
-        transition={SPRING}
+        className={`pointer-events-none fixed inset-x-0 top-0 z-[110] ${
+          isFormed
+            ? "px-2.5 pt-2 sm:px-4 sm:pt-2.5 md:px-5"
+            : "px-3 pt-3 sm:px-5 sm:pt-3.5 md:px-6"
+        }`}
       >
         <motion.div
-          className="pointer-events-auto mx-auto w-full"
+          className="pointer-events-auto mx-auto w-full max-w-[1280px]"
           animate={{ maxWidth: isFormed ? 1400 : 1280 }}
           transition={SPRING}
         >
           <motion.nav
-            className={`relative flex w-full items-center overflow-hidden px-2 py-2 sm:px-3 sm:py-2.5 ${
+            className={`relative flex w-full items-center overflow-hidden px-2 py-1 sm:px-3 sm:py-1.5 ${
               isFormed ? "navbar-glass-bar" : ""
             }`}
             animate={{ borderRadius: isFormed ? 9999 : 0 }}
@@ -190,19 +195,23 @@ export function Navbar() {
           >
             {isFormed ? <div className="navbar-solid-bg" aria-hidden /> : null}
 
-            <div className="relative z-10 flex w-full min-w-0 items-center gap-3">
+            <div className="relative z-10 flex w-full min-w-0 items-center gap-2 sm:gap-2.5">
               <a
                 href="/"
                 aria-label="SCUBA CAPITAL home"
-                className="inline-flex shrink-0 items-center pl-1"
+                className="inline-flex shrink-0 items-center pl-0.5 sm:pl-1"
                 onClick={() => setOpen(false)}
               >
-                <ScubaLogo variant="navbar" className="h-11 w-auto sm:h-12" priority />
+                <ScubaLogo
+                  variant="navbar"
+                  className="h-7 w-auto sm:h-8 md:h-9"
+                  priority
+                />
               </a>
 
               <ul
-                className={`relative hidden min-w-0 flex-1 flex-nowrap items-center justify-center lg:flex ${
-                  isFormed ? "gap-0" : "gap-2"
+                className={`relative hidden min-w-0 flex-1 flex-nowrap items-center justify-center xl:flex ${
+                  isFormed ? "gap-0" : "gap-1.5"
                 }`}
               >
                 {navLinks.map((link) => {
@@ -219,8 +228,8 @@ export function Navbar() {
                       ) : null}
                       <a
                         href={link.href}
-                        className={`relative z-10 block rounded-full whitespace-nowrap py-2 font-medium transition-colors ${
-                          isFormed ? "px-2.5 text-[13px]" : "px-3 text-sm"
+                        className={`relative z-10 block rounded-full whitespace-nowrap py-1.5 font-medium transition-colors ${
+                          isFormed ? "px-2 text-xs" : "px-2.5 text-[13px]"
                         } ${
                           isActive && isFormed
                             ? "text-white"
@@ -238,7 +247,7 @@ export function Navbar() {
                 })}
               </ul>
 
-              <div className="ml-auto hidden shrink-0 items-center gap-1.5 lg:flex xl:gap-2">
+              <div className="ml-auto hidden shrink-0 items-center gap-1.5 xl:flex xl:gap-2">
                 <a
                   href={ctaConfig.portfolioReview.href}
                   className={
@@ -253,7 +262,7 @@ export function Navbar() {
                   href={ctaConfig.consultation.href}
                   className={
                     isFormed
-                      ? "navbar-cta-outline navbar-cta-compact whitespace-nowrap"
+                      ? "navbar-cta-outline navbar-cta-primary navbar-cta-compact whitespace-nowrap"
                       : "navbar-cta-outline navbar-cta-outline--open whitespace-nowrap"
                   }
                 >
@@ -261,41 +270,52 @@ export function Navbar() {
                 </a>
               </div>
 
-              <button
-                type="button"
-                aria-label={open ? "Close menu" : "Open menu"}
-                aria-expanded={open}
-                onClick={() => setOpen(!open)}
-                className={`ml-auto inline-flex size-10 shrink-0 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10 lg:ml-0 lg:hidden ${
-                  isFormed ? "ring-1 ring-white/20" : ""
-                }`}
-              >
-                <AnimatePresence mode="wait" initial={false}>
-                  {open ? (
-                    <motion.span
-                      key="close"
-                      initial={{ opacity: 0, rotate: -90, scale: 0.8 }}
-                      animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                      exit={{ opacity: 0, rotate: 90, scale: 0.8 }}
-                      transition={{ duration: 0.18 }}
-                      className="inline-flex"
-                    >
-                      <X className="size-5" />
-                    </motion.span>
-                  ) : (
-                    <motion.span
-                      key="menu"
-                      initial={{ opacity: 0, rotate: 90, scale: 0.8 }}
-                      animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                      exit={{ opacity: 0, rotate: -90, scale: 0.8 }}
-                      transition={{ duration: 0.18 }}
-                      className="inline-flex"
-                    >
-                      <Menu className="size-5" />
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </button>
+              <div className="ml-auto flex shrink-0 items-center gap-1.5 xl:ml-0 xl:hidden">
+                <a
+                  href={ctaConfig.consultation.href}
+                  className={`navbar-cta-outline navbar-cta-primary hidden whitespace-nowrap sm:inline-flex ${
+                    isFormed ? "navbar-cta-compact" : "navbar-cta-outline--open"
+                  }`}
+                  onClick={() => setOpen(false)}
+                >
+                  Consultation
+                </a>
+                <button
+                  type="button"
+                  aria-label={open ? "Close menu" : "Open menu"}
+                  aria-expanded={open}
+                  onClick={() => setOpen(!open)}
+                  className={`inline-flex size-9 shrink-0 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10 ${
+                    isFormed ? "ring-1 ring-white/20" : ""
+                  }`}
+                >
+                  <AnimatePresence mode="wait" initial={false}>
+                    {open ? (
+                      <motion.span
+                        key="close"
+                        initial={{ opacity: 0, rotate: -90, scale: 0.8 }}
+                        animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                        exit={{ opacity: 0, rotate: 90, scale: 0.8 }}
+                        transition={{ duration: 0.18 }}
+                        className="inline-flex"
+                      >
+                        <X className="size-5" />
+                      </motion.span>
+                    ) : (
+                      <motion.span
+                        key="menu"
+                        initial={{ opacity: 0, rotate: 90, scale: 0.8 }}
+                        animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                        exit={{ opacity: 0, rotate: -90, scale: 0.8 }}
+                        transition={{ duration: 0.18 }}
+                        className="inline-flex"
+                      >
+                        <Menu className="size-5" />
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </button>
+              </div>
             </div>
           </motion.nav>
         </motion.div>
@@ -305,7 +325,7 @@ export function Navbar() {
         {open ? (
           <motion.div
             key="mobile-menu"
-            className="navbar-mobile-sheet fixed inset-0 z-[109] flex flex-col lg:hidden"
+            className="navbar-mobile-sheet fixed inset-0 z-[109] flex flex-col xl:hidden"
             variants={mobileMenuContainerVariants}
             initial="hidden"
             animate="visible"
@@ -319,16 +339,16 @@ export function Navbar() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.22 }}
             />
-            <div className="relative z-10 h-[4.5rem] shrink-0" aria-hidden />
+            <div className="relative z-10 h-14 shrink-0 sm:h-16" aria-hidden />
             <motion.div
-              className="relative z-10 flex flex-1 flex-col overflow-y-auto px-5 pt-2 pb-8"
+              className="relative z-10 flex flex-1 flex-col overflow-y-auto px-4 pt-2 pb-8 sm:px-6"
               variants={mobileMenuPanelVariants}
               initial="hidden"
               animate="visible"
               exit="exit"
             >
               <motion.ul
-                className="flex flex-col gap-1"
+                className="mx-auto flex w-full max-w-md flex-col gap-1 sm:max-w-lg"
                 variants={mobileMenuListVariants}
                 initial="hidden"
                 animate="visible"
@@ -341,7 +361,7 @@ export function Navbar() {
                     <motion.li key={link.href} variants={mobileMenuItemVariants}>
                       <a
                         href={link.href}
-                        className={`block rounded-full px-4 py-3 text-sm font-medium transition-colors ${
+                        className={`block rounded-full px-4 py-3 text-sm font-medium transition-colors sm:text-[15px] ${
                           isActive
                             ? "bg-white/15 text-white ring-1 ring-white/25"
                             : "text-white/75 hover:bg-white/10 hover:text-white"
@@ -354,20 +374,20 @@ export function Navbar() {
                   );
                 })}
                 <motion.li
-                  className="flex flex-col gap-2 pt-4"
+                  className="flex flex-col gap-2.5 pt-5 sm:flex-row sm:gap-3"
                   variants={mobileMenuItemVariants}
                 >
                   <a
                     href={ctaConfig.portfolioReview.href}
                     onClick={() => setOpen(false)}
-                    className="navbar-cta-outline w-full justify-center px-6 py-3 text-sm"
+                    className="navbar-cta-outline w-full justify-center px-5 py-3 text-sm sm:flex-1"
                   >
                     {ctaConfig.portfolioReview.shortLabel}
                   </a>
                   <a
                     href={ctaConfig.consultation.href}
                     onClick={() => setOpen(false)}
-                    className="navbar-cta-outline w-full justify-center px-6 py-3 text-sm"
+                    className="navbar-cta-outline navbar-cta-primary w-full justify-center px-5 py-3 text-sm sm:flex-1"
                   >
                     {ctaConfig.consultation.label}
                   </a>
