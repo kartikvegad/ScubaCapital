@@ -1,0 +1,190 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { SectionImage } from "@/components/ui/SectionImage";
+import { ctaConfig, products, productsIntro, serviceSegments, servicesPageIntro } from "@/lib/constants";
+import { PartnerEcosystemSection } from "@/components/sections/PartnerEcosystemSection";
+
+function getSegmentIndexFromHash(hash: string): number {
+  const segmentId = hash.replace(/^#/, "");
+  if (!segmentId) return 0;
+
+  const index = serviceSegments.findIndex((segment) => segment.id === segmentId);
+  return index >= 0 ? index : 0;
+}
+
+export function ServicesPageContent() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    function syncFromHash() {
+      const index = getSegmentIndexFromHash(window.location.hash);
+      setActiveIndex(index);
+
+      if (window.location.hash) {
+        document.getElementById("segments")?.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
+    syncFromHash();
+    window.addEventListener("hashchange", syncFromHash);
+    return () => window.removeEventListener("hashchange", syncFromHash);
+  }, []);
+
+  function selectSegment(index: number) {
+    setActiveIndex(index);
+    const segmentId = serviceSegments[index].id;
+    window.history.replaceState(null, "", `/services#${segmentId}`);
+  }
+
+  const activeSegment = serviceSegments[activeIndex];
+
+  return (
+    <div className="page-shell overflow-x-hidden">
+      <section className="section-navy pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-40 lg:pb-24">
+        <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+          <ScrollReveal>
+            <p className="eyebrow !text-white">{servicesPageIntro.eyebrow}</p>
+            <h1 className="font-display mt-3 text-[1.65rem] font-bold leading-tight tracking-tight text-white sm:mt-4 sm:text-4xl lg:text-5xl">
+              {servicesPageIntro.heading}
+            </h1>
+            <p className="mx-auto mt-4 max-w-2xl text-[13px] leading-relaxed text-white/70 sm:mt-6 sm:text-base">
+              {servicesPageIntro.intro}
+            </p>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      <section id="segments" className="section-cream -mt-6 pb-24 pt-2 sm:-mt-8 sm:pb-16 sm:pt-4 lg:py-20">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="sticky top-[4.75rem] z-20 -mx-1 mb-4 px-1 pb-1 sm:static sm:mx-0 sm:mb-0 sm:px-0 sm:pb-0">
+            <div className="flex gap-1 rounded-full bg-[#e6e2ea] p-1 shadow-[inset_0_1px_3px_rgba(73,48,82,0.12)]">
+            {serviceSegments.map((segment, index) => {
+              const isActive = index === activeIndex;
+              return (
+                <button
+                  key={segment.id}
+                  type="button"
+                  onClick={() => selectSegment(index)}
+                  className={`relative z-10 flex min-h-10 min-w-0 flex-1 touch-manipulation items-center justify-center rounded-full px-1.5 py-2.5 text-[11px] font-semibold whitespace-nowrap transition-colors sm:min-h-11 sm:px-3 sm:text-sm ${
+                    isActive ? "text-navy" : "text-muted active:text-foreground/70"
+                  }`}
+                >
+                  {isActive ? (
+                    <motion.span
+                      layoutId="service-segment-pill"
+                      className="absolute inset-0 rounded-full bg-white shadow-[0_2px_8px_rgba(37,41,71,0.12),0_1px_2px_rgba(37,41,71,0.08)]"
+                      transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                    />
+                  ) : null}
+                  <span className="relative text-center leading-none">
+                    {segment.shortLabel}
+                  </span>
+                </button>
+              );
+            })}
+            </div>
+          </div>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeSegment.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.22, ease: "easeOut" }}
+              className="mt-6 sm:mt-10"
+            >
+              <div className="text-left sm:text-center">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={`${activeSegment.id}-image`}
+                    initial={{ opacity: 0, scale: 0.98 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.98 }}
+                    transition={{ duration: 0.3 }}
+                    className="mb-6 sm:mb-8"
+                  >
+                    <SectionImage
+                      src={activeSegment.image}
+                      alt={activeSegment.title}
+                      className="aspect-[16/10] rounded-2xl sm:aspect-[21/9]"
+                      sizes="(max-width: 1024px) 100vw, 896px"
+                    />
+                  </motion.div>
+                </AnimatePresence>
+                <h2 className="font-display text-xl font-bold leading-snug text-navy sm:text-2xl lg:text-3xl">
+                  {activeSegment.title}
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-muted sm:mx-auto sm:mt-4 sm:max-w-2xl sm:text-base">
+                  {activeSegment.intro}
+                </p>
+              </div>
+
+              <div className="mt-6 space-y-3 sm:mt-10 sm:space-y-4">
+                {activeSegment.services.map((service, index) => (
+                  <motion.article
+                    key={service.title}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: Math.min(index * 0.03, 0.2), duration: 0.25 }}
+                    className="panel rounded-xl p-4 sm:rounded-2xl sm:p-6 lg:p-7"
+                  >
+                    <h3 className="font-display text-[15px] font-bold leading-snug text-navy sm:text-base lg:text-lg">
+                      {service.title}
+                    </h3>
+                    <p className="mt-2 text-[13px] leading-relaxed text-muted sm:mt-2.5 sm:text-sm">
+                      {service.description}
+                    </p>
+                  </motion.article>
+                ))}
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </section>
+
+      <PartnerEcosystemSection />
+
+      <section className="section-cream pb-24 pt-0 sm:pb-16 lg:py-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <ScrollReveal className="text-center">
+            <p className="eyebrow">Solutions</p>
+            <h2 className="font-display mt-3 text-2xl font-bold sm:text-3xl">
+              {productsIntro.heading}
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
+              {productsIntro.intro}
+            </p>
+          </ScrollReveal>
+
+          <ScrollReveal delay={0.1} className="mt-8 sm:mt-10">
+            <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:justify-center sm:gap-3">
+              {products.map((product) => (
+                <span
+                  key={product}
+                  className="rounded-xl border border-border bg-white px-3 py-2.5 text-center text-[10px] font-semibold tracking-wide text-navy/80 uppercase sm:rounded-full sm:px-4 sm:text-xs"
+                >
+                  {product}
+                </span>
+              ))}
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal delay={0.15} className="mt-10 text-center sm:mt-12">
+            <a
+              href={ctaConfig.consultation.href}
+              className="btn-primary inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold sm:px-8"
+            >
+              {ctaConfig.consultation.label}
+              <ArrowRight className="size-4" />
+            </a>
+          </ScrollReveal>
+        </div>
+      </section>
+    </div>
+  );
+}
