@@ -67,14 +67,14 @@ export function GuideCard({ guide, onClick, variant = "default" }: GuideCardProp
       }}
       className={
         isBento
-          ? "group h-full w-full rounded-[1.5rem] text-left shadow-[0_16px_40px_rgba(37,41,71,0.14)] transition-shadow duration-300 hover:shadow-[0_24px_50px_rgba(37,41,71,0.2)]"
+          ? "group w-full rounded-[1.5rem] text-left shadow-[0_16px_40px_rgba(37,41,71,0.14)] transition-shadow duration-300 hover:shadow-[0_24px_50px_rgba(37,41,71,0.2)]"
           : "group w-[280px] shrink-0 rounded-[1.75rem] text-left shadow-[0_16px_40px_rgba(37,41,71,0.16)] transition-shadow duration-300 hover:shadow-[0_24px_50px_rgba(37,41,71,0.22)] sm:w-[300px]"
       }
     >
       <div
         className={
           isBento
-            ? "guide-card relative h-full min-h-[18rem] overflow-hidden rounded-[1.5rem] sm:min-h-[20rem] lg:min-h-full"
+            ? "guide-card relative aspect-[3/4] overflow-hidden rounded-[1.5rem]"
             : "guide-card relative aspect-[3/4] overflow-hidden"
         }
       >

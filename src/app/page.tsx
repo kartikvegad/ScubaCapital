@@ -6,7 +6,6 @@ import { FaqSection } from "@/components/sections/FaqSection";
 import { GuidesSection } from "@/components/sections/GuidesSection";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { PillarsSection } from "@/components/sections/PillarsSection";
-import { ServicesSection } from "@/components/sections/ServicesSection";
 import { WhoWeAreSection } from "@/components/sections/WhoWeAreSection";
 import { WhyUsSection } from "@/components/sections/WhyUsSection";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -26,10 +25,10 @@ export default function Home() {
       <JsonLd data={getFaqJsonLd(faqs.slice(0, 5))} />
       <div className="page-shell">
         <HeroSection />
-        <GuidesSection />
         <PillarsSection />
         <WhoWeAreSection />
-        <ServicesSection />
+        {/* About: perspective + founder + credentials */}
+        <GuidesSection />
         <ApproachSection />
         <WhyUsSection />
         <BlogSection />

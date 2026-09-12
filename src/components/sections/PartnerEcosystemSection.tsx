@@ -22,13 +22,24 @@ type PartnerEcosystemSectionProps = {
   variant?: "compact" | "full";
 };
 
-function PartnerGrid({ items }: { items: readonly string[] }) {
+function PartnerChips({
+  items,
+  tone = "on-dark",
+}: {
+  items: readonly string[];
+  tone?: "on-dark" | "on-brand";
+}) {
+  const chipClass =
+    tone === "on-brand"
+      ? "border-white/20 bg-white/10 text-white"
+      : "border-transparent bg-white text-[#262262] shadow-sm";
+
   return (
-    <div className="flex flex-wrap content-start justify-center gap-x-2.5 gap-y-3">
+    <div className="flex flex-wrap content-start justify-center gap-2 sm:gap-2.5">
       {items.map((name) => (
         <span
           key={name}
-          className="relative inline-flex rounded-full border border-white/15 bg-white/10 px-3.5 py-2 text-[11px] leading-none font-medium whitespace-nowrap text-white/85"
+          className={`inline-flex rounded-full border px-3.5 py-2 text-[11px] leading-none font-semibold whitespace-nowrap sm:text-xs ${chipClass}`}
         >
           {name}
         </span>
@@ -37,22 +48,9 @@ function PartnerGrid({ items }: { items: readonly string[] }) {
   );
 }
 
-function PartnerGridLight({ items }: { items: readonly string[] }) {
-  return (
-    <div className="flex flex-wrap content-start justify-center gap-x-2.5 gap-y-3">
-      {items.map((name) => (
-        <span
-          key={name}
-          className="relative inline-flex rounded-full border border-border bg-white px-3.5 py-2 text-[11px] leading-none font-medium whitespace-nowrap text-navy/80"
-        >
-          {name}
-        </span>
-      ))}
-    </div>
-  );
-}
-
-export function PartnerEcosystemSection({ variant = "full" }: PartnerEcosystemSectionProps) {
+export function PartnerEcosystemSection({
+  variant = "full",
+}: PartnerEcosystemSectionProps) {
   const [activeTab, setActiveTab] = useState<PartnerTab>("amc");
   const isCompact = variant === "compact";
 
@@ -74,11 +72,11 @@ export function PartnerEcosystemSection({ variant = "full" }: PartnerEcosystemSe
           {partnerEcosystemIntro.compactDescription}
         </p>
 
-        <div className="mt-5 flex flex-wrap content-start items-center justify-center gap-x-2.5 gap-y-3">
+        <div className="mt-5 flex flex-wrap content-start items-center justify-center gap-2">
           {tabs.map((tab) => (
             <span
               key={tab.id}
-              className="relative inline-flex rounded-full bg-white/10 px-3.5 py-2 text-[11px] leading-none font-semibold whitespace-nowrap text-white/90 ring-1 ring-white/15"
+              className="inline-flex rounded-full bg-white/10 px-3.5 py-2 text-[11px] leading-none font-semibold whitespace-nowrap text-white ring-1 ring-white/20"
             >
               {tab.count}+ {tab.label}
             </span>
@@ -86,10 +84,12 @@ export function PartnerEcosystemSection({ variant = "full" }: PartnerEcosystemSe
         </div>
 
         <div className="mt-6">
-          <PartnerGrid items={partnerAmcs.slice(0, 12)} />
+          <PartnerChips items={partnerAmcs.slice(0, 12)} tone="on-brand" />
         </div>
 
-        <p className="mt-5 text-xs text-white/55">{partnerEcosystemIntro.disclaimer}</p>
+        <p className="mt-5 text-xs text-white/55">
+          {partnerEcosystemIntro.disclaimer}
+        </p>
 
         <a
           href="/services#partners"
@@ -106,7 +106,9 @@ export function PartnerEcosystemSection({ variant = "full" }: PartnerEcosystemSe
     <section id="partners" className="section-navy section-py">
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         <ScrollReveal className="text-center">
-          <p className="eyebrow text-gold-light">{partnerEcosystemIntro.eyebrow}</p>
+          <p className="eyebrow text-gold-light">
+            {partnerEcosystemIntro.eyebrow}
+          </p>
           <h2 className="font-display mt-3 text-2xl font-bold text-white sm:text-3xl">
             {partnerEcosystemIntro.heading}
           </h2>
@@ -116,30 +118,41 @@ export function PartnerEcosystemSection({ variant = "full" }: PartnerEcosystemSe
         </ScrollReveal>
 
         <ScrollReveal delay={0.08} className="mt-8">
-          <div className="flex flex-wrap justify-center gap-2">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => setActiveTab(tab.id)}
-                className={`rounded-full px-4 py-2 text-xs font-semibold transition-colors sm:text-sm ${
-                  activeTab === tab.id
-                    ? "bg-white text-brand-ink"
-                    : "border border-white/20 bg-white/10 text-white/80 hover:bg-white/15"
-                }`}
-              >
-                {tab.count}+ {tab.label}
-              </button>
-            ))}
+          <div
+            role="tablist"
+            aria-label="Partner categories"
+            className="mx-auto flex max-w-2xl flex-col gap-2 sm:flex-row sm:justify-center"
+          >
+            {tabs.map((tab) => {
+              const isActive = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-colors ${
+                    isActive
+                      ? "bg-white text-[#262262] shadow-md"
+                      : "border border-white/20 bg-transparent text-white/80 hover:bg-white/10"
+                  }`}
+                >
+                  {tab.count}+ {tab.label}
+                </button>
+              );
+            })}
           </div>
         </ScrollReveal>
 
         <ScrollReveal delay={0.12} className="mt-8">
-          <PartnerGridLight items={activeItems} />
+          <div className="rounded-2xl bg-white/[0.06] p-5 ring-1 ring-white/10 sm:p-7">
+            <PartnerChips items={activeItems} />
+          </div>
         </ScrollReveal>
 
         <ScrollReveal delay={0.16} className="mt-8 text-center">
-          <p className="text-xs leading-relaxed text-white/55 sm:text-sm">
+          <p className="mx-auto max-w-2xl text-xs leading-relaxed text-white/55 sm:text-sm">
             {partnerEcosystemIntro.disclaimer}
           </p>
           <a

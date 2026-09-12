@@ -9,23 +9,19 @@ import { ScubaLogo } from "@/components/ui/ScubaLogo";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 const HOME_SECTION_TO_HREF: Record<string, string> = {
-  about: "/#about",
+  offerings: "/#offerings",
   philosophy: "/#philosophy",
-  services: "/services",
+  about: "/#about",
   approach: "/#approach",
   blog: "/blog",
-  resources: "/#resources",
-  faqs: "/#faqs",
 };
 
 const HOME_SECTION_ORDER = [
-  "about",
+  "offerings",
   "philosophy",
-  "services",
+  "about",
   "approach",
   "blog",
-  "resources",
-  "faqs",
 ] as const;
 
 const SPRING = { type: "spring" as const, stiffness: 260, damping: 30, mass: 0.8 };
@@ -178,43 +174,46 @@ export function Navbar() {
       <motion.header
         className={`pointer-events-none fixed inset-x-0 top-0 z-[110] ${
           isFormed
-            ? "px-2.5 pt-2 sm:px-4 sm:pt-2.5 md:px-5"
-            : "px-3 pt-3 sm:px-5 sm:pt-3.5 md:px-6"
+            ? "px-3 pt-3 sm:px-5 sm:pt-3.5 md:px-6"
+            : "px-4 pt-4 sm:px-6 sm:pt-5 md:px-8"
         }`}
       >
         <motion.div
           className="pointer-events-auto mx-auto w-full max-w-[1280px]"
-          animate={{ maxWidth: isFormed ? 1400 : 1280 }}
+          animate={{ maxWidth: isFormed ? 1180 : 1280 }}
           transition={SPRING}
         >
           <motion.nav
-            className={`relative flex w-full items-center overflow-hidden px-3 py-2.5 sm:px-4 sm:py-3 ${
+            className={`relative flex w-full items-center overflow-hidden px-4 py-2.5 sm:px-5 sm:py-3 ${
               isFormed ? "navbar-glass-bar" : ""
             }`}
-            animate={{ borderRadius: isFormed ? 9999 : 0 }}
+            animate={{ borderRadius: isFormed ? 22 : 0 }}
             transition={SPRING}
           >
             {isFormed ? <div className="navbar-solid-bg" aria-hidden /> : null}
 
-            <div className="relative z-10 flex w-full min-w-0 items-center gap-2.5 sm:gap-3">
+            <div className="relative z-10 flex w-full min-w-0 items-center gap-4 sm:gap-5">
               <a
                 href="/"
                 aria-label="SCUBA CAPITAL home"
-                className="inline-flex shrink-0 items-center pl-0.5 sm:pl-1"
+                className="inline-flex shrink-0 items-center"
                 onClick={() => setOpen(false)}
               >
                 <ScubaLogo
                   variant="navbar"
-                  className="h-9 w-auto sm:h-10 md:h-11"
+                  className="h-8 w-auto sm:h-9"
                   priority
                 />
               </a>
 
-              <ul
-                className={`relative hidden min-w-0 flex-1 flex-nowrap items-center justify-center xl:flex ${
-                  isFormed ? "gap-0.5" : "gap-1.5"
+              <div
+                className={`hidden h-5 w-px shrink-0 xl:block ${
+                  isFormed ? "bg-white/15" : "bg-white/20"
                 }`}
-              >
+                aria-hidden
+              />
+
+              <ul className="relative hidden min-w-0 flex-1 items-center justify-center gap-1 xl:flex">
                 {navLinks.map((link) => {
                   const isActive = activeHref === link.href;
 
@@ -223,22 +222,20 @@ export function Navbar() {
                       {isActive && isFormed ? (
                         <motion.span
                           layoutId="navbar-active-pill"
-                          className="absolute inset-0 rounded-full bg-white/15 ring-1 ring-white/25"
+                          className="absolute inset-0 rounded-full bg-green/15 ring-1 ring-green/35"
                           transition={SPRING}
                         />
                       ) : null}
                       <a
                         href={link.href}
-                        className={`relative z-10 block rounded-full whitespace-nowrap py-2 font-medium transition-colors ${
-                          isFormed ? "px-2.5 text-[13px]" : "px-3 text-sm"
-                        } ${
+                        className={`relative z-10 block rounded-full px-3.5 py-2 text-[13px] font-medium tracking-wide whitespace-nowrap transition-colors ${
                           isActive && isFormed
-                            ? "text-white"
+                            ? "text-green"
                             : heroOpen
-                              ? "text-white/85 hover:text-white"
+                              ? "text-white/80 hover:text-white"
                               : isFormed
-                                ? "text-white/75 hover:text-white"
-                                : "text-white/85 hover:text-white"
+                                ? "text-white/70 hover:text-white"
+                                : "text-white/80 hover:text-white"
                         }`}
                       >
                         {link.label}
@@ -248,27 +245,19 @@ export function Navbar() {
                 })}
               </ul>
 
-              <div className="ml-auto hidden shrink-0 items-center gap-1.5 xl:flex xl:gap-2">
+              <div className="ml-auto hidden shrink-0 items-center gap-2.5 xl:flex">
                 <ThemeToggle
-                  className={isFormed ? "ring-1 ring-white/20" : ""}
+                  className={isFormed ? "ring-1 ring-white/15" : ""}
                 />
                 <a
                   href={ctaConfig.portfolioReview.href}
-                  className={
-                    isFormed
-                      ? "navbar-cta-outline navbar-cta-compact whitespace-nowrap"
-                      : "navbar-cta-outline navbar-cta-outline--open whitespace-nowrap"
-                  }
+                  className="navbar-cta-ghost whitespace-nowrap"
                 >
-                  {ctaConfig.portfolioReview.shortLabel}
+                  Portfolio Review
                 </a>
                 <a
                   href={ctaConfig.consultation.href}
-                  className={
-                    isFormed
-                      ? "navbar-cta-outline navbar-cta-primary navbar-cta-compact whitespace-nowrap"
-                      : "navbar-cta-outline navbar-cta-outline--open whitespace-nowrap"
-                  }
+                  className="navbar-cta-solid whitespace-nowrap"
                 >
                   {ctaConfig.consultation.label}
                 </a>
@@ -276,13 +265,11 @@ export function Navbar() {
 
               <div className="ml-auto flex shrink-0 items-center gap-1.5 xl:ml-0 xl:hidden">
                 <ThemeToggle
-                  className={isFormed ? "ring-1 ring-white/20" : ""}
+                  className={isFormed ? "ring-1 ring-white/15" : ""}
                 />
                 <a
                   href={ctaConfig.consultation.href}
-                  className={`navbar-cta-outline navbar-cta-primary hidden whitespace-nowrap sm:inline-flex ${
-                    isFormed ? "navbar-cta-compact" : "navbar-cta-outline--open"
-                  }`}
+                  className="navbar-cta-solid hidden whitespace-nowrap sm:inline-flex"
                   onClick={() => setOpen(false)}
                 >
                   Consultation
@@ -293,7 +280,7 @@ export function Navbar() {
                   aria-expanded={open}
                   onClick={() => setOpen(!open)}
                   className={`inline-flex size-10 shrink-0 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10 ${
-                    isFormed ? "ring-1 ring-white/20" : ""
+                    isFormed ? "ring-1 ring-white/15" : ""
                   }`}
                 >
                   <AnimatePresence mode="wait" initial={false}>
@@ -370,7 +357,7 @@ export function Navbar() {
                         href={link.href}
                         className={`block rounded-full px-4 py-3 text-sm font-medium transition-colors sm:text-[15px] ${
                           isActive
-                            ? "bg-white/15 text-white ring-1 ring-white/25"
+                            ? "bg-green/15 text-green ring-1 ring-green/35"
                             : "text-white/75 hover:bg-white/10 hover:text-white"
                         }`}
                         onClick={() => setOpen(false)}
@@ -396,12 +383,12 @@ export function Navbar() {
                     onClick={() => setOpen(false)}
                     className="navbar-cta-outline w-full justify-center px-5 py-3 text-sm sm:flex-1"
                   >
-                    {ctaConfig.portfolioReview.shortLabel}
+                    Portfolio Review
                   </a>
                   <a
                     href={ctaConfig.consultation.href}
                     onClick={() => setOpen(false)}
-                    className="navbar-cta-outline navbar-cta-primary w-full justify-center px-5 py-3 text-sm sm:flex-1"
+                    className="navbar-cta-solid w-full justify-center px-5 py-3 text-sm sm:flex-1"
                   >
                     {ctaConfig.consultation.label}
                   </a>

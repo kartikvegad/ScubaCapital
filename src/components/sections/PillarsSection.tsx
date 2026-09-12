@@ -1,11 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { OfferingCard } from "@/components/ui/OfferingCard";
-import { pillars, pillarsIntro, siteImages } from "@/lib/constants";
+import { pillars, pillarsIntro } from "@/lib/constants";
 
 function formatOfferingNumber(index: number) {
   return String(index + 1).padStart(2, "0");
@@ -17,18 +16,17 @@ const OFFERING_ORDER = ["build", "retire", "protect", "preserve"] as const;
 export function PillarsSection() {
   const orderedPillars = OFFERING_ORDER.map(
     (id) => pillars.find((pillar) => pillar.id === id)!,
-  );  return (
-    <section className="relative overflow-hidden section-py">
-      <div className="absolute inset-0" aria-hidden>
-        <Image
-          src={siteImages.philosophy}
-          alt=""
-          fill
-          className="object-cover object-center"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,10,18,0.88)_0%,rgba(10,14,22,0.92)_45%,rgba(8,12,16,0.94)_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(141,198,63,0.12),transparent_55%)]" />
+  );
+
+  return (
+    <section
+      id="offerings"
+      className="relative overflow-hidden bg-background-soft section-py dark:bg-[#07090f]"
+    >
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_-10%,rgba(141,198,63,0.1),transparent_55%)] dark:bg-[radial-gradient(ellipse_70%_50%_at_50%_-10%,rgba(141,198,63,0.14),transparent_55%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_100%_100%,rgba(141,198,63,0.06),transparent_50%)]" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent dark:via-white/15" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-6xl px-6 lg:px-8">
@@ -37,17 +35,17 @@ export function PillarsSection() {
             <p className="text-[11px] font-semibold tracking-[0.2em] text-green uppercase sm:text-xs">
               {pillarsIntro.eyebrow}
             </p>
-            <h2 className="font-display mt-3 text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl lg:text-[2.65rem]">
+            <h2 className="font-display mt-3 text-3xl font-bold leading-tight tracking-tight text-navy sm:text-4xl lg:text-[2.65rem] dark:text-white">
               {pillarsIntro.heading}
             </h2>
           </div>
           <div className="max-w-md lg:pb-1">
-            <p className="text-sm leading-relaxed text-white/70 sm:text-[0.95rem]">
+            <p className="text-sm leading-relaxed text-muted sm:text-[0.95rem] dark:text-white/70">
               {pillarsIntro.subtitle}
             </p>
             <a
               href="/services"
-              className="mt-4 inline-flex items-center gap-2 border-b border-white/50 pb-0.5 text-sm font-semibold text-white transition-colors hover:border-green hover:text-green"
+              className="mt-4 inline-flex items-center gap-2 border-b border-navy/30 pb-0.5 text-sm font-semibold text-navy transition-colors hover:border-green hover:text-green dark:border-white/50 dark:text-white dark:hover:border-green dark:hover:text-green"
             >
               View All Solutions
               <ArrowRight className="size-4" />

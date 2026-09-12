@@ -9,8 +9,8 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import {
   ctaConfig,
   financialGuides,
-  guidesSection,
   trustFactors,
+  whoWeAre,
 } from "@/lib/constants";
 
 type Guide = (typeof financialGuides)[number];
@@ -29,37 +29,38 @@ export function GuidesSection() {
     };
   }, [activeGuide]);
 
-  const [trustHeading, ...trustTiles] = [
-    {
-      title: "Registered. Qualified. Accountable.",
-      description: "Why Trust SCUBA CAPITAL",
-      isHeading: true as const,
-    },
-    ...trustFactors.map((factor) => ({ ...factor, isHeading: false as const })),
-  ];
-
   return (
     <>
-      <section id="trust" className="section-cream overflow-visible py-8 sm:py-10 lg:py-12">
-        <div className="mx-auto max-w-6xl overflow-visible px-6 lg:px-8">
-          <div className="grid auto-rows-min grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-12">
-            {/* Intro */}
-            <ScrollReveal className="panel flex flex-col justify-center rounded-2xl p-5 sm:col-span-2 sm:p-6 lg:col-span-7">
-              <p className="eyebrow">{guidesSection.eyebrow}</p>
-              <h2 className="font-display mt-2 text-xl font-bold leading-tight tracking-tight text-navy sm:text-2xl lg:text-[1.75rem]">
-                {guidesSection.headline}
+      <section className="section-cream overflow-visible section-py">
+        <div
+          id="about"
+          className="mx-auto max-w-6xl overflow-visible px-6 lg:px-8"
+        >
+          <div className="grid grid-cols-1 gap-3 sm:gap-4 lg:grid-cols-12 lg:items-stretch">
+            {/* About */}
+            <ScrollReveal className="panel flex flex-col rounded-2xl p-5 sm:p-6 lg:col-span-7 lg:p-7">
+              <p className="eyebrow">About</p>
+              <h2 className="font-display mt-2 text-3xl font-bold tracking-tight text-navy sm:text-4xl lg:text-[2.55rem] lg:leading-[1.12]">
+                {whoWeAre.title}
               </h2>
-              <p className="mt-2.5 max-w-xl text-sm leading-relaxed text-muted">
-                {guidesSection.paragraphs[0]}
+              <div className="mt-5 flex flex-1 flex-col justify-center gap-3.5">
+                {whoWeAre.paragraphs.map((paragraph) => (
+                  <p
+                    key={paragraph}
+                    className="text-base leading-relaxed text-muted sm:text-[1.05rem] sm:leading-relaxed"
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+              <p className="font-display mt-6 text-lg font-semibold leading-snug text-navy sm:text-xl">
+                {whoWeAre.closing}
               </p>
             </ScrollReveal>
 
-            {/* Founder — spans intro + trust only */}
-            <ScrollReveal
-              delay={0.08}
-              className="sm:col-span-2 lg:col-span-5 lg:row-span-2"
-            >
-              <div className="h-full min-h-[18rem] sm:min-h-[20rem] lg:min-h-full">
+            {/* Founder */}
+            <ScrollReveal delay={0.06} className="lg:col-span-5">
+              <div className="mx-auto w-full max-w-[22rem] lg:max-w-none">
                 {financialGuides.map((guide) => (
                   <GuideCard
                     key={guide.id}
@@ -71,22 +72,20 @@ export function GuidesSection() {
               </div>
             </ScrollReveal>
 
-            {/* Trust heading + credentials */}
+            {/* Why Trust + credentials — one merged box */}
             <ScrollReveal
-              delay={0.1}
-              className="panel rounded-2xl p-5 sm:col-span-2 lg:col-span-7"
+              delay={0.08}
+              className="panel rounded-2xl p-5 sm:p-6 lg:col-span-12"
             >
-              <div className="mb-3">
-                <p className="eyebrow">{trustHeading.description}</p>
-                <h3 className="font-display mt-1 text-base font-bold tracking-tight text-navy sm:text-lg">
-                  {trustHeading.title}
-                </h3>
-              </div>
-              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-3">
-                {trustTiles.map((factor) => (
+              <p className="eyebrow">Why Trust SCUBA CAPITAL</p>
+              <h3 className="font-display mt-1.5 text-xl font-bold tracking-tight text-navy sm:text-2xl">
+                Registered. Qualified. Accountable.
+              </h3>
+              <div className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-5">
+                {trustFactors.map((factor) => (
                   <div
                     key={factor.title}
-                    className="rounded-xl bg-cream px-3 py-2.5 ring-1 ring-border/70"
+                    className="rounded-xl bg-cream px-3.5 py-3 ring-1 ring-border/70"
                   >
                     <p className="font-display text-sm font-bold text-navy">
                       {factor.title}
@@ -99,10 +98,10 @@ export function GuidesSection() {
               </div>
             </ScrollReveal>
 
-            {/* CTA — full-width compact bar, buttons side by side */}
+            {/* CTA */}
             <ScrollReveal
-              delay={0.16}
-              className="panel flex flex-col gap-3 rounded-2xl px-5 py-4 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4 lg:col-span-12"
+              delay={0.1}
+              className="panel flex flex-col gap-3 rounded-2xl px-5 py-3.5 sm:flex-row sm:items-center sm:justify-between sm:gap-4 lg:col-span-12"
             >
               <p className="shrink-0 text-sm leading-relaxed text-muted">
                 Ready for clearer next steps?

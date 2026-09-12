@@ -37,6 +37,11 @@
   --scrollbar-track: #f0f3f0;
   --scrollbar-thumb: #9aa3b5;
   --scrollbar-thumb-hover: #6f7a90;
+  /* Selection uses fixed brand colors — never the theme-flipped --navy token */
+  --selection-bg: #262262;
+  --selection-fg: #ffffff;
+  --selection-on-dark-bg: #8dc63f;
+  --selection-on-dark-fg: #0f1720;
 
   --gradient-brand: linear-gradient(
     145deg,
@@ -123,6 +128,17 @@
   scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 }
 
+html {
+  /* Just enough to clear the fixed floating navbar */
+  scroll-padding-top: 4.75rem;
+}
+
+@media (min-width: 640px) {
+  html {
+    scroll-padding-top: 5.25rem;
+  }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -169,33 +185,40 @@ svg {
 }
 
 ::selection {
-  background: var(--navy);
-  color: #ffffff;
+  background: var(--selection-bg);
+  color: var(--selection-fg);
+  text-shadow: none;
 }
 
 ::-moz-selection {
-  background: var(--navy);
-  color: #ffffff;
+  background: var(--selection-bg);
+  color: var(--selection-fg);
+  text-shadow: none;
 }
 
-.theme-dark ::selection,
+/* Dark UI mode + intentional dark surfaces → brand green highlight */
+.dark ::selection,
+.section-ink ::selection,
 .section-navy ::selection,
 .bg-gradient-brand ::selection,
 .bg-gradient-sunset ::selection,
 .navbar-glass ::selection,
 footer ::selection {
-  background: #ffffff;
-  color: var(--navy);
+  background: var(--selection-on-dark-bg);
+  color: var(--selection-on-dark-fg);
+  text-shadow: none;
 }
 
-.theme-dark ::-moz-selection,
+.dark ::-moz-selection,
+.section-ink ::-moz-selection,
 .section-navy ::-moz-selection,
 .bg-gradient-brand ::-moz-selection,
 .bg-gradient-sunset ::-moz-selection,
 .navbar-glass ::-moz-selection,
 footer ::-moz-selection {
-  background: #ffffff;
-  color: var(--navy);
+  background: var(--selection-on-dark-bg);
+  color: var(--selection-on-dark-fg);
+  text-shadow: none;
 }
 
 .page-shell {
@@ -331,6 +354,11 @@ footer ::-moz-selection {
   color: #fff;
 }
 
+.section-ink {
+  background: #07090f;
+  color: #fff;
+}
+
 .section-cream {
   background: linear-gradient(
     180deg,
@@ -428,10 +456,10 @@ footer ::-moz-selection {
 .navbar-glass-bar {
   position: relative;
   isolation: isolate;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow:
-    0 10px 36px rgba(4, 12, 18, 0.28),
-    0 1px 0 rgba(255, 255, 255, 0.06) inset;
+    0 12px 40px rgba(4, 12, 18, 0.35),
+    0 1px 0 rgba(255, 255, 255, 0.05) inset;
 }
 
 .navbar-mobile-sheet {
@@ -444,13 +472,13 @@ footer ::-moz-selection {
   background:
     linear-gradient(
       135deg,
-      rgba(141, 198, 63, 0.1) 0%,
-      transparent 42%,
+      rgba(141, 198, 63, 0.08) 0%,
+      transparent 40%,
       transparent 100%
     ),
-    linear-gradient(165deg, #0b1720 0%, #08141c 48%, #0a1a22 100%);
-  -webkit-backdrop-filter: blur(18px);
-  backdrop-filter: blur(18px);
+    linear-gradient(165deg, rgba(11, 23, 32, 0.94) 0%, rgba(8, 20, 28, 0.96) 100%);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  backdrop-filter: blur(20px) saturate(1.2);
   pointer-events: none;
   z-index: 0;
 }
@@ -461,6 +489,40 @@ footer ::-moz-selection {
 
 .navbar-glass-gradient {
   display: none;
+}
+
+.navbar-cta-ghost {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.78);
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.navbar-cta-ghost:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.navbar-cta-solid {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  border: 1px solid rgba(141, 198, 63, 0.45);
+  background: #8dc63f;
+  padding: 0.5rem 1.05rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #0a1a22;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.navbar-cta-solid:hover {
+  background: #a0d44f;
+  border-color: rgba(141, 198, 63, 0.7);
 }
 
 .navbar-cta-outline {

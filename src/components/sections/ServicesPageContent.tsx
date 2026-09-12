@@ -2,11 +2,19 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Shield, TrendingUp, Umbrella, Landmark } from "lucide-react";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionImage } from "@/components/ui/SectionImage";
-import { ctaConfig, products, productsIntro, serviceSegments, servicesPageIntro } from "@/lib/constants";
+import {
+  ctaConfig,
+  products,
+  productsIntro,
+  serviceSegments,
+  servicesPageIntro,
+} from "@/lib/constants";
 import { PartnerEcosystemSection } from "@/components/sections/PartnerEcosystemSection";
+
+const segmentIcons = [TrendingUp, Shield, Umbrella, Landmark] as const;
 
 function getSegmentIndexFromHash(hash: string): number {
   const segmentId = hash.replace(/^#/, "");
@@ -58,89 +66,117 @@ export function ServicesPageContent() {
         </div>
       </section>
 
-      <section id="segments" className="section-cream -mt-6 pb-24 pt-2 sm:-mt-8 sm:pb-16 sm:pt-4 lg:py-20">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <div className="sticky top-[4.75rem] z-20 -mx-1 mb-4 px-1 pb-1 sm:static sm:mx-0 sm:mb-0 sm:px-0 sm:pb-0">
-            <div className="flex gap-1 rounded-full bg-[#e6e2ea] p-1 shadow-[inset_0_1px_3px_rgba(73,48,82,0.12)]">
+      <section id="segments" className="section-cream -mt-6 pb-16 pt-8 sm:pb-20 sm:pt-10 lg:py-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <ScrollReveal className="mb-8 flex flex-col gap-3 sm:mb-10 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="eyebrow">Solutions</p>
+              <h2 className="font-display mt-2 text-2xl font-bold tracking-tight text-navy sm:text-3xl">
+                Four paths. One structured plan.
+              </h2>
+            </div>
+            <a
+              href={ctaConfig.consultation.href}
+              className="btn-outline-navy inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold"
+            >
+              Start a conversation
+              <ArrowRight className="size-4" />
+            </a>
+          </ScrollReveal>
+
+          <div className="grid gap-3 sm:grid-cols-2 lg:gap-4">
             {serviceSegments.map((segment, index) => {
+              const Icon = segmentIcons[index] ?? TrendingUp;
               const isActive = index === activeIndex;
               return (
                 <button
                   key={segment.id}
                   type="button"
                   onClick={() => selectSegment(index)}
-                  className={`relative z-10 flex min-h-10 min-w-0 flex-1 touch-manipulation items-center justify-center rounded-full px-1.5 py-2.5 text-[11px] font-semibold whitespace-nowrap transition-colors sm:min-h-11 sm:px-3 sm:text-sm ${
-                    isActive ? "text-brand-ink" : "text-muted active:text-foreground/70"
+                  className={`group flex h-full flex-col rounded-2xl border p-5 text-left transition-all sm:p-6 ${
+                    isActive
+                      ? "border-green/45 bg-surface shadow-[0_16px_40px_rgba(38,34,98,0.1)] ring-1 ring-green/25"
+                      : "border-border bg-surface/80 hover:-translate-y-0.5 hover:border-green/30 hover:shadow-[0_12px_32px_rgba(38,34,98,0.08)]"
                   }`}
                 >
-                  {isActive ? (
-                    <motion.span
-                      layoutId="service-segment-pill"
-                      className="absolute inset-0 rounded-full bg-surface shadow-[0_2px_8px_rgba(37,41,71,0.12),0_1px_2px_rgba(37,41,71,0.08)]"
-                      transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                    />
-                  ) : null}
-                  <span className="relative text-center leading-none">
+                  <span
+                    className={`inline-flex size-11 items-center justify-center rounded-xl transition-colors ${
+                      isActive
+                        ? "bg-green text-[#0a1a22]"
+                        : "bg-accent-light text-green group-hover:bg-green group-hover:text-[#0a1a22]"
+                    }`}
+                  >
+                    <Icon className="size-5" strokeWidth={1.75} />
+                  </span>
+                  <p className="mt-4 text-[11px] font-semibold tracking-[0.16em] text-green uppercase">
                     {segment.shortLabel}
+                  </p>
+                  <h3 className="font-display mt-1.5 text-lg font-bold tracking-tight text-navy sm:text-xl">
+                    {segment.title}
+                  </h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted line-clamp-3">
+                    {segment.intro}
+                  </p>
+                  <span
+                    className={`mt-5 inline-flex items-center gap-1.5 text-sm font-semibold transition-colors ${
+                      isActive ? "text-green" : "text-navy group-hover:text-green"
+                    }`}
+                  >
+                    {isActive ? "Viewing details" : "Explore"}
+                    <ArrowRight className="size-4" />
                   </span>
                 </button>
               );
             })}
-            </div>
           </div>
 
           <AnimatePresence mode="wait">
             <motion.div
               key={activeSegment.id}
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.22, ease: "easeOut" }}
-              className="mt-6 sm:mt-10"
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.28, ease: "easeOut" }}
+              className="mt-8 scroll-mt-28 sm:mt-10"
+              id={activeSegment.id}
             >
-              <div className="text-left sm:text-center">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={`${activeSegment.id}-image`}
-                    initial={{ opacity: 0, scale: 0.98 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.98 }}
-                    transition={{ duration: 0.3 }}
-                    className="mb-6 sm:mb-8"
-                  >
-                    <SectionImage
-                      src={activeSegment.image}
-                      alt={activeSegment.title}
-                      className="aspect-[16/10] rounded-2xl sm:aspect-[21/9]"
-                      sizes="(max-width: 1024px) 100vw, 896px"
-                    />
-                  </motion.div>
-                </AnimatePresence>
-                <h2 className="font-display text-xl font-bold leading-snug text-navy sm:text-2xl lg:text-3xl">
-                  {activeSegment.title}
-                </h2>
-                <p className="mt-3 text-sm leading-relaxed text-muted sm:mx-auto sm:mt-4 sm:max-w-2xl sm:text-base">
-                  {activeSegment.intro}
-                </p>
-              </div>
+              <div className="overflow-hidden rounded-[1.5rem] border border-border bg-surface shadow-[0_18px_50px_rgba(38,34,98,0.08)]">
+                <SectionImage
+                  src={activeSegment.image}
+                  alt={activeSegment.title}
+                  className="aspect-[16/9] sm:aspect-[21/8]"
+                  sizes="(max-width: 1024px) 100vw, 1152px"
+                />
+                <div className="p-5 sm:p-7 lg:p-8">
+                  <h3 className="font-display text-xl font-bold text-navy sm:text-2xl">
+                    {activeSegment.title}
+                  </h3>
+                  <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted sm:text-base">
+                    {activeSegment.intro}
+                  </p>
 
-              <div className="mt-6 space-y-3 sm:mt-10 sm:space-y-4">
-                {activeSegment.services.map((service, index) => (
-                  <motion.article
-                    key={service.title}
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: Math.min(index * 0.03, 0.2), duration: 0.25 }}
-                    className="panel rounded-xl p-4 sm:rounded-2xl sm:p-6 lg:p-7"
-                  >
-                    <h3 className="font-display text-[15px] font-bold leading-snug text-navy sm:text-base lg:text-lg">
-                      {service.title}
-                    </h3>
-                    <p className="mt-2 text-[13px] leading-relaxed text-muted sm:mt-2.5 sm:text-sm">
-                      {service.description}
-                    </p>
-                  </motion.article>
-                ))}
+                  <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                    {activeSegment.services.map((service, index) => (
+                      <motion.article
+                        key={service.title}
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{
+                          delay: Math.min(index * 0.03, 0.2),
+                          duration: 0.25,
+                        }}
+                        className="rounded-xl border border-border bg-background-soft/70 p-4 sm:p-5"
+                      >
+                        <h4 className="font-display text-[15px] font-bold leading-snug text-navy">
+                          {service.title}
+                        </h4>
+                        <p className="mt-2 text-[13px] leading-relaxed text-muted sm:text-sm">
+                          {service.description}
+                        </p>
+                      </motion.article>
+                    ))}
+                  </div>
+                </div>
               </div>
             </motion.div>
           </AnimatePresence>
@@ -153,7 +189,7 @@ export function ServicesPageContent() {
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center">
             <p className="eyebrow">Solutions</p>
-            <h2 className="font-display mt-3 text-2xl font-bold sm:text-3xl">
+            <h2 className="font-display mt-3 text-2xl font-bold text-navy sm:text-3xl">
               {productsIntro.heading}
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">

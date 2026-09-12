@@ -176,16 +176,6 @@ export const heroAudiences = [
   "HNI Families",
 ] as const;
 
-export const guidesSection = {
-  eyebrow: "YOUR MUTUAL FUND DISTRIBUTORS",
-  headline: "We help you move forward with confidence.",
-  paragraphs: [
-    "It's not just about building a strong portfolio or retirement plan — it's about clear guidance, honest conversations, and making sure you understand every decision along the way.",
-    "We're mutual fund distributors focused on your objectives first — and we take this journey seriously because your financial future matters.",
-  ],
-  cta: "Explore Our Approach",
-} as const;
-
 export const pillarsIntro = {
   eyebrow: "Our Core Offerings",
   heading: "Financial solutions for every stage of your journey.",
@@ -1132,8 +1122,9 @@ export type BlogPost = {
 export const blogSection = {
   eyebrow: "Insights & Education",
   headline: "From Our Blog",
+  pageTitle: "Clarity for every financial decision.",
   description:
-    "Practical insights on mutual fund strategies, goal-based planning and disciplined investing — on Medium.",
+    "Practical insights on mutual fund strategies, goal-based planning and disciplined investing — written for Indian families, professionals and business owners.",
   mediumCta: "Follow on Medium",
 } as const;
 
@@ -1153,7 +1144,7 @@ export const blogPosts: readonly BlogPost[] = [
     publishedAt: "2026-01-18",
     readTime: "5 min read",
     category: "Financial Planning",
-    image: "/images/about-planning.jpg",
+    image: "/images/blog/goal-planning.png",
     mediumUrl:
       "https://medium.com/@scubacapital/why-financial-goal-planning-should-come-before-product-selection-8f2a1c9d4e7b",
     author: "Mr. Satishkumar Kagre",
@@ -1173,7 +1164,7 @@ export const blogPosts: readonly BlogPost[] = [
     publishedAt: "2026-02-05",
     readTime: "6 min read",
     category: "Mutual Funds",
-    image: "/images/invest-grow.jpg",
+    image: "/images/blog/sip-discipline.png",
     mediumUrl:
       "https://medium.com/@scubacapital/sip-discipline-what-long-term-investors-should-understand-3b7e5a2f1c90",
     author: "Mr. Satishkumar Kagre",
@@ -1193,7 +1184,7 @@ export const blogPosts: readonly BlogPost[] = [
     publishedAt: "2026-03-12",
     readTime: "5 min read",
     category: "Portfolio Review",
-    image: "/images/team-approach.jpg",
+    image: "/images/blog/portfolio-review.png",
     mediumUrl:
       "https://medium.com/@scubacapital/annual-portfolio-review-what-to-check-and-why-it-matters-9d4c8b1e6f23",
     author: "Mr. Satishkumar Kagre",
@@ -1213,7 +1204,7 @@ export const blogPosts: readonly BlogPost[] = [
     publishedAt: "2026-04-02",
     readTime: "6 min read",
     category: "Mutual Funds",
-    image: "/images/invest-grow.jpg",
+    image: "/images/blog/fund-categories.png",
     mediumUrl:
       "https://medium.com/@scubacapital/choosing-mutual-fund-categories-for-different-financial-goals",
     author: "Mr. Satishkumar Kagre",
@@ -1233,7 +1224,7 @@ export const blogPosts: readonly BlogPost[] = [
     publishedAt: "2026-04-18",
     readTime: "5 min read",
     category: "Mutual Funds",
-    image: "/images/about-planning.jpg",
+    image: "/images/blog/fund-returns.png",
     mediumUrl:
       "https://medium.com/@scubacapital/understanding-3-5-and-7-year-mutual-fund-returns",
     author: "Mr. Satishkumar Kagre",
@@ -1245,12 +1236,16 @@ export function getBlogPost(slug: string): BlogPost | undefined {
 }
 
 export const navLinks = [
-  { label: "About", href: "/#about" },
+  { label: "Offerings", href: "/#offerings" },
   { label: "Philosophy", href: "/#philosophy" },
+  { label: "About", href: "/#about" },
+  { label: "Approach", href: "/#approach" },
   { label: "Services", href: "/services" },
-  { label: "Our Approach", href: "/#approach" },
   { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/contact" },
+] as const;
+
+export const footerExtraLinks = [
   { label: "Resources", href: "/#resources" },
   { label: "FAQs", href: "/#faqs" },
-  { label: "Contact", href: "/contact" },
 ] as const;

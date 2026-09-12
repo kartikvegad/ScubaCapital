@@ -1,4 +1,4 @@
-import { navLinks, siteConfig } from "@/lib/constants";
+import { footerExtraLinks, navLinks, siteConfig } from "@/lib/constants";
 import { DotLogo } from "@/components/ui/DotLogo";
 import { SocialLinks } from "@/components/ui/SocialLinks";
 export function Footer() {
@@ -38,7 +38,7 @@ export function Footer() {
               Sitemap
             </p>
             <ul className="mt-3 space-y-1.5">
-              {navLinks.map((link) => (
+              {[...navLinks, ...footerExtraLinks].map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
