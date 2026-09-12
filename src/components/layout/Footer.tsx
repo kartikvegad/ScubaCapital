@@ -1,6 +1,7 @@
 import { footerExtraLinks, navLinks, siteConfig } from "@/lib/constants";
 import { DotLogo } from "@/components/ui/DotLogo";
 import { SocialLinks } from "@/components/ui/SocialLinks";
+
 export function Footer() {
   return (
     <footer className="bg-gradient-brand relative overflow-hidden text-white">
@@ -35,10 +36,10 @@ export function Footer() {
 
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/40">
-              Sitemap
+              Explore
             </p>
             <ul className="mt-3 space-y-1.5">
-              {[...navLinks, ...footerExtraLinks].map((link) => (
+              {navLinks.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
@@ -53,17 +54,19 @@ export function Footer() {
 
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/40">
-              Blog
+              More
             </p>
             <ul className="mt-3 space-y-1.5">
-              <li>
-                <a
-                  href="/blog"
-                  className="text-sm text-white/65 transition-colors hover:text-gold-light"
-                >
-                  All Articles
-                </a>
-              </li>
+              {footerExtraLinks.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="text-sm text-white/65 transition-colors hover:text-gold-light"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
               <li>
                 <a
                   href={siteConfig.social.medium}
@@ -113,8 +116,8 @@ export function Footer() {
           </p>
           <p className="text-xs text-white/30">
             © <span suppressHydrationWarning>{new Date().getFullYear()}</span>{" "}
-            {siteConfig.legalName}. All Rights
-            Reserved. {siteConfig.philosophyLine}
+            {siteConfig.legalName}. All Rights Reserved.{" "}
+            {siteConfig.philosophyLine}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-2.5 pt-1">
             <span className="text-xs text-white/35">Designed by</span>

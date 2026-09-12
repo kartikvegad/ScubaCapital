@@ -85,9 +85,6 @@ const VIDEO_HERO_PATHS = new Set([
 ]);
 
 function resolveRouteActive(pathname: string, hash: string): string | null {
-  if (pathname === "/contact" || pathname === "/contact/portfolio-review") {
-    return "/contact";
-  }
   if (pathname === "/services") return "/services";
   if (pathname === "/blog" || pathname.startsWith("/blog/")) return "/blog";
 

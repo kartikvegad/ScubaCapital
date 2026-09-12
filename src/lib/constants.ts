@@ -1242,10 +1242,11 @@ export const navLinks = [
   { label: "Approach", href: "/#approach" },
   { label: "Services", href: "/services" },
   { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "/contact" },
 ] as const;
 
 export const footerExtraLinks = [
   { label: "Resources", href: "/#resources" },
   { label: "FAQs", href: "/#faqs" },
+  { label: "Contact", href: "/contact" },
+  { label: "Portfolio Review", href: "/contact/portfolio-review" },
 ] as const;
